@@ -16,12 +16,14 @@
         @import url("css/main.css");
     </style>
 
+    <!-- My Script -->
+    <script src="js/main.js"></script>
+
+
     <!-- Favicon -->
 
     <link rel="shortcut icon" type="image/png" href="media/favicon.png" />
 
-    <!-- My Script -->
-    <script src="js/main.js"></script>
 
     <!-- TITLE -->
     <title>Final_Proyect</title>
@@ -31,45 +33,30 @@
 <body>
 
     <div class="main">
-
-
         <div class="container">
-
             <div class="middle">
                 <div id="login">
-
                     <form action="javascript:void(0);" method="get">
-
                         <fieldset class="clearfix">
-
-                            <p><span class="fa fa-user"></span><input type="text" Placeholder="Username" required></p>
+                            <p><span class="fa fa-user"></span><input type="text" Placeholder="Usuario" required></p>
                             <!-- JS because of IE support; better: placeholder="Username" -->
-                            <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password" required></p>
+                            <p><span class="fa fa-lock"></span><input type="password" Placeholder="Contraseña" required></p>
                             <!-- JS because of IE support; better: placeholder="Password" -->
 
+                            <!-- Botones para Hacer el registro y login-->
                             <div>
-                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Forgot
-                                    password?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Sign In"></span>
+                                <input id="resgistro" type="submit" value="Registrarse">
+                                <input id="acceder" type="submit" value="Acceder">
                             </div>
-
                         </fieldset>
-                        <div class="clearfix"></div>
                     </form>
-
-                    <div class="clearfix"></div>
-
                 </div>
                 <!-- end login -->
-                <div class="logo">LOGO
-
-                    <div class="clearfix"></div>
+                <div class="logo">
+                    <img src="media/favicon.png" alt="Logo" height="150" width="150">
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </body>
 
