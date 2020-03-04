@@ -5,7 +5,7 @@ function init() {
 }
 
 function prueba() {
-    window.location.replace("http://www.w3schools.com");
+    window.location.replace("../main.html");
 
 }
 // The mother of the lamb.
