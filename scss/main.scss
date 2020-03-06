@@ -62,29 +62,14 @@ p {
 /* ---------- LOGIN ---------- */
 
 #login {
-    form {
-        width: 250px;
-    }
-    display: inline-block;
-    width: 40%;
-}
-
-.logo {
-    display: inline-block;
-    width: 40%;
-    color: #fff;
-    font-size: 50px;
-    line-height: 125px;
-    margin-left: 5%;
-}
-
-#login {
     border-right: 1px solid #fff;
     padding: 0px 22px;
+    display: inline-block;
     width: 59%;
-}
 
-#login form {
+    form {
+
+        width: 250px;
     span.fa {
         background-color: #fff;
         border-radius: 3px 0px 0px 3px;
@@ -96,15 +81,30 @@ p {
         line-height: 50px;
         text-align: center;
         width: 50px;
+
+        span.fa.fa.female{
+            background-color: red;
+        }
     }
     input {
         height: 50px;
     }
 }
+}
 
 
+/* LOGO */
 
 
+.logo {
+    display: grid;
+    width: 40%;
+    align-items: center;
+    img{
+
+        vertical-align: middle;
+    }
+}
 
 fieldset {
     padding: 0;
