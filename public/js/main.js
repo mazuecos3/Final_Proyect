@@ -10,12 +10,12 @@ function register() {
 `
     <form action="javascript:void(0);" method="get">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input type="text" Placeholder="Usuario" ></p>
-        <p><span class="fa fa-envelope"></span><input type="text" Placeholder="Email" >  </p>
+        <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>
+        <p><span class="fa fa-envelope"></span><input id="email" type="text" Placeholder="sample@gmail.com" >  </p>
        
-        <p><span class="fa fa-info"></span><input type="text" Placeholder="Edad" >  </p>
-        <p><span class="fa fa-lock"></span><input type="password" Placeholder="Contraseña" >  </p>
-        <p><span class="fa fa-lock"></span><input type="password" Placeholder="Repetir Contraseña"></p>
+        <p><span class="fa fa-info"></span><input id="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
+        <p><span class="fa fa-lock"></span><input id="contraseña"type="password" Placeholder="Contraseña" >  </p>
+        <p><span class="fa fa-lock"></span><input id="RepeatContraseña"type="password" Placeholder="Repetir Contraseña"></p>
         <div>
             <input id="registro" type="submit" value="Registrarse">          
         </div>
@@ -23,7 +23,12 @@ function register() {
 </form>
 `
 ;
-
+document.getElementById("edad").addEventListener("keypress", function() {
+   if (document.getElementById("edad").value) {
+       
+   } console.log(document.getElementById("edad"));
+    
+});
 document.getElementById("registro").addEventListener("click", login);
 }
 
@@ -37,8 +42,8 @@ function login() {
 `
     <form action="javascript:void(0);" method="get">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input type="text" Placeholder="Usuario" ></p>  
-        <p><span class="fa fa-lock"></span><input type="password" Placeholder="Contraseña" >  </p>
+        <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>  
+        <p><span class="fa fa-lock"></span><input id="email" type="password" Placeholder="Contraseña" >  </p>
         <div>
             <input id="registro" type="submit" value="Registrarse">
             <input id="acceder" type="submit" value="Acceder">          
