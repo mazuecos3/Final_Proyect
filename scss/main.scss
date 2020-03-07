@@ -82,9 +82,8 @@ p {
         text-align: center;
         width: 50px;
 
-        span.fa.fa.female{
-            background-color: red;
-        }
+      
+
     }
     input {
         height: 50px;
@@ -92,6 +91,14 @@ p {
 }
 }
 
+
+
+.fa-circle-o::before {
+
+    content: "+12";
+    //content: url("../public/media/max12.png");
+
+}
 
 /* LOGO */
 

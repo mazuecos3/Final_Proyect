@@ -13,7 +13,7 @@ function register() {
         <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>
         <p><span class="fa fa-envelope"></span><input id="email" type="text" Placeholder="sample@gmail.com" >  </p>
        
-        <p><span class="fa fa-info"></span><input id="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
+        <p><span class="fa fa-circle-o"></span><input id="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
         <p><span class="fa fa-lock"></span><input id="contraseña"type="password" Placeholder="Contraseña" >  </p>
         <p><span class="fa fa-lock"></span><input id="RepeatContraseña"type="password" Placeholder="Repetir Contraseña"></p>
         <div>
