@@ -7,8 +7,7 @@ app.use(express.json());
 //para que heroku elija el puerto que tenga libre
 let puerto = process.env.PORT;
 
-//para que heroku elija el puerto que tenga libre
-let puerto = process.env.PORT;
+
 
 // Paginas publicas (estaticas)
 app.use(express.static(path.join(__dirname, 'public')));
