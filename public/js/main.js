@@ -8,14 +8,13 @@ function register() {
     divEntero.innerHTML ="";
     divEntero.innerHTML =
 `
-    <form action="javascript:void(0);" method="get">
+    <form action="./consulta.php" method="POST">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>
-        <p><span class="fa fa-envelope"></span><input id="email" type="text" Placeholder="sample@gmail.com" >  </p>
-       
-        <p><span class="fa fa-circle-o"></span><input id="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
-        <p><span class="fa fa-lock"></span><input id="contraseña"type="password" Placeholder="Contraseña" >  </p>
-        <p><span class="fa fa-lock"></span><input id="RepeatContraseña"type="password" Placeholder="Repetir Contraseña"></p>
+        <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" ></p>
+        <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com" >  </p>
+        <p><span class="fa fa-circle-o"></span><input id="edad" name="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
+        <p><span class="fa fa-lock"></span><input id="contraseña" name="password" type="password" Placeholder="Contraseña" >  </p>
+        <p><span class="fa fa-lock"></span><input id="RepeatContraseña" name="password_repeat" type="password" Placeholder="Repetir Contraseña"></p>
         <div>
             <input id="registro" type="submit" value="Registrarse">          
         </div>
@@ -29,7 +28,7 @@ document.getElementById("edad").addEventListener("keypress", function() {
    } console.log(document.getElementById("edad"));
     
 });
-document.getElementById("registro").addEventListener("click", login);
+//document.getElementById("registro").addEventListener("click", login);
 }
 
 // FUNCTION TO CREATE THE LOGIN
@@ -68,6 +67,7 @@ function addEvents() {
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
     console.log("Iniciando...")
+   login(); 
    addEvents();  
    
 }
