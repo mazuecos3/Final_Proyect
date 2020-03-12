@@ -8,7 +8,7 @@ function register() {
     divEntero.innerHTML ="";
     divEntero.innerHTML =
 `
-    <form action="./consulta.php" method="POST">
+    <form action="./consulta" method="POST">
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" ></p>
         <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com" >  </p>

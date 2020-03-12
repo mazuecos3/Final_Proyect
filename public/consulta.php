@@ -13,9 +13,12 @@
             VALUES ('$usuario', '$email',$edad,'$password');";
         
             $result = mysqli_query($conn, $consulta);
-       
+            
+            $_POST["usuario"] = "patata";
           
             mysqli_close($conn);
+
+           
                                     
         ?>
       
