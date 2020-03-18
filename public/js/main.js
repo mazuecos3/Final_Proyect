@@ -68,7 +68,10 @@ function addEvents() {
 function init() {
     console.log("Iniciando...")
    login(); 
-   addEvents();  
+   addEvents(); 
+   
+   //LLAMAMOS A EL OTRO JS!
+   init2();
    
 }
 // FIRST FUNCTION WHEN ONLOAD THE PAGE

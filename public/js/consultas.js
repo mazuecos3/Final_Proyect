@@ -18,9 +18,13 @@ module.exports.insert = function consutaInsert(usuario, email, edad, password) {
         con.query('INSERT INTO valenrunner SET ?;', values, function (err, result, fields) {
           if (err) throw err;
           console.log(result);
+
+          
         });
+        con.end();
       });
-      
+
+    
 }
 
 

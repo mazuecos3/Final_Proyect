@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+//tener el e
 const consultas= require('./public/js/consultas.js');
 
 //para que heroku elija el puerto que tenga libre
@@ -12,10 +13,11 @@ const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(bodyParser.json());
 
-
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+ // to support URL-encoded bodies
+app.use(bodyParser.urlencoded({    
     extended: true
   }));
+
 
 // FUNCTION INSERTAR DATOS USUARIO REGISTRO
 app.post('/consulta',function(req,res){
@@ -27,6 +29,8 @@ app.post('/consulta',function(req,res){
     console.log(username, email, edad, password);
     
     consultas.insert(username, email, edad, password);
+
+    //res.location("www.google.es");
  });
 
 
