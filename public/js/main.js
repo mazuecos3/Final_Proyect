@@ -5,9 +5,9 @@ function register() {
     let divEntero = document.getElementById("login");
 
     console.log(divEntero);
-    divEntero.innerHTML ="";
+    divEntero.innerHTML = "";
     divEntero.innerHTML =
-`
+        `
     <form action="./consulta" method="POST">
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" ></p>
@@ -21,14 +21,14 @@ function register() {
     </fieldset>
 </form>
 `
-;
-document.getElementById("edad").addEventListener("keypress", function() {
-   if (document.getElementById("edad").value) {
-       
-   } console.log(document.getElementById("edad"));
-    
-});
-//document.getElementById("registro").addEventListener("click", login);
+        ;
+    document.getElementById("edad").addEventListener("keypress", function () {
+        if (document.getElementById("edad").value) {
+
+        } console.log(document.getElementById("edad"));
+
+    });
+    //document.getElementById("registro").addEventListener("click", login);
 }
 
 // FUNCTION TO CREATE THE LOGIN
@@ -36,9 +36,9 @@ function login() {
     let divEntero = document.getElementById("login");
 
     console.log(divEntero);
-    divEntero.innerHTML ="";
+    divEntero.innerHTML = "";
     divEntero.innerHTML =
-`
+        `
     <form action="javascript:void(0);" method="get">
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>  
@@ -50,12 +50,12 @@ function login() {
     </fieldset>
 </form>
 `
-;
+        ;
 
-addEvents();
+    addEvents();
 }
 //FUNCTION TO OPEN THE LOGIN
-function IniciarLogin() { 
+function IniciarLogin() {
 
     window.location.replace("../main.html");
 
@@ -67,12 +67,15 @@ function addEvents() {
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
     console.log("Iniciando...")
-   login(); 
-   addEvents(); 
-   
-   //LLAMAMOS A EL OTRO JS!
-   init2();
-   
+    login();
+    addEvents();
+    
+    //CALL THE OTHER JS WITH VALIDATOR LOGIN!
+    mainLogin();
+
+    //CALL THE OTHER JS WITH VALIDATOR LOGIN!
+   mainRegister();
+
 }
 // FIRST FUNCTION WHEN ONLOAD THE PAGE
 window.onload = init;

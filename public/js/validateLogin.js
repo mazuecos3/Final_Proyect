@@ -1,5 +1,12 @@
+const RegExLogin = [
+    /^[A-Za-z' ']{1,30}$/,
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    /^[A-Za-z0-9]{1,30}$/,
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
+];
 
-function init2() {
-    console.log("HOla");
+
+function mainLogin() {
+    console.log("Login");
 }
 

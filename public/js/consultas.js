@@ -28,7 +28,6 @@ module.exports.insert = function consutaInsert(usuario, email, edad, password) {
 }
 
 
-
 /*module.exports = {
     insert: consutaInsert(params)
   };
