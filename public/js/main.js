@@ -28,7 +28,7 @@ function register() {
         } console.log(document.getElementById("edad"));
 
     });
-    //document.getElementById("registro").addEventListener("click", login);
+    document.getElementById("registro").addEventListener("click", login);
 }
 
 // FUNCTION TO CREATE THE LOGIN
