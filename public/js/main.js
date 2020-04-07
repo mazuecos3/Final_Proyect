@@ -39,7 +39,7 @@ function login() {
     divEntero.innerHTML = "";
     divEntero.innerHTML =
         `
-    <form action="javascript:void(0);" method="get">
+    <form action="./comprobar" method="POST">
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" Placeholder="Contraseña" >  </p>

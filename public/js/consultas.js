@@ -15,16 +15,31 @@ module.exports.insert = function consutaInsert(usuario, email, edad, password) {
     
     con.connect(function(err) {
         if (err) throw err;
-        con.query('INSERT INTO valenrunner SET ?;', values, function (err, result, fields) {
+        con.query('INSERT INTO valenrunner SET ?;', values, function (err, result) {
           if (err) throw err;
           console.log(result);
 
           
         });
         con.end();
-      });
+      });    
+}
 
-    
+
+module.exports.comprobar = function comprobar(usuario) {
+  var values = {usuario};
+  console.log(values);
+  
+  con.connect(function(err) {
+    if (err) throw err;
+    con.query('SELECT usuario FROM valenrunner WHERE usuario="values";', function (err, result) {
+      if (err) throw err;
+      console.log(result);
+
+      
+    });
+    con.end();
+  });      
 }
 
 
