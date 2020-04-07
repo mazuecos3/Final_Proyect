@@ -41,7 +41,7 @@ function login() {
         `
     <form action="./comprobar" method="POST">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input id="usuario" type="text" Placeholder="Usuario" ></p>  
+        <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario" ></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" Placeholder="Contraseña" >  </p>
         <div>
             <input id="registro" type="submit" value="Registrarse">

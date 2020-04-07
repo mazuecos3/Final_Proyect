@@ -27,18 +27,18 @@ module.exports.insert = function consutaInsert(usuario, email, edad, password) {
 
 
 module.exports.comprobar = function comprobar(usuario) {
-  var values = {usuario};
-  console.log(values);
+  var value = usuario;
+  console.log(value);
   
   con.connect(function(err) {
     if (err) throw err;
-    con.query('SELECT usuario FROM valenrunner WHERE usuario="values";', function (err, result) {
+    con.query("SELECT usuario FROM valenrunner WHERE usuario LIKE '" + value + "';", function (err, result) {
       if (err) throw err;
       console.log(result);
 
       
     });
-    con.end();
+    //con.end();
   });      
 }
 
