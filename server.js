@@ -30,19 +30,16 @@ app.post('/consulta',function(req,res){
     
     consultas.insert(username, email, edad, password);
 
-    //res.location("www.google.es");
+    res.redirect('index.html');
  });
 
 
  // FUNCTION COMPROBAR USUARIO EN BDD
-app.post('/comprobar',function(req,res){
+app.post('/comprobar',function(req, res){
   var username = req.body.usuario;
-  
-  
-  console.log(username);
-  consultas.comprobar(username);
+ 
+  consultas.comprobar(username, res);
 
-  //res.location("www.google.es");
 });
 
 
