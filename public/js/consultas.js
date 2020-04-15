@@ -26,23 +26,25 @@ module.exports.insert = function consutaInsert(usuario, email, edad, password) {
 }
 
 
-module.exports.comprobar = function comprobar(usuario, res) {
-  var value = usuario;
+module.exports.comprobar = function comprobar(usuario, password, res) {
+
  
   con.connect(function(err) {
     if (err) throw err;
 
  //Con esta consulta comprobamos si el usuario esta en la base de datos
-    con.query("SELECT usuario FROM valenrunner WHERE usuario LIKE '" + value + "';", function (err, result) {
+    con.query("SELECT usuario,password FROM valenrunner WHERE usuario LIKE '" + usuario + "' AND password LIKE '"+ password + "';", function (err, result) {
+console.log(result);
 //console.log(result.length);
 //si no estuviera en la base de datos el result que devuve es 0, entonces con una condición sencilla de si 
 //es mayor que cero(si que está en la base de datos)
 //de lo contrario, saldrá una alerta de que hay que registrarse primero
-       if (result.length > 0 ) {
+       if (result[0].usuario == usuario && result[0].password == password) {
         console.log(result[0].usuario);
+        console.log(result[0].password);
         res.redirect('main.html'); 
-      } else{
-        console.log("Registrate Primero ");
+      } else {
+        console.log("Registrate Primero");
         res.redirect('index.html'); 
        
       }  

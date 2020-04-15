@@ -37,8 +37,9 @@ app.post('/consulta',function(req,res){
  // FUNCTION COMPROBAR USUARIO EN BDD
 app.post('/comprobar',function(req, res){
   var username = req.body.usuario;
+  var password = req.body.password;
  
-  consultas.comprobar(username, res);
+  consultas.comprobar(username, password, res);
 
 });
 
