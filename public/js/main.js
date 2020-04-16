@@ -45,7 +45,7 @@ function login() {
         <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
             <input id="registro" type="submit" value="Registrarse">
-            <input id="acceder" type="submit" value="Acceder">          
+            <input id="acceder" type="submit" value="Acceder ">          
         </div>
     </fieldset>
 </form>
