@@ -31,6 +31,8 @@ function register() {
     //document.getElementById("registro").addEventListener("click", login);
 }
 
+
+
 // FUNCTION TO CREATE THE LOGIN
 function login() {
     let divEntero = document.getElementById("login");
