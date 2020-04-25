@@ -10,12 +10,12 @@ function register() {
         `
     <form action="./consulta" method="POST">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" ></p>
-        <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com" >  </p>
-        <p><span class="fa fa-circle-o"></span><input id="edad" name="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2">  </p>
-        <p><span class="fa fa-lock"></span><input id="contraseña" name="password" type="password" Placeholder="Contraseña" >  </p>
-        <p><span class="fa fa-lock"></span><input id="RepeatContraseña" name="password_repeat" type="password" Placeholder="Repetir Contraseña"></p>
-        <div>
+        <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" required></p>
+        <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com " required>  </p>
+        <p><span class="fa fa-circle-o"></span><input id="edad" name="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2" required>  </p>
+        <p><span class="fa fa-lock"></span><input id="contraseña" name="password" type="password" Placeholder="Contraseña" required>  </p>
+        <p><span class="fa fa-lock"></span><input id="RepeatContraseña" name="password_repeat" type="password" Placeholder="Repetir Contraseña" required></p>
+    <div>
             <input id="registro" type="submit" value="Registrarse">          
         </div>
     </fieldset>
@@ -43,7 +43,7 @@ function login() {
         `
     <form action="./comprobar" method="POST">
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario " ></p>  
+        <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario"></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
             <input id="registro" type="submit" value="Registrarse">
