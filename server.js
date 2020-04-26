@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 
+  
 
 // FUNCTION INSERTAR DATOS USUARIO REGISTRO
 app.post('/consulta',function(req,res){
