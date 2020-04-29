@@ -9,6 +9,7 @@ function register() {
     divEntero.innerHTML =
         `
     <form action="./consulta" method="POST">
+    <h2>Registrarse</h2>
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" required></p>
         <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com " required>  </p>
@@ -43,6 +44,7 @@ function login() {
         `
     <form action="./comprobar" method="POST">
     <fieldset class="clearfix">
+    <h2>Incio Sesion</h2>
         <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario"></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
