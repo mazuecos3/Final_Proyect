@@ -22,35 +22,8 @@
         <div id="map"></div>
 
 
-        <script >
-          window.onload = function() {
-
-              var map;
-              var dir;
-              
-              map = L.map('map', {
-                layers: MQ.mapLayer(),
-                center: [39.429204, -0.417839],
-                zoom: 15
-              });
-
-              dir = MQ.routing.directions();
-            
-
-              dir.route({
-                  locations: [
-                      'Paiporta, Santa Ana',
-                      'Paiporta, Colombicultura'
-                      
-                  ]
-               
-              });
-
-              map.addLayer(MQ.routing.routeLayer({
-                  directions: dir,
-                  fitBounds: true
-              }));
-          }
-      </script>
+      
+           <script src="js/map.js"></script>
+    
     </body>
 </html>

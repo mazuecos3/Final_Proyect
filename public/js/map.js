@@ -1,39 +1,30 @@
-/*<!DOCTYPE html>
-<html lang="en">
-    <head>
-      <!-- Leaflet css-->
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-      <!-- My css-->
-        <style>
-          @import url("css/map.css");
-      </style>
-    </head>
+window.onload = function() {
 
-    <body>
-        <div id="mapid"></div>
+  let map;
+  let dir;
+  
+  map = L.map('map', {
+    layers: MQ.mapLayer(),
+    center: [39.429204, -0.417839],
+    zoom: 15
+  });
 
- <!-- Leaflet js-->
-        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
- <!-- My js-->
-        <script>
-            var mymap = L.map('mapid').setView([39.4697495, -0.37739], 15);
-
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(mymap);
+  dir = MQ.routing.directions();
 
 
-var marker = L.marker([39.4697495, -0.37739]).addTo(mymap);
+  dir.route({
+      locations: [
+          'Paiporta, Santa Ana',
+          'Paiporta, Colombicultura',
+        
+          'Paiporta, Jaime'
+          
+      ]
+   
+  });
 
-
-
-marker.bindPopup("<b>Start Here!</b>").openPopup();
-
-
-
-
-
-        </script>
-    </body>
-</html>
-*/
+  map.addLayer(MQ.routing.routeLayer({
+      directions: dir,
+      fitBounds: true
+  }));
+}

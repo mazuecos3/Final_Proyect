@@ -48,7 +48,7 @@ function login() {
         <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario"></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
-            <input id="registro" type="submit" value="Registrarse">
+            <input id="registro" type="button" value="Registrarse">
             <input id="acceder" type="submit" value="Acceder ">          
         </div>
     </fieldset>
@@ -65,20 +65,22 @@ function IniciarLogin() {
 
 }
 function addEvents() {
-    document.getElementById("registro").addEventListener("click", register);
+   
     document.getElementById("acceder").addEventListener("click", IniciarLogin);
+  
+   // document.getElementById("registro").addEventListener("click", register);
+   
 }
+
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
     console.log("Iniciando...")
     login();
     addEvents();
-    
-    //CALL THE OTHER JS WITH VALIDATOR LOGIN!
-    mainLogin();
+//Call function (when u press Enter you are going to the home page)
+  //  goLoginWithEnter();
+   
 
-    //CALL THE OTHER JS WITH VALIDATOR LOGIN!
-   mainRegister();
 
 }
 // FIRST FUNCTION WHEN ONLOAD THE PAGE
