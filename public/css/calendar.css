@@ -99,34 +99,40 @@ body {
   }
   
   .first-week {
-    margin-bottom: 25px;
+    width: 480px;
+    display: grid;
+    grid-template-columns: repeat(7 ,1fr);
+    grid-template-rows: repeat(5,1fr);
     word-spacing: 55px;
   }
-  
+
   .second-week {
     margin-bottom: 25px;
-    word-spacing: 53px;
+    word-spacing: 55px;
   }
-  
+  .second-week:nth-child(1) p{
+   color:red;
+  }
+
   .third-week {
-    margin-bottom: 25px;
-    word-spacing: 58px;
-  }
-  
-  .fourth-week {
-    margin-bottom: 25px;
-    word-spacing: 58px;
-  }
-  
-  .fifth-week {
-    margin-bottom: 25px;
-    word-spacing: 56px;
-  }
-  
-  .sixth-week {
     margin-bottom: 25px;
     word-spacing: 55px;
   }
+
+  .fourth-week {
+    margin-bottom: 25px;
+    word-spacing: 55px;
+  }
+
+  .fifth-week {
+    margin-bottom: 25px;
+    word-spacing: 55px;
+  }
+  .sixt-week {
+    margin-bottom: 25px;
+    word-spacing: 55px;
+  }
+  
   
   .active-day {
     width: 35px;

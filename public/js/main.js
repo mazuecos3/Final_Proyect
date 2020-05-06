@@ -3,11 +3,12 @@
 // FUNCTION TO CREATEA REGISTER FORM
 function register() {
     let divEntero = document.getElementById("login");
-
+    let warning = document.getElementsByClassName("alert-danger");
     console.log(divEntero);
     divEntero.innerHTML = "";
     divEntero.innerHTML =
         `
+   
     <form action="./consulta" method="POST">
     <h2>Registrarse</h2>
     <fieldset class="clearfix">
@@ -21,17 +22,31 @@ function register() {
         </div>
     </fieldset>
 </form>
+<br>
+<div class="alert alert-danger">
+<strong>Error!</strong> Las contraseñas no coinciden.
+</div>
 `
         ;
-    document.getElementById("edad").addEventListener("keypress", function () {
-        if (document.getElementById("edad").value) {
+        /*Comprobación errores*/ 
+        /*Si la contraseña no es igual a repetir contraseña, lanzar alert*/ 
+    document.getElementById("registro").addEventListener("click", function () {
+        if (document.getElementById("contraseña").value != document.getElementById("RepeatContraseña").value) {
+    console.log("las contraseñas no son iguales");
 
-        } console.log(document.getElementById("edad"));
+            console.log(warning[0]);
+            warning[0].style.visibility = "visible";
+        } 
+
 
     });
-    //document.getElementById("registro").addEventListener("click", login);
+   
+   
 }
 
+function createWarning() {
+  
+}
 
 
 // FUNCTION TO CREATE THE LOGIN
@@ -68,7 +83,7 @@ function addEvents() {
    
     document.getElementById("acceder").addEventListener("click", IniciarLogin);
   
-   // document.getElementById("registro").addEventListener("click", register);
+    document.getElementById("registro").addEventListener("click", register);
    
 }
 
