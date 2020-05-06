@@ -14,7 +14,7 @@ function dates() {
     divDates[0].innerHTML = "";
    let date = document.createElement("div");
    
-    date.classList.add("first-week");
+    date.classList.add("week");
     console.log(date);
 for (let i = 1; i <=42; i++) {
     contador++
