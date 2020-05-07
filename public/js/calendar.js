@@ -21,10 +21,15 @@ function dates() {
     //CREATION NUMBERS OF THE CALENDAR
     if (contador < 10) {
       num.innerText = "0" + i;
+
+         //FUNCTION WHEN U CLICK, CHANGUE ALL THE LEFT SECTION CALENDAR OF THIS DAY
+      num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
     } else {
       // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey
       if (contador <= 30) {
         num.innerText = i;
+      //FUNCTION WHEN U CLICK, CHANGUE ALL THE LEFT SECTION CALENDAR OF THIS DAY
+        num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
       } else {
         num.classList.add("grey");
         num.innerText = i - 30;
@@ -33,12 +38,7 @@ function dates() {
     }
    
 
-    
-    
-    //FUNCTION WHEN U CLICK CHANGUE ALL THELEFT SECTION CALENDAR OF THIS DAY
-    num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
-    
-   console.log(num);
+  // console.log(num);
     //Add all to the to the father class
     date.appendChild(num);
      //Add all to the to the father DOM
