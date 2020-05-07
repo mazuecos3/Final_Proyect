@@ -17,7 +17,7 @@ body {
   border-radius: 20px;
   background-color: white;
   position: relative;
-  z-index: -1;
+  z-index: 3;
   color: black;
 }
 
@@ -106,7 +106,7 @@ body {
   z-index: 1;
 }
 
-.week {
+.dates{
 
   width: 500px;
   display: grid;
@@ -119,13 +119,12 @@ body {
 
 .active-day {
   text-align: center;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+  height: 50%;
+  width: 80%;
+  border-radius: 80%;
   background-color: blue;
   position: relative;
-  top: 295px;
-  left: 661px;
+
 }
 
 .white {
@@ -153,12 +152,14 @@ body {
 }
 
 .calendar-left {
+
+  margin: 0;
   width: 300px;
   height: 500px;
   border-radius: 20px 0px 0px 20px;
   background-color: blue;
   position: relative;
-  z-index: -1;
+  z-index: 4;
   bottom: 500px;
   color: white;
 }

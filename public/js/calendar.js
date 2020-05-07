@@ -1,45 +1,94 @@
-
-
-function init() {
-    console.log("inicio JS");
-    dates();
-}
-
+const day = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 function dates() {
-    let contador = 0;
-    let num;
-    let divDates = document.getElementsByClassName('num-dates');
-   // console.log(divDates[0]);
-    divDates[0].innerHTML = "";
-   let date = document.createElement("div");
-   
-   date.classList.add("week");
-    console.log(date);
-for (let i = 1; i <=42; i++) {
-    contador++
-  
+  let contador = 0;
+  let num;
+ 
+  let divDates = document.getElementsByClassName("num-dates");
+  // console.log(divDates[0]);
+  divDates[0].innerHTML = "";
+  let date = document.createElement("div");
+
+  date.classList.add("dates");
+  console.log(date);
+  for (let i = 1; i <= 42; i++) {
+    contador++;
+    
     num = document.createElement("p");
     num.dataset.num = contador;
+   
+    
     //CREATION NUMBERS OF THE CALENDAR
     if (contador < 10) {
-        num.innerText = "0"+i; 
-    }else{
-        // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey
-        if (contador <= 30) {
-            num.innerText = +i; 
-        } else {
-            num.classList.add("grey");
-            num.innerText = i - 30; 
-           
-        }
+      num.innerText = "0" + i;
+    } else {
+      // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey
+      if (contador <= 30) {
+        num.innerText = i;
+      } else {
+        num.classList.add("grey");
+        num.innerText = i - 30;
+      }
+    
     }
-    console.log(num);
+   
+    
+    //FUNCTION WHEN U CLICK CHANGUE ALL THELEFT SECTION CALENDAR OF THIS DAY
+    num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
+    
+   console.log(num);
+    //Add all to the to the father class
     date.appendChild(num);
-divDates[0].appendChild(date);
-}
+     //Add all to the to the father DOM
+    divDates[0].appendChild(date);
+    
+   
+    //num.addEventListener("click", () => openDate(num.value,num.innerText));
+    
+  }
+  
+ 
 }
 
+function openDate(date, d) {
 
+
+  let leftDiv = document.querySelector(".calendar-left");
+  leftDiv.innerHTML = "";
+
+ leftDiv.innerHTML= `
+ <div class="num-date">` + date + `</div>
+
+ <br>
+ <br>
+ <div class="day">` + day[(d-1)%7]  + `</div>
+
+ <div class="current-events">Próximos Eventos
+   <br>
+   <ul>
+     <li>Carrera X</li>
+     <li>Carrera X</li>
+     <li>Carrera X</li>
+     <li>Carrera X</li>
+     <li>Carrera X</li>
+     
+   </ul>
+ 
+
+
+</div>
+ <!-- add-event -->
+
+</div>
+ `
+
+  
+  console.log(leftDiv);
+}
+
+function init() {
+  console.log("inicio JS");
+  dates();
+}
 
 window.onload = init;
