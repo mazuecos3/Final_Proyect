@@ -1,10 +1,13 @@
 body {
   width: 99%;
-  background-color: lightgray;
+  opacity: 0.9;
+  background-image: url("../media/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: 'Kanit', sans-serif;
 }
 .container{
-  margin-left: 300px;
+  margin-left: 350px;
   margin-top: 100px;
 
   width: 800px;
@@ -22,53 +25,23 @@ body {
 }
 
 .year {
-  color: #E8E8E8;
+  color:  #AAAAAA;
   font-size: 30px;
   float: right;
   position: relative;
-  right: 75px;
+  right: 40px;
   top: 20px;
   font-weight: bold;
 }
-
-.triangle-left {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-right: 10px solid #E8E8E8;
-  border-bottom: 5px solid transparent;
-  float: right;
-  position: relative;
-  right: 90px;
-  top: 36px;
+.year:hover{
+  color:#2980B9;
 }
 
-.triangle-right {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-left: 10px solid #E8E8E8;
-  border-bottom: 5px solid transparent;
-  float: right;
-  position: relative;
-  left: 20px;
-  top: 36px;
-}
 
-.triangle-left:hover {
-  border-right: 10px solid#2ECC71;
-}
 
-.triangle-right:hover {
-  border-left: 10px solid#2ECC71;
-}
-
-.month-color {
-  color: #27AE60;
-}
 
 .month-hover:hover {
-  color: #27e879 !important;
+  color: #2980B9 !important;
 }
 
 .months {
@@ -158,7 +131,7 @@ body {
   width: 300px;
   height: 500px;
   border-radius: 20px 0px 0px 20px;
-  background-color: blue;
+  background-color: #2980B9;
   position: relative;
   z-index: 4;
   bottom: 500px;
