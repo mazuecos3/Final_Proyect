@@ -32,6 +32,8 @@ function dates() {
     
     }
    
+
+    
     
     //FUNCTION WHEN U CLICK CHANGUE ALL THELEFT SECTION CALENDAR OF THIS DAY
     num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
