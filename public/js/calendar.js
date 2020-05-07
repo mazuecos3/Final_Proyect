@@ -52,7 +52,16 @@ function dates() {
 
 function openDate(date, d) {
 
-
+  // for take Monday, Tuesday... etc
+  d = (d-1)%7
+  // array of races on this day
+  let races = 
+  [
+  "Marxa conta l'Escleròsi Múltiple", "Carrera por la Esclerosis Múltiple" ,
+  "Carrera Solidaria Popular Cruz Roja", "Carrera Marta Fernández de Castro", 
+  "Cursa Illa de El Palmar", "I Carrera por el día mundial del TDH", 
+  " XLIV Volta a Peu als Barris", "VIII Can-rrera Bioparc Valencia"
+];
   let leftDiv = document.querySelector(".calendar-left");
   leftDiv.innerHTML = "";
 
@@ -61,24 +70,20 @@ function openDate(date, d) {
 
  <br>
  <br>
- <div class="day">` + day[(d-1)%7]  + `</div>
+ <div class="day">` + day[d]  + `</div>
 
- <div class="current-events">Próximos Eventos
+ <div class="current-events">Próximos Eventos :
    <br>
    <ul>
-     <li>Carrera X</li>
-     <li>Carrera X</li>
-     <li>Carrera X</li>
-     <li>Carrera X</li>
-     <li>Carrera X</li>
+    
+     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
+     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
+     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
+     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
      
    </ul>
- 
-
 
 </div>
- <!-- add-event -->
-
 </div>
  `
 

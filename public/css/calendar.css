@@ -108,6 +108,7 @@ body {
 
 .dates{
 
+  cursor: pointer;
   width: 500px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -186,10 +187,15 @@ body {
 }
 
 .current-events {
-  font-size: 15px;
+  font-size: 18px;
   position: relative;
   margin-left: 25px;
   bottom: 30px;
+}
+
+li {
+  margin-top: 15px;
+
 }
 
 .posts {
