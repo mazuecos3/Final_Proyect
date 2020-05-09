@@ -11,7 +11,7 @@ function dates() {
 
   date.classList.add("dates");
   console.log(date);
-  for (let i = 1; i <= 42; i++) {
+  for (let i = 1; i <= 35; i++) {
     contador++;
     
     num = document.createElement("p");
@@ -70,18 +70,17 @@ function openDate(date, d) {
  leftDiv.innerHTML= `
  <div class="num-date">` + date + `</div>
 
- <br>
- <br>
+ 
  <div class="day">` + day[d]  + `</div>
 
  <div class="current-events">Próximos Eventos :
-   <br>
+   
    <ul>
     
      <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
      <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
      <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
-     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
+  
      
    </ul>
 

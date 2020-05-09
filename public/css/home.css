@@ -1,0 +1,45 @@
+
+
+
+#logo{
+  content:url("../media/logo25x25.png");
+  margin-right: 20px;
+}
+.w3-bar.w3-white.w3-large a {
+  font-size: 25px;
+}
+/*NAV section*/
+a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-user {
+  height: 53px;
+}
+
+a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-sign-out {
+  height: 53px;
+}
+
+.w3-red, .w3-hover-red {
+  color: #fff!important;
+  background-color: #2980B9!important;
+}
+
+
+/*Footer Section*/
+
+footer{
+ height: 10%; 
+}
+.w3-black, .w3-hover-black{
+  background-color: #2980B9 !important;
+}
+
+#main{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#main img{
+
+width: 100%;
+height: 50%;
+}
+
