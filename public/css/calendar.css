@@ -88,18 +88,20 @@ body {
   grid-template-rows: repeat(5, 1fr);
   word-spacing: 35px;
   text-align: center;
+  grid-gap: 5px;
 
 }
-
-.active-day {
-  text-align: center;
-  height: 50%;
-  width: 80%;
-  border-radius: 80%;
-  background-color: blue;
-  position: relative;
-
+.dates p{
+  width: 100%;
+  font-weight: bold;
+  
 }
+.active-day{
+  background-color: red;
+  
+}
+
+
 
 .white {
   color: white;
@@ -227,5 +229,9 @@ a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-sign-out {
   background-color: #2980B9!important;
 }
 
+/* Links style */
 
+a{
+  text-decoration: none;
+}
 

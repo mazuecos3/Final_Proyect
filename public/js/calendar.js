@@ -25,6 +25,10 @@ function dates() {
          //FUNCTION WHEN U CLICK, CHANGUE ALL THE LEFT SECTION CALENDAR OF THIS DAY
       num.addEventListener("click", () => openDate( event.target.innerText ,  event.target.dataset.num));
     } else {
+
+      if (contador <= 20 && contador > 15) {
+       num.classList.add("active-day");
+      }
       // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey
       if (contador <= 30) {
         num.innerText = i;
@@ -54,6 +58,8 @@ function dates() {
 
 function openDate(date, d) {
 
+console.log(d);
+
   // for take Monday, Tuesday... etc
   d = (d-1)%7
   // array of races on this day
@@ -65,28 +71,41 @@ function openDate(date, d) {
   " XLIV Volta a Peu als Barris", "VIII Can-rrera Bioparc Valencia"
 ];
   let leftDiv = document.querySelector(".calendar-left");
-  leftDiv.innerHTML = "";
+  leftDiv.innerHTML = ``;
 
- leftDiv.innerHTML= `
+
+   if (event.target.classList == "active-day") {
+
+    let idRaces = event.target.dataset.num;
+
+    leftDiv.innerHTML= `
  <div class="num-date">` + date + `</div>
-
- 
  <div class="day">` + day[d]  + `</div>
-
  <div class="current-events">Próximos Eventos :
-   
    <ul>
-    
-     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
-     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
-     <li>` +races[Math.floor(Math.random() * 8)]  + `</li>
-  
-     
+   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
+   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
+   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
    </ul>
 
 </div>
 </div>
  `
+} else {
+
+  console.log(event.target.classList);
+  leftDiv.innerHTML= `
+  <div class="num-date">` + date + `</div>
+  <div class="day">` + day[d]  + `</div>
+  <div class="current-events">Próximos Eventos :
+    <ul>
+  <li>  Ningún evento programado.</li>
+    </ul>
+ </div>
+ </div>
+  `
+
+}
 
   
   console.log(leftDiv);
