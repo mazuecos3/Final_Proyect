@@ -1,9 +1,14 @@
 
 function main() {
+
+   
+ let start;
+ let end;
+ 
     let main = document.getElementById("main");
-    console.log(main);
+    //console.log(main);
     main.innerHTML = "";
-    for (let i = 1; i < 40; i++) {
+    for (let i = 16; i < 19; i++) {
       
         let container = document.createElement("div");
         container.classList.add("w3-row-padding");
@@ -19,25 +24,51 @@ function main() {
             <h6 class="w3-opacity"> 12€</h6>
             <p>Carrera de 10 kilometros maximo 200 participantes</p>
             <p>Ubicacion Prevista: Zona Alameda</p>
-            <div id="map`+i +`" class="map"></div>
-            <button class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+            <div id="map`+ i +`" class="map"></div>
+            <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
           </div>
         
         `
-        
+       
+      
        // console.log(container)
        main.appendChild(container);
-       createMap(i);
+       eventsReservar(i);
+     // console.log(container.id);
+       switch (container.id) {
+         case "16":
+          start = 'Paiporta, Santa Ana';
+          end  ='Paiporta, Colombicultura'; 
+           break;
+
+       case "17": 
+       start = 'Paiporta, Jaume I';
+       end  ='Paiporta, Colombicultura';
+       break;
+
+       case "18":
+        start = 'Paiporta, Maestre Palau';
+        end  ='Paiporta, Colombicultura'; 
+         break;
+       
+       }
+       
+       
+       createMap(i,start, end); 
       
         
     }
     
 }
 
-function createMap(i) {
+
+
+function createMap(i , start ,  end) {
   let map;
   let dir;
- 
+
+
+
   map = L.map(`map${i}`, {
     layers: MQ.mapLayer(),
     center: [39.429204, -0.417839],
@@ -50,9 +81,9 @@ function createMap(i) {
 
   dir.route({
       locations: [
-          'Paiporta, Santa Ana',
-          'Paiporta, Colombicultura',
-          'Paiporta, Jaime'
+         start,
+         end
+         
           
       ]
    
@@ -64,15 +95,23 @@ function createMap(i) {
   }));
 
 }
-function events() {
-    console.log("eventos");
-    
+
+function eventsReservar(i) {
+ 
+ let buttonClicked = document.getElementById("button"+i);
+  console.log(buttonClicked);
+  buttonClicked.addEventListener("click",reservar);
+
+  
 }
 
+function reservar() {
+  console.log("Reservando . . .")
+}
 function init() {
     
     console.log("Inicio js Home");
-    events();
+   
     main();
 }
 
