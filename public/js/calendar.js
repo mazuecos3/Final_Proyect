@@ -83,9 +83,9 @@ console.log(d);
  <div class="day">` + day[d]  + `</div>
  <div class="current-events">Próximos Eventos :
    <ul>
-   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
-   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
-   <li> <a href="http://localhost:3000/main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
+   <li> <a href="main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
+   <li> <a href="main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
+   <li> <a href="main.html#` +idRaces+ `">` +races[Math.floor(Math.random() * 8)]  + ` </a></li>
    </ul>
 
 </div>

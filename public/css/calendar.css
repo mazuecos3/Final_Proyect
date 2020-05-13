@@ -229,6 +229,10 @@ a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-sign-out {
   background-color: #2980B9!important;
 }
 
+
+.w3-bar .w3-white .w3-large{
+  width: 100%;
+}
 /* Links style */
 
 a{
