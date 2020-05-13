@@ -4,7 +4,7 @@
 function register() {
     let divEntero = document.getElementById("login");
     let warning = document.getElementsByClassName("alert-danger");
-    console.log(divEntero);
+    //console.log(divEntero);
     divEntero.innerHTML = "";
     divEntero.innerHTML =
         `
@@ -18,7 +18,9 @@ function register() {
         <p><span class="fa fa-lock"></span><input id="contraseña" name="password" type="password" Placeholder="Contraseña" required>  </p>
         <p><span class="fa fa-lock"></span><input id="RepeatContraseña" name="password_repeat" type="password" Placeholder="Repetir Contraseña" required></p>
     <div>
-            <input id="registro" type="submit" value="Registrarse">          
+              
+            <input id="volver" type="button" value="Volver"> 
+            <input id="registro" type="submit" value="Registrarse">       
         </div>
     </fieldset>
 </form>
@@ -41,7 +43,7 @@ function register() {
 
     });
    
-   
+   volver();
 }
 
 function createWarning() {
@@ -53,13 +55,13 @@ function createWarning() {
 function login() {
     let divEntero = document.getElementById("login");
 
-    console.log(divEntero);
+    //console.log(divEntero);
     divEntero.innerHTML = "";
     divEntero.innerHTML =
         `
     <form action="./comprobar" method="POST">
     <fieldset class="clearfix">
-    <h2>Incio Sesion</h2>
+    <h2>Inicio Sesión</h2>
         <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario"></p>  
         <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
@@ -72,6 +74,7 @@ function login() {
         ;
 
     addEvents();
+  
 }
 //FUNCTION TO OPEN THE LOGIN
 function IniciarLogin() {
@@ -79,12 +82,15 @@ function IniciarLogin() {
     window.location.replace("../main.html");
 
 }
+function volver() {
+    document.getElementById("volver").addEventListener("click", login);
+}
 function addEvents() {
    
     document.getElementById("acceder").addEventListener("click", IniciarLogin);
-  
     document.getElementById("registro").addEventListener("click", register);
-   
+  
+
 }
 
 // FIRST FUNCTION & ADDVEVENTS

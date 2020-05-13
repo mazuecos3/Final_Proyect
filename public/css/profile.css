@@ -109,13 +109,10 @@ body{
     font-size: 25px;
   }
   /*NAV section*/
-  a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-user {
+  a.w3-bar-item.w3-button.w3-right.w3-mobile.fa {
     height: 53px;
   }
   
-  a.w3-bar-item.w3-button.w3-right.w3-mobile.fa.fa-sign-out {
-    height: 53px;
-  }
   
   .w3-red, .w3-hover-red {
     color: #fff!important;
