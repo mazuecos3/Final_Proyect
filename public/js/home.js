@@ -106,7 +106,10 @@ function eventsReservar(i) {
 }
 
 function reservar() {
-  console.log("Reservando . . .")
+  
+  console.log("Añadido al carrito");
+  window.location.replace("../shopping.html");
+
 }
 function init() {
     

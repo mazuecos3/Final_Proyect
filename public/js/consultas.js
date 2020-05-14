@@ -30,7 +30,7 @@ console.log(result.length);
        if (result.length > 0 ) {
         console.log(result[0].usuario);
         console.log(result[0].password);
-        res.redirect('main.html'); 
+        res.redirect('home.html'); 
       } else {
         console.log("Registrate Primero");
         res.redirect('index.html'); 
