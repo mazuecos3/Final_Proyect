@@ -116,7 +116,7 @@ body{
   
   .w3-red, .w3-hover-red {
     color: #fff!important;
-    background-color: #0264d6!important;
+    background-color: #2980B9!important;
   }
   
   /* Links style */
@@ -129,3 +129,8 @@ body{
     max-width: 40% ;
   }
   
+
+  .nav-background{
+    color: #fff!important;
+    background-color: #2980B9!important;
+  }

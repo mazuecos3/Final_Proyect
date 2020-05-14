@@ -46,7 +46,48 @@ height: 50%;
   width: 100%;
   height:200px;
 
- 
+}
+
+.nav-background{
+  color: #fff!important;
+  background-color: #2980B9!important;
+}
+
+
+/*Animation Card*/
+
+.animationCart:after{
+  position: absolute;
+  padding: 3px;
+  box-shadow: 0 0 7px #b53;
+  border-radius: 30%;
+  background: #f90;
+  content: '1';
+  font-size: 10px;
  
 }
 
+/*Disable button whenn the rotate animation ends*/
+.disableButton{
+  cursor: not-allowed;
+  pointer-events:none;
+
+}
+
+/*Rotation animation when u click*/
+.rotate-center{
+	-webkit-animation: rotate-center 0.4s ease-in-out both;
+	        animation: rotate-center 0.4s ease-in-out both;
+}
+
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+            opacity: 0.5;
+  }
+}

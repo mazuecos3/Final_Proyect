@@ -236,3 +236,7 @@ a{
   text-decoration: none;
 }
 
+.nav-background{
+  color: #fff!important;
+  background-color: #2980B9!important;
+}

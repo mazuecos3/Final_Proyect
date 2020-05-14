@@ -19,13 +19,13 @@ function main() {
           <div class="w3-container w3-white">
        
           <p>`+  container.id +`</p>
-          <img src="./media/race1.jpg" alt="race1">
+          <!--<img src="./media/race1.jpg" alt="race1">-->
             <h3>10k</h3>
             <h6 class="w3-opacity"> 12€</h6>
             <p>Carrera de 10 kilometros maximo 200 participantes</p>
             <p>Ubicacion Prevista: Zona Alameda</p>
             <div id="map`+ i +`" class="map"></div>
-            <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom">Reservar</button>
+            <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom ">Añadir al Carrito</button>
           </div>
         
         `
@@ -59,6 +59,35 @@ function main() {
         
     }
     
+}
+
+
+function eventsReservar(i) {
+ 
+ let buttonClicked = document.getElementById("button"+i);
+  //console.log(buttonClicked);
+  
+  buttonClicked.addEventListener("click",addCart);
+  buttonClicked.addEventListener("click",function() {
+    buttonClicked.classList.add("rotate-center");
+    buttonClicked.classList.add("disableButton");
+  });
+
+}
+
+function addCart() {
+  let contador = 0;
+  contador++;
+  console.log(contador);
+  let cart = document.getElementById("cart");
+  console.log(cart);
+ 
+ 
+  cart.classList.add("animationCart"); 
+   
+
+ // window.location.replace("../shopping.html");
+
 }
 
 
@@ -96,21 +125,6 @@ function createMap(i , start ,  end) {
 
 }
 
-function eventsReservar(i) {
- 
- let buttonClicked = document.getElementById("button"+i);
-  console.log(buttonClicked);
-  buttonClicked.addEventListener("click",reservar);
-
-  
-}
-
-function reservar() {
-  
-  console.log("Añadido al carrito");
-  window.location.replace("../shopping.html");
-
-}
 function init() {
     
     console.log("Inicio js Home");
