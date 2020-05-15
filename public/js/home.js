@@ -25,7 +25,7 @@ function main() {
             <p>Carrera de 10 kilometros maximo 200 participantes</p>
             <p>Ubicacion Prevista: Zona Alameda</p>
             <div id="map`+ i +`" class="map"></div>
-            <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom ">Añadir al Carrito</button>
+            <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom "></button>
           </div>
         
         `
@@ -73,7 +73,7 @@ function eventsReservar(i) {
   //Add function when click in the button and enable 2 clases(animation and disable the button)
   buttonClicked.addEventListener("click",addCart);
   buttonClicked.addEventListener("click",function() {
-    buttonClicked.classList.add("rotate-center","disableButton"); 
+    buttonClicked.classList.add("buttonAnimation","disableButton"); 
 
     
   });

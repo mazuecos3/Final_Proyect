@@ -61,10 +61,17 @@ height: 50%;
   padding: 3px;
   box-shadow: 0 0 7px #b53;
   border-radius: 30%;
-  background: #f90;
+  background-color: #f90;
   
   font-size: 10px;
  
+}
+
+
+/*Button*/
+button::after
+{
+  content: "Añadir al carrito";
 }
 
 /*Disable button whenn the rotate animation ends*/
@@ -74,23 +81,37 @@ height: 50%;
 
 }
 
-/*Rotation animation when u click*/
-.rotate-center{
-	-webkit-animation: rotate-center 0.4s ease-in-out both;
-	        animation: rotate-center 0.4s ease-in-out both;
+/*Animation when u click in the add cart button*/
+.buttonAnimation{
+
+  animation: addCart-Animation 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) 1  both;
+}
+.buttonAnimation:after{
+  content: "Añadida al carrito";
+ 
 }
 
-@-webkit-keyframes rotate-center {
-  0% {
-    -webkit-transform: rotate(0);
-            transform: rotate(0);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-            opacity: 0.5;
-  }
+@keyframes addCart-Animation {
+
+    0% {
+      -webkit-transform: rotateX(0);
+              transform: rotateX(0);
+    }
+    50% {
+      -webkit-transform: rotateX(-180deg);
+      transform: rotateX(-180deg);
+            
+    }
+    100% {
+   
+              background-color: #f90;
+              opacity: 0.5;
+              
+    }
+  
+  
 }
+
 
 #spanCart{
   position: absolute;
