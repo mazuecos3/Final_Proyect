@@ -56,13 +56,13 @@ height: 50%;
 
 /*Animation Card*/
 
-.animationCart:after{
+.animationCart{
   position: absolute;
   padding: 3px;
   box-shadow: 0 0 7px #b53;
   border-radius: 30%;
   background: #f90;
-  content: '1';
+  
   font-size: 10px;
  
 }
@@ -90,4 +90,14 @@ height: 50%;
             transform: rotate(360deg);
             opacity: 0.5;
   }
+}
+
+#spanCart{
+  position: absolute;
+  visibility: hidden;
+  padding: 4px;
+  box-shadow: 0 0 7px #b53;
+  border-radius: 40%;
+  background: #f90;
+  font-size: 10px;
 }

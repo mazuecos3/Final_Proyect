@@ -1,7 +1,7 @@
+let numRaces = 0;
 
-function main() {
 
-   
+function main() { 
  let start;
  let end;
  
@@ -34,6 +34,7 @@ function main() {
        // console.log(container)
        main.appendChild(container);
        eventsReservar(i);
+      
      // console.log(container.id);
        switch (container.id) {
          case "16":
@@ -64,30 +65,32 @@ function main() {
 
 function eventsReservar(i) {
  
+ 
+  //Now we take the button pressed (with each id)
  let buttonClicked = document.getElementById("button"+i);
-  //console.log(buttonClicked);
-  
+  //console.log(buttonClicked);c
+ 
+  //Add function when click in the button and enable 2 clases(animation and disable the button)
   buttonClicked.addEventListener("click",addCart);
   buttonClicked.addEventListener("click",function() {
-    buttonClicked.classList.add("rotate-center");
-    buttonClicked.classList.add("disableButton");
+    buttonClicked.classList.add("rotate-center","disableButton"); 
+
+    
   });
 
 }
 
 function addCart() {
-  let contador = 0;
-  contador++;
-  console.log(contador);
-  let cart = document.getElementById("cart");
-  console.log(cart);
- 
- 
-  cart.classList.add("animationCart"); 
-   
+  
+  //Num of races when u add 1 race to the cart 
+  numRaces++;
+  
+  let cart = document.getElementById("spanCart");
+  //console.log(cart);
+  cart.innerText=numRaces;
+  cart.style.visibility = "visible";
 
  // window.location.replace("../shopping.html");
-
 }
 
 
@@ -128,7 +131,7 @@ function createMap(i , start ,  end) {
 function init() {
     
     console.log("Inicio js Home");
-   
+ 
     main();
 }
 
