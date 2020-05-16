@@ -1,13 +1,10 @@
-
-
 // FUNCTION TO CREATEA REGISTER FORM
 function register() {
-    let divEntero = document.getElementById("login");
-    let warning = document.getElementsByClassName("alert-danger");
-    //console.log(divEntero);
-    divEntero.innerHTML = "";
-    divEntero.innerHTML =
-        `
+  let divEntero = document.getElementById("login");
+  let warning = document.getElementsByClassName("alert-danger");
+  //console.log(divEntero);
+  divEntero.innerHTML = "";
+  divEntero.innerHTML = `
    
     <form action="./consulta" method="POST">
     <h2>Registrarse</h2>
@@ -28,81 +25,115 @@ function register() {
 <div class="alert alert-danger">
 <strong>Error!</strong> Las contraseñas no coinciden.
 </div>
-`
-        ;
-        /*Comprobación errores*/ 
-        /*Si la contraseña no es igual a repetir contraseña, lanzar alert*/ 
-    document.getElementById("registro").addEventListener("click", function () {
-        if (document.getElementById("contraseña").value != document.getElementById("RepeatContraseña").value) {
-    console.log("las contraseñas no son iguales");
+`;
+  /*Comprobación errores*/
 
-            console.log(warning[0]);
-            warning[0].style.visibility = "visible";
-        } 
+  /*Si la contraseña no es igual a repetir contraseña, lanzar alert*/
 
+  document.getElementById("registro").addEventListener("click", function () {
+    if (
+      document.getElementById("contraseña").value !=
+      document.getElementById("RepeatContraseña").value
+    ) {
+      console.log("las contraseñas no son iguales");
 
-    });
-   
-   volver();
+      console.log(warning[0]);
+      warning[0].style.visibility = "visible";
+    }
+  });
+
+  volver();
 }
 
-function createWarning() {
-  
-}
-
+function createWarning() {}
 
 // FUNCTION TO CREATE THE LOGIN
 function login() {
-    let divEntero = document.getElementById("login");
+  let divEntero = document.getElementById("login");
 
-    //console.log(divEntero);
-    divEntero.innerHTML = "";
-    divEntero.innerHTML =
-        `
-    <form action="./comprobar" method="POST">
+  //console.log(divEntero);
+  divEntero.innerHTML = "";
+  divEntero.innerHTML = `
+    <form>
     <fieldset class="clearfix">
     <h2>Inicio Sesión</h2>
         <p><span class="fa fa-user"></span><input id="usuario" type="text" name="usuario" Placeholder="Usuario"></p>  
-        <p><span class="fa fa-lock"></span><input id="email" type="password" name="password" Placeholder="Contraseña" >  </p>
+        <p><span class="fa fa-lock"></span><input id="password" type="password" name="password" Placeholder="Contraseña" >  </p>
         <div>
             <input id="registro" type="button" value="Registrarse">
-            <input id="acceder" type="submit" value="Acceder ">          
+            <input id="acceder" type="button" value="Acceder ">          
         </div>
     </fieldset>
 </form>
-`
-        ;
+`;
 
-    addEvents();
-  
+  addEvents();
 }
 //FUNCTION TO OPEN THE LOGIN
 function IniciarLogin() {
+  let username = document.getElementById("usuario").value;
+  let password = document.getElementById("password").value;
 
-    window.location.replace("../main.html");
-
-}
-function volver() {
-    document.getElementById("volver").addEventListener("click", login);
-}
-function addEvents() {
-   
-    document.getElementById("acceder").addEventListener("click", IniciarLogin);
-    document.getElementById("registro").addEventListener("click", register);
   
+  console.log(document.getElementById("usuario").value);
+  console.log(document.getElementById("password").value);
+//FETCH to check if the response of the server, if is correct we create a cookie
+// with the tokenUser and the response signed by the token, alsa when all of this is
+//correct we can go inside the application.
+  fetch("http://localhost:3000/comprobar", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ username: username, password: password }),
+  })
+    .then((response) => response.json())
+    .then((response) => createCookie("tokenUser", response.token))
+    .then(() => window.location.replace("../main.html"));
+  
+}
 
+function volver() {
+  document.getElementById("volver").addEventListener("click", login);
+}
+
+function addEvents() {
+  document.getElementById("acceder").addEventListener("click", IniciarLogin);
+  document.getElementById("registro").addEventListener("click", register);
+}
+
+function createCookie(name, value, days) {
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    var expires = "; expires=" + date.toGMTString();
+  } else var expires = "";
+  document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function addEnterListener() {
+  // Execute a function when the user releases a key on the keyboard
+  document.addEventListener("keyup", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("acceder").click();
+    }
+  });
 }
 
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
-    console.log("Iniciando...")
-    login();
-    addEvents();
-//Call function (when u press Enter you are going to the home page)
+  console.log("Iniciando...");
+  login();
+  addEvents();
+  addEnterListener();
+  //Call function (when u press Enter you are going to the home page)
   //  goLoginWithEnter();
-   
-
-
 }
+
 // FIRST FUNCTION WHEN ONLOAD THE PAGE
 window.onload = init;

@@ -10,13 +10,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mazuecos3/Pokedex"
+        "url": "https://github.com/mazuecos3/Final_Proyect"
     },
     "author": "Oscar Mazuecos",
     "license": "ISC",
     "dependencies": {
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
         "leaflet-routing-machine": "^3.2.12",
         "mysql": "^2.18.1",
         "node-sass": "^4.13.1",
