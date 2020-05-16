@@ -80,7 +80,10 @@ function IniciarLogin() {
 //FETCH to check if the response of the server, if is correct we create a cookie
 // with the tokenUser and the response signed by the token, alsa when all of this is
 //correct we can go inside the application.
-  fetch("http://localhost:3000/comprobar" || "http://valenrunner.herokuapp.com//comprobar", {
+
+// HEROKU LINK
+/*"http://valenrunner.herokuapp.com/comprobar"*/ 
+  fetch("http://valenrunner.herokuapp.com/comprobar", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

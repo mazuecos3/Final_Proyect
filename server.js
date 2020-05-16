@@ -88,17 +88,17 @@ app.post("/verifyToken", (req, res) => {
     if (err) {
       res.send(false);
     } else {
-      connection.query(`SELECT * FROM users WHERE id LIKE ${token};`, function (
+      pool.query(`SELECT * FROM valenrunner WHERE id_usuario LIKE ${token};`, function (
         error,
         results,
         fields
       ) {
         if (error) throw error;
-        console.log(results[0].id);
+        console.log(results[0].id_usuario);
 
         userData = {
           isValid: true,
-          id: results[0].id,
+          id: results[0].id_usuario,
         };
 
         res.send(userData);

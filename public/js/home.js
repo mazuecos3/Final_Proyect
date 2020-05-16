@@ -15,9 +15,7 @@ function main() {
         container.id = i;
         container.innerHTML = 
         `
-       
-          <div class="w3-container w3-white">
-       
+          <div class="w3-container w3-white">     
           <p>`+  container.id +`</p>
           <!--<img src="./media/race1.jpg" alt="race1">-->
             <h3>10k</h3>
@@ -26,11 +24,8 @@ function main() {
             <p>Ubicacion Prevista: Zona Alameda</p>
             <div id="map`+ i +`" class="map"></div>
             <button id="button`+ i +`" class="w3-button w3-block w3-black w3-margin-bottom "></button>
-          </div>
-        
-        `
-       
-      
+          </div>        
+        `    
        // console.log(container)
        main.appendChild(container);
        eventsReservar(i);
@@ -50,22 +45,16 @@ function main() {
        case "18":
         start = 'Paiporta, Maestre Palau';
         end  ='Paiporta, Colombicultura'; 
-         break;
-       
-       }
-       
-       
+         break;  
+       } 
        createMap(i,start, end); 
-      
-        
     }
     
 }
 
 
 function eventsReservar(i) {
- 
- 
+
   //Now we take the button pressed (with each id)
  let buttonClicked = document.getElementById("button"+i);
   //console.log(buttonClicked);c
@@ -73,33 +62,23 @@ function eventsReservar(i) {
   //Add function when click in the button and enable 2 clases(animation and disable the button)
   buttonClicked.addEventListener("click",addCart);
   buttonClicked.addEventListener("click",function() {
-    buttonClicked.classList.add("buttonAnimation","disableButton"); 
-
-    
+    buttonClicked.classList.add("buttonAnimation","disableButton");     
   });
-
 }
-
-function addCart() {
-  
+function addCart() { 
   //Num of races when u add 1 race to the cart 
   numRaces++;
-  
+
   let cart = document.getElementById("spanCart");
   //console.log(cart);
   cart.innerText=numRaces;
   cart.style.visibility = "visible";
-
  // window.location.replace("../shopping.html");
 }
-
-
 
 function createMap(i , start ,  end) {
   let map;
   let dir;
-
-
 
   map = L.map(`map${i}`, {
     layers: MQ.mapLayer(),
@@ -107,32 +86,50 @@ function createMap(i , start ,  end) {
     zoom: 15
   });
   
- 
   dir = MQ.routing.directions();
-
 
   dir.route({
       locations: [
          start,
-         end
-         
-          
+         end       
       ]
-   
   });
 
   map.addLayer(MQ.routing.routeLayer({
       directions: dir,
       fitBounds: true
   }));
-
 }
 
+//With this function we get the cookie and send the cookie to the server, if the resposne
+//is true, can enter to the site, else not.
+function comprobarCookie() {
+  let splitCookie = document.cookie.split(";")[0].indexOf("=");
+  let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
+//http://valenrunner.herokuapp.com//comprobar for heroku 
+  fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ token: cookie }),
+  })
+    .then((response) => response.json())
+    .then((response) => console.log(response)
+    )
+  
+console.log(cookie)
+  if (cookie) {
+  } 
+}
 function init() {
     
     console.log("Inicio js Home");
  
     main();
+
+    comprobarCookie();
 }
 
 
