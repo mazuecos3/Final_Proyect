@@ -92,7 +92,7 @@ function IniciarLogin() {
     body: JSON.stringify({ username: username, password: password }),
   })
     .then((response) => response.json())
-    .then((response) => createCookie("tokenUser", response.token))
+    .then((response) => createCookie("tokenUser", response.token, 200))
     .then(() => window.location.replace("../main.html"));
   
 }
@@ -128,12 +128,45 @@ function addEnterListener() {
   });
 }
 
+//TODO!!!! CRATE THIS FUNCTION FOR ALL SCRIPTS IN ONLY 1 PLACE!!!
+function comprobarCookie() {
+
+  // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
+  let splitCookie = document.cookie.split(";")[0].indexOf("=");
+  let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
+//http://valenrunner.herokuapp.com//comprobar for heroku 
+  fetch("http://localhost:3000/verifyToken", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ token: cookie }),
+  })
+    .then((response) => response.json())
+    .then((response) => {console.log(response.isValid)
+
+    if (response.isValid) {
+      window.location.replace("../main.html");
+    }else{
+      //window.location.replace("../index.html");
+     
+    }
+   
+  })
+  
+
+}
+
+
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
+  comprobarCookie();
   console.log("Iniciando...");
   login();
   addEvents();
   addEnterListener();
+ 
   //Call function (when u press Enter you are going to the home page)
   //  goLoginWithEnter();
 }

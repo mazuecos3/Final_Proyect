@@ -42,7 +42,7 @@ app.post("/comprobar", function (req, res) {
 
  //query that check if the id_usuario is orrect with the password/username
   pool.query(
-    "SELECT id_usuario FROM valenrunner WHERE usuario LIKE '" +
+    "SELECT id_usuario, usuario, email, edad FROM valenrunner WHERE usuario LIKE '" +
       username +
       "' AND password LIKE '" +
       password +
@@ -56,9 +56,18 @@ app.post("/comprobar", function (req, res) {
       if (result.length > 0) {
         //console.log(result[0].usuario);
         //console.log(result[0].password);
-        console.log(result[0].id_usuario);
+    
+        let id_usuario = result[0].id_usuario;
+        let usuario =result[0].usuario;
+        let email = result[0].email;
+        let edad = result[0].edad;
 
-        let token = createToken(result[0].id_usuario)
+        console.log(id_usuario);
+        console.log(usuario);
+        console.log(email);
+        console.log(edad);
+
+        let token = createToken(id_usuario, usuario);
 
         let tokenjson = {
           token: token
@@ -75,30 +84,42 @@ app.post("/comprobar", function (req, res) {
   );
 });
 
-// ENCRYPT TOKEN
-function createToken(userId) {
-  let token = jstoken.sign(userId, "desencrypt");
+// ENCRYPT TOKEN With the word "Desencrypt" you have to put the same word
+//when you will descencrypt it.
+function createToken(userId, usuario) {
+  let prueba = {
+    userid: userId,
+    usuario: usuario,
+  }
+
+  let token = jstoken.sign( prueba,"desencrypt");
 
   return token;
 }
 
 // Verify token
 app.post("/verifyToken", (req, res) => {
+ 
+  
   jstoken.verify(req.body.token, "desencrypt", (err, token) => {
+   
     if (err) {
-      res.send(false);
+      res.send({isValid: false});
     } else {
-      pool.query(`SELECT * FROM valenrunner WHERE id_usuario LIKE ${token};`, function (
+      pool.query("SELECT * FROM valenrunner WHERE id_usuario LIKE "+token.userid+";", function (
         error,
         results,
         fields
       ) {
         if (error) throw error;
-        console.log(results[0].id_usuario);
+       // console.log(results[0].id_usuario);
 
         userData = {
           isValid: true,
           id: results[0].id_usuario,
+          usuario: results[0].usuario,
+          email: results[0].email,
+          edad: results[0].edad,
         };
 
         res.send(userData);
@@ -107,17 +128,6 @@ app.post("/verifyToken", (req, res) => {
   });
 });
 
-function verifyToken(token) {
-  return jwt.verify(token, "desencrypt", function (err, decoded) {
-    console.log("token:", token);
-
-    if (err) {
-      console.log("error NO CONFIRMED");
-    } else {
-      return decoded;
-    }
-  });
-}
 
 // Paginas publicas (estaticas)
 app.use(express.static(path.join(__dirname, "public")));

@@ -104,6 +104,8 @@ function createMap(i , start ,  end) {
 //With this function we get the cookie and send the cookie to the server, if the resposne
 //is true, can enter to the site, else not.
 function comprobarCookie() {
+
+  // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
   let splitCookie = document.cookie.split(";")[0].indexOf("=");
   let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
 //http://valenrunner.herokuapp.com//comprobar for heroku 
@@ -116,20 +118,25 @@ function comprobarCookie() {
     body: JSON.stringify({ token: cookie }),
   })
     .then((response) => response.json())
-    .then((response) => console.log(response)
-    )
+    .then((response) => {console.log(response.isValid)
+
+    if (response.isValid) {
+      // window.location.replace("../main.html");
+    }else{
+        window.location.replace("../index.html");
+    }
+   
+  })
   
-console.log(cookie)
-  if (cookie) {
-  } 
+
 }
 function init() {
     
     console.log("Inicio js Home");
- 
+    comprobarCookie();
     main();
 
-    comprobarCookie();
+   
 }
 
 
