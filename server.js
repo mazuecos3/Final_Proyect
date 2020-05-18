@@ -30,7 +30,7 @@ app.post("/consulta", function (req, res) {
 
   //console.log(username, email, edad, password);
 
-  consultas.insert(username, email, edad, password);
+  //consultas.insert(username, email, edad, password);
 
   res.redirect("index.html");
 });

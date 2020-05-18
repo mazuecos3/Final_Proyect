@@ -19,7 +19,8 @@ function reviseCookie() {
 
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
-    fetch("http://localhost:3000/verifyToken", {
+    /* http://valenrunner.herokuapp.com/ */ 
+    fetch("http://valenrunner.herokuapp.com/verifyToken", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
