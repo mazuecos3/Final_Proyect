@@ -81,8 +81,8 @@ body{
     margin-top: -15%;
 }
 .profile-work p{
-    font-size: 12px;
-    color: #818182;
+    font-size: 15px;
+    color:#0062cc;
     font-weight: 600;
     margin-top: 10%;
 }
@@ -126,7 +126,7 @@ body{
   }
 
   .col-md-8{
-    max-width: 40% ;
+    max-width: 100% ;
   }
   
 
@@ -134,3 +134,21 @@ body{
     color: #fff!important;
     background-color: #2980B9!important;
   }
+
+  /*With for the text and labels in profile section history and dates*/
+  #home .row{
+    max-width: 100%;
+}
+
+#home .row .col-md-6{
+    max-width: 100%;
+}
+
+
+/*Maring top to set the container more closer to the text info*/
+
+.proile-rating {
+    font-size: 12px;
+    color: #818182;
+    margin-top: 20%;
+}

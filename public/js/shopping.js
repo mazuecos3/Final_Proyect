@@ -1,4 +1,12 @@
+import {logOut} from "./profile.js";
+
 function paid() {
+
+ //add function logout to the logout section
+  //console.log(document.getElementById("logOut"));
+  let btnLogOut = document.getElementById("logOut");
+  btnLogOut.addEventListener("click", logOut);
+
   let container = document.getElementById("product");
   console.log(container);
 

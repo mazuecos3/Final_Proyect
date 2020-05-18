@@ -1,3 +1,7 @@
+export {createCookie};
+
+
+
 // FUNCTION TO CREATEA REGISTER FORM
 function register() {
   let divEntero = document.getElementById("login");
@@ -83,7 +87,7 @@ function IniciarLogin() {
 
 // HEROKU LINK
 /*"http://valenrunner.herokuapp.com/comprobar"*/ 
-  fetch("http://valenrunner.herokuapp.com/comprobar", {
+  fetch("http://localhost:3000/comprobar", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -135,7 +139,7 @@ function comprobarCookie() {
   let splitCookie = document.cookie.split(";")[0].indexOf("=");
   let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
 //http://valenrunner.herokuapp.com//comprobar for heroku 
-  fetch("http://valenrunner.herokuapp.com/verifyToken", {
+  fetch("http://localhost:3000/verifyToken", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

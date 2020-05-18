@@ -1,7 +1,16 @@
+import {logOut} from "./profile.js";
+
 let numRaces = 0;
 
 
 function main() { 
+
+
+  //add function logout to the logout section
+  //console.log(document.getElementById("logOut"));
+  let btnLogOut = document.getElementById("logOut");
+  btnLogOut.addEventListener("click", logOut);
+
  let start;
  let end;
  
@@ -50,6 +59,7 @@ function main() {
        createMap(i,start, end); 
     }
     
+
 }
 
 
@@ -109,7 +119,7 @@ function comprobarCookie() {
   let splitCookie = document.cookie.split(";")[0].indexOf("=");
   let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
 //http://valenrunner.herokuapp.com//comprobar for heroku 
-  fetch("http://valenrunner.herokuapp.com/verifyToken", {
+  fetch("http://localhost:3000/verifyToken", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -130,6 +140,8 @@ function comprobarCookie() {
   
 
 }
+
+
 function init() {
     
     console.log("Inicio js Home");

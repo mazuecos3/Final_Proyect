@@ -1,4 +1,19 @@
 
+ import {createCookie} from "./login.js";
+ export {logOut};
+
+let totalRacesDone = 0;
+let usuario;
+let email;
+let edad;
+let userRol = "Runner";
+let races = 
+  [
+  "Marxa conta l'Escleròsi Múltiple", "Carrera por la Esclerosis Múltiple" ,
+  "Carrera Solidaria Popular Cruz Roja", "Carrera Marta Fernández de Castro", 
+  "Cursa Illa de El Palmar", "I Carrera por el día mundial del TDH", 
+  " XLIV Volta a Peu als Barris", "VIII Can-rrera Bioparc Valencia"
+];
 
 function reviseCookie() {
 
@@ -13,65 +28,105 @@ function reviseCookie() {
         body: JSON.stringify({ token: cookie }),
       })
         .then((response) => response.json())
-        .then((response) => console.log(response)
-        )
+        .then((response) => {console.log(response)
+          usuario = response.usuario;
+          email = response.email;
+          edad = response.edad ; 
+         
+        // console.log(usuario,email,edad);
+        //When we have the dates from the response like the username, email, years
+         main();
+        }
+    )
+   
 }
-
-
+//call all functions
 function main(){
 
   headerInfo();
   leftInfo();
   rightInfo();
+  //add function logout to the logout section
+  //console.log(document.getElementById("logOut"));
+  let btnLogOut = document.getElementById("logOut");
+  btnLogOut.addEventListener("click", logOut);
 }
 function headerInfo() {
+ 
   let container = document.getElementById("headerInfo");
-  console.log(container);
+ // console.log(container);
   container.innerHTML = "";
-
   container.innerHTML = 
   `
   <div class="profile-head">
   <h5>
      Oscar Mazuecos Montoro
   </h5>
-  <h6>
-    Dueño / Runner / Admin
-  </h6>
+  <h6>`+ userRol+`</h6>
   <p class="proile-rating">Carreras Totales : <span>7</span></p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#">Datos</a>
+          <a class="nav-link active" id="home-tab"  href="#">Datos</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" id="profile-tab" href="#" >Historial</a>
-      </li>
-     
+      </li> 
   </ul>
 </div>`
-  
 }
 function leftInfo() {
   let container = document.getElementById("leftInfo");
-  console.log(container);
+  //console.log(container);
   container.innerHTML = "";
 
   container.innerHTML = 
   `
   <div class="profile-work">
-  <p>Dueño / Runner</p>
-  <a>10k Valencia</a><br />
-  <a >10k Paiporta-Torrent</a><br />
-  <a >10k Paiporta-Torrent</a><br />
-  <a >10k Paiporta-Torrent</a><br />
-  <a >10k Paiporta-Torrent</a><br />
+  <p> `+ userRol + `</p>
+  <a >` +races[Math.floor(Math.random() * 8)]  + `</a><br />
+  <a >` +races[Math.floor(Math.random() * 8)]  + `</a><br />
+  <a >` +races[Math.floor(Math.random() * 8)]  + `</a><br />
+  <a >` +races[Math.floor(Math.random() * 8)]  + `</a><br />
+  <a >` +races[Math.floor(Math.random() * 8)]  + `</a><br />
 </div>
   
   `;
 }
 function rightInfo() {
   let container =  document.getElementById("rightInfo");
-  console.log(container);
+  
+  let datesTab = document.getElementById("home-tab");
+  let historyTab = document.getElementById("profile-tab");
+
+  fillText();
+  //Function to changue te active class when u click in the 2 nav links
+  datesTab.addEventListener("click", function() {
+    datesTab.classList.add("active");
+    historyTab.classList.remove("active");
+    fillText();
+  });
+
+  historyTab.addEventListener("click", function() {
+    datesTab.classList.remove("active");
+    historyTab.classList.add("active");
+    fillText();
+  });
+
+}
+
+//Depends if you are in the dates/history section you are going to see
+//different info, with the dates that we recopile of the fetch request to the bdd
+
+function fillText() {
+  console.log(usuario,email,edad);
+
+  let container =  document.getElementById("rightInfo");
+  
+  let datesTab = document.getElementById("home-tab");
+  let historyTab = document.getElementById("profile-tab");
+
+  if (datesTab.classList.contains("active")){
+    console.log(datesTab);
   container.innerHTML = "";
   container.innerHTML = 
   `
@@ -79,10 +134,10 @@ function rightInfo() {
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">       
       <div class="row">
           <div class="col-md-6">
-              <label>Nombre</label>
+              <label>Usuario</label>
           </div>
           <div class="col-md-6">
-              <p>Oscar Mazuecos</p>
+              <p>` + usuario + `</p>
           </div>
       </div>
       <div class="row">
@@ -90,7 +145,7 @@ function rightInfo() {
               <label>Email</label>
           </div>
           <div class="col-md-6">
-              <p>oscar3mazuecos@hotmail.com</p>
+              <p>` + email + `</p>
           </div>
       </div>
       <div class="row">
@@ -98,7 +153,7 @@ function rightInfo() {
               <label>Edad</label>
           </div>
           <div class="col-md-6">
-              <p>20</p>
+              <p>` + edad + `</p>
           </div>
       </div>
      
@@ -107,11 +162,63 @@ function rightInfo() {
 </div>
 
   `;
+  }else {
+    //console.log(container);
+    console.log(historyTab);
+  container.innerHTML = "";
+  container.innerHTML = 
+  `
+  <div class="tab-content profile-tab" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">       
+      <div class="row">
+          <div class="col-md-6">
+              <label>I Carrera por el día mundial del TDH</label>
+            
+          </div>
+          <div class="col-md-6">
+              <p>16-06-2020</p>
+            
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+              <label>VIII Can-rrera Bioparc Valencia</label>
+          </div>
+          <div class="col-md-6">
+              <p>17-06-2020</p>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+              <label>XLIV Volta a Peu als Barris</label>
+          </div>
+          <div class="col-md-6">
+              <p>18-06-2020</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+  `;
+  }
+}
+
+
+  //function imported from profile.js that add event to the 
+//button in nav (goOut) and removes the cookie
+//Set the cookie with value "empty" and expires with 0 ( is the same as sesion)
+function logOut() {
+  
+  createCookie("tokenUser", "", 0);
 }
 
 function init() {
-  main();
+  
+ // First of all we call to revise the cookie function, inside of this 
+ //we are going to get all the values from the bdd in the response so we need
+ // the reviseCookie like the first Call in this script
   reviseCookie();
+
 }
 
 
