@@ -19,8 +19,7 @@ function reviseCookie() {
 
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
-    /* http://valenrunner.herokuapp.com/ */ 
-    fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -51,6 +50,9 @@ function main(){
   //console.log(document.getElementById("logOut"));
   let btnLogOut = document.getElementById("logOut");
   btnLogOut.addEventListener("click", logOut);
+
+  //Add function to the the click on upload image to set the image that yo want
+  document.getElementById("file").addEventListener("change", () => loadFile(event));
 }
 function headerInfo() {
  
@@ -61,9 +63,12 @@ function headerInfo() {
   `
   <div class="profile-head">
   <h5>
-     Oscar Mazuecos Montoro
+    `+usuario+` / `+ userRol+` 
   </h5>
-  <h6>`+ userRol+`</h6>
+  <br>
+  <h6>Estado:</h6>
+  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.. "</p>
   <p class="proile-rating">Carreras Totales : <span>7</span></p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
@@ -212,6 +217,14 @@ function logOut() {
   
   createCookie("tokenUser", "", 0);
 }
+
+
+function loadFile(event) {
+  var image = document.getElementById('output');
+  image.src = URL.createObjectURL(event.target.files[0]);
+}
+
+
 
 function init() {
   

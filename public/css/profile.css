@@ -21,40 +21,30 @@ body{
     text-align: center;
 }
 .profile-img img{
-    width: 70%;
-    height: 100%;
+    display: inline-block;
+  width: 70%;
+  height: 100%;
+  border-radius: 50%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 .profile-img .file {
-    position: relative;
-    overflow: hidden;
-    margin-top: -20%;
+    margin-top: 2px;
+    border:none;
+    background: #0062cc;
     width: 70%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
+    
 }
-.profile-img .file input {
-    position: absolute;
-    opacity: 0;
-    right: 0;
-    top: 0;
-}
+
 .profile-head h5{
     color: #333;
 }
 .profile-head h6{
     color: #0062cc;
 }
-.profile-edit-btn{
-    border: none;
-    border-radius: 1.5rem;
-    width: 70%;
-    padding: 2%;
-    font-weight: 600;
-    color: #6c757d;
-    cursor: pointer;
-}
+
 .proile-rating{
     font-size: 12px;
     color: #818182;
@@ -76,9 +66,13 @@ body{
     border: none;
     border-bottom:2px solid #0062cc;
 }
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
+.profile-work {
+    /* padding: 14%; */
+  
+    padding-left: 14%;
+    padding-bottom: 14%;
+    
+    padding-right: 14%;
 }
 .profile-work p{
     font-size: 15px;
@@ -150,5 +144,5 @@ body{
 .proile-rating {
     font-size: 12px;
     color: #818182;
-    margin-top: 20%;
+    margin-top: 10%;
 }

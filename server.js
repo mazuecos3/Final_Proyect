@@ -21,19 +21,7 @@ app.use(
   })
 );
 
-// FUNCTION INSERTAR DATOS USUARIO REGISTRO
-app.post("/consulta", function (req, res) {
-  var username = req.body.usuario;
-  var email = req.body.email;
-  var edad = req.body.edad;
-  var password = req.body.password;
 
-  //console.log(username, email, edad, password);
-
-  //consultas.insert(username, email, edad, password);
-
-  res.redirect("index.html");
-});
 
 // FUNCTION COMPROBAR USUARIO EN BDD
 app.post("/comprobar", function (req, res) {
