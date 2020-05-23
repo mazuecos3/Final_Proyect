@@ -87,7 +87,7 @@ function IniciarLogin() {
 
     // HEROKU LINK
     /*"http://valenrunner.herokuapp.com/comprobar"*/
-    fetch("http://valenrunner.herokuapp.com/comproba", {
+    fetch("http://valenrunner.herokuapp.com/comprobar", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
