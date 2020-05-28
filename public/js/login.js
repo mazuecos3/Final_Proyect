@@ -4,6 +4,9 @@ export { createCookie };
 
 // FUNCTION TO CREATEA REGISTER FORM
 function register() {
+
+
+
     let divEntero = document.getElementById("login");
     let warning = document.getElementsByClassName("alert-danger");
     //console.log(divEntero);
@@ -30,11 +33,24 @@ function register() {
 <strong>Error!</strong> Las contraseñas no coinciden.
 </div>
 `;
+
     /*Comprobación errores*/
 
-    /*Si la contraseña no es igual a repetir contraseña, lanzar alert*/
-
     document.getElementById("registro").addEventListener("click", function() {
+
+
+        /*   fetch("http://localhost:3000/consulta", {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                // body: JSON.stringify({ username: username, password: password }),
+            })
+            .then((response) => console.log(response.statusText));
+ */
+
+        /*If the password aren't the same show an alert*/
         if (
             document.getElementById("contraseña").value !=
             document.getElementById("RepeatContraseña").value
@@ -43,6 +59,7 @@ function register() {
 
             console.log(warning[0]);
             warning[0].style.visibility = "visible";
+
         }
     });
 
@@ -82,7 +99,7 @@ function IniciarLogin() {
     console.log(document.getElementById("usuario").value);
     console.log(document.getElementById("password").value);
     //FETCH to check if the response of the server, if is correct we create a cookie
-    // with the tokenUser and the response signed by the token, alsa when all of this is
+    // with the tokenUser and the response signed by the token, also when all of this is
     //correct we can go inside the application.
 
     // HEROKU LINK
@@ -138,7 +155,7 @@ function comprobarCookie() {
     // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
-    //http://valenrunner.herokuapp.com//comprobar for heroku 
+    //http://valenrunner.herokuapp.com/verifyToken for heroku 
     fetch("http://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",

@@ -119,7 +119,7 @@ function comprobarCookie() {
     // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
-    //http://valenrunner.herokuapp.com//comprobar for heroku 
+    //http://valenrunner.herokuapp.com/verifyToken for heroku 
     fetch("http://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
