@@ -103,8 +103,9 @@ function IniciarLogin() {
     //correct we can go inside the application.
 
     // HEROKU LINK
-    /*"http://valenrunner.herokuapp.com/comprobar"*/
-    fetch("http://valenrunner.herokuapp.com/comprobar", {
+    // http://valenrunner.herokuapp.com/comprobar for heroku
+    //http://localhost:3000/comprobar for localhost
+    fetch("http://valenrunner.herokuapp.com/comprobar ", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -156,6 +157,7 @@ function comprobarCookie() {
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
+    //http://localhost:3000/verifyToken for localhost
     fetch("http://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",

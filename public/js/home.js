@@ -120,6 +120,7 @@ function comprobarCookie() {
     let splitCookie = document.cookie.split(";")[0].indexOf("=");
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
+    //http://localhost:3000/verifyToken localhost
     fetch("http://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
