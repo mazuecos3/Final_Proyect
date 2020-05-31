@@ -31,7 +31,7 @@ function dates() {
             num.addEventListener("click", () => openDate(event.target.innerText, event.target.dataset.num));
         } else {
 
-            if (contador <= 20 && contador > 15) {
+            if (contador <= 25 && contador > 18) {
                 num.classList.add("active-day");
             }
             // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey

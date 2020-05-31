@@ -1,9 +1,11 @@
 import { logOut } from "./profile.js";
+import { createCookie } from "./login.js";
+import { getCookieValue } from "./exports.js";
 
 let numRaces = 0;
 
 
-function main() {
+function mainHome() {
 
 
     //add function logout to the logout section
@@ -15,7 +17,7 @@ function main() {
     let end;
 
     let main = document.getElementById("main");
-    //console.log(main);
+    console.log(main);
     main.innerHTML = "";
     for (let i = 16; i < 19; i++) {
 
@@ -115,13 +117,13 @@ function createMap(i, start, end) {
 //With this function we get the cookie and send the cookie to the server, if the resposne
 //is true, can enter to the site, else not.
 function comprobarCookie() {
+    let cookie;
+    cookie = getCookieValue("tokenUser");
+    console.log("PERRRRO", cookie);
 
-    // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
-    let splitCookie = document.cookie.split(";")[0].indexOf("=");
-    let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
-    //http://localhost:3000/verifyToken localhost
-    fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    //http://localhost:3000/verifyToken for localhost
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -132,10 +134,13 @@ function comprobarCookie() {
         .then((response) => response.json())
         .then((response) => {
             console.log(response.isValid)
-
+            console.log(response);
             if (response.isValid) {
+
                 // window.location.replace("../main.html");
             } else {
+                console.log("replace");
+
                 window.location.replace("../index.html");
             }
 
@@ -144,12 +149,22 @@ function comprobarCookie() {
 
 }
 
+function carrerasCookie() {
+    getCookieValue("carreras");
+    createCookie("carreras", "111111", 50)
+        // console.log(document.cookie);
+}
+
+
 
 function init() {
 
+    /*  carrerasCookie(); */
     console.log("Inicio js Home");
     comprobarCookie();
-    main();
+
+
+    mainHome();
 
 
 }

@@ -105,7 +105,7 @@ function IniciarLogin() {
     // HEROKU LINK
     // http://valenrunner.herokuapp.com/comprobar for heroku
     //http://localhost:3000/comprobar for localhost
-    fetch("http://valenrunner.herokuapp.com/comprobar ", {
+    fetch("http://localhost:3000/comprobar ", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -158,7 +158,7 @@ function comprobarCookie() {
     let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

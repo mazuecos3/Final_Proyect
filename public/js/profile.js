@@ -1,5 +1,7 @@
 import { createCookie } from "./login.js";
+import { getCookieValue } from "./exports.js";
 export { logOut };
+
 
 let totalRacesDone = 0;
 let usuario;
@@ -15,11 +17,11 @@ let races = [
 
 function reviseCookie() {
 
-    let splitCookie = document.cookie.split(";")[0].indexOf("=");
-    let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
+    let cookie;
+    cookie = getCookieValue("tokenUser");
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -36,12 +38,12 @@ function reviseCookie() {
 
             // console.log(usuario,email,edad);
             //When we have the dates from the response like the username, email, years
-            main();
+            mainProfile();
         })
 
 }
 //call all functions
-function main() {
+function mainProfile() {
 
     headerInfo();
     leftInfo();
@@ -219,6 +221,7 @@ function fillText() {
 function logOut() {
 
     createCookie("tokenUser", "", 0);
+    createCookie("carreras", "", 0);
 }
 
 

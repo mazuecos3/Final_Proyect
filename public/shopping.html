@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario - Valenrunner</title>
+    <link rel="icon" href="media/favicon.png">
+    <title>Calendario - Valenrunners</title>
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <!-- My css -->
     <style>
         @import url("css/shopping.css");
     </style>
-<script src="https://use.fontawesome.com/c560c025cf.js"></script>
+    <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 
 </head>
+
 <body>
 
     <!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-large nav-background">
-  <a href="main.html" class="w3-bar-item w3-button w3-red w3-mobile"><i class="fa fa-users w3-margin-right"></i>Valenrunners</a>
-  <a href="calendar.html" class="w3-bar-item w3-button w3-mobile">Calendario</a>
-  <a href="profile.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-user"></a>
-  <a href="index.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-sign-out" id="logOut"></a>
-  <a href="shopping.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-shopping-cart"></a>
-</div>
-   
-<div class="container">
-   <div class="card shopping-cart">
+    <div class="w3-bar w3-white w3-large nav-background">
+        <a href="main.html" class="w3-bar-item w3-button w3-red w3-mobile"><i id="logo"></i>Valenrunners</a>
+        <a href="calendar.html" class="w3-bar-item w3-button w3-mobile">Calendario</a>
+        <a href="profile.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-user"></a>
+        <a href="index.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-sign-out" id="logOut"></a>
+        <a href="shopping.html" class="w3-bar-item w3-button w3-right w3-mobile fa fa-shopping-cart"></a>
+    </div>
+
+    <div class="container">
+        <div class="card shopping-cart">
             <div class="card-header bg-dark text-light ">
-              <p> Your Races</p>
+                <p> Your Races</p>
                 <div class="clearfix"></div>
             </div>
             <div id="product" class="card-body">
-                   
-               
+
+
             </div>
-            <div class="card-footer">    
+            <div class="card-footer">
                 <div class="pull-right" style="margin: 10px">
                     <a href="" class="btn btn-success pull-right">Checkout</a>
                     <div class="pull-right" style="margin: 5px">
@@ -47,8 +50,9 @@
                 </div>
             </div>
         </div>
-</div>
-<!--Shopping script-->
-<script type="module" src="js/shopping.js" defer></script>
+    </div>
+    <!--Shopping script-->
+    <script type="module" src="js/shopping.js" defer></script>
 </body>
+
 </html>
