@@ -1,4 +1,6 @@
-import { logOut } from "./profile.js";
+import { logOut } from "./exports.js";
+import { cookieRacesValues } from "./exports.js";
+
 
 const day = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
@@ -117,6 +119,8 @@ function openDate(date, d) {
 function init() {
     console.log("inicio JS");
     dates();
+    cookieRacesValues();
+
 
 }
 

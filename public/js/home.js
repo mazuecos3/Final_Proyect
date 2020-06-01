@@ -1,6 +1,8 @@
-import { logOut } from "./profile.js";
+import { logOut } from "./exports.js";
 import { createCookie } from "./login.js";
 import { getCookieValue } from "./exports.js";
+import { cookieRacesValues } from "./exports.js";
+
 
 let numRaces = 0;
 
@@ -80,12 +82,10 @@ function eventsReservar(i) {
 }
 
 function addCart() {
+
     //Num of races when u add 1 race to the cart 
 
-
-
     console.log(document.cookie);
-
     numRaces++;
 
     //create a new cookie with the number of races added to the shoping cart (because we want the value in all the pages)
@@ -158,8 +158,8 @@ function comprobarCookie() {
             }
 
         })
-
-
+        //When we check the cookie, can save the value for the cart shopping
+    cookieRacesValues();
 }
 
 

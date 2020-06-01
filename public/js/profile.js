@@ -1,6 +1,7 @@
-import { createCookie } from "./login.js";
 import { getCookieValue } from "./exports.js";
-export { logOut };
+import { cookieRacesValues } from "./exports.js";
+
+import { logOut } from "./exports.js";
 
 
 
@@ -215,15 +216,11 @@ function fillText() {
 }
 
 
-//function imported from profile.js that add event to the 
-//button in nav (goOut) and removes the cookie
 //Set the cookie with value "empty" and expires with 0 ( is the same as sesion)
-function logOut() {
-
-    createCookie("tokenUser", "", 0);
-    createCookie("carreras", "", 0);
-}
-
+//add function logout to the logout section
+//console.log(document.getElementById("logOut"));
+let btnLogOut = document.getElementById("logOut");
+btnLogOut.addEventListener("click", logOut);
 
 function loadFile(event) {
     var image = document.getElementById('output');
@@ -238,6 +235,7 @@ function init() {
     //we are going to get all the values from the bdd in the response so we need
     // the reviseCookie like the first Call in this script
     reviseCookie();
+    cookieRacesValues();
 
 }
 

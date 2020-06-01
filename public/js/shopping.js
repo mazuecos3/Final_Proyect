@@ -1,5 +1,5 @@
-import { logOut } from "./profile.js";
-import { getCookieValue } from "./exports.js";
+import { logOut } from "./exports.js";
+import { cookieRacesValues } from "./exports.js";
 
 function paid() {
 
@@ -55,20 +55,7 @@ function paid() {
 
 }
 
-// TODO EXPORT THIS FUNCTION TO ALL JS FILES
-function cookieRacesValues() {
 
-    // console.log(document.cookie);
-    console.log(getCookieValue("carreras"));
-
-    let valueRaces = getCookieValue("carreras");
-    let cart = document.getElementById("spanCart");
-    // console.log(cart);
-    cart.innerText = valueRaces;
-
-    cart.style.visibility = "visible";
-
-}
 
 function addEvents() {
     let totalPrice = document.getElementById("price");

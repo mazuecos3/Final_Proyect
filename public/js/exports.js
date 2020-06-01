@@ -1,4 +1,7 @@
 export { getCookieValue };
+export { cookieRacesValues };
+export { logOut };
+import { createCookie } from "./login.js";
 
 
 
@@ -25,5 +28,27 @@ function getCookieValue(cookieName) {
     console.log("RETURN", cookie)
     return cookie;
 
+}
 
+// Function that gives the value of the cookie for the num of the all races when u add to the cart shopping 
+function cookieRacesValues() {
+
+    // console.log(document.cookie);
+    console.log(getCookieValue("carreras"));
+
+    let valueRaces = getCookieValue("carreras");
+    let cart = document.getElementById("spanCart");
+    // console.log(cart);
+    cart.innerText = valueRaces;
+
+    cart.style.visibility = "visible";
+
+}
+
+// Function that create the new cookie but with sesion expire = 0 , if you do that, 
+//the cookie will dissapear(perfect because we want this when we will exit the page)
+function logOut() {
+
+    createCookie("tokenUser", "", 0);
+    createCookie("carreras", "", 0);
 }
