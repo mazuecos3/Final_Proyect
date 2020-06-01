@@ -74,19 +74,32 @@ function eventsReservar(i) {
     //Add function when click in the button and enable 2 clases(animation and disable the button)
     buttonClicked.addEventListener("click", addCart);
     buttonClicked.addEventListener("click", function() {
+
         buttonClicked.classList.add("buttonAnimation", "disableButton");
     });
 }
 
 function addCart() {
     //Num of races when u add 1 race to the cart 
+
+
+
+    console.log(document.cookie);
+
     numRaces++;
+
+    //create a new cookie with the number of races added to the shoping cart (because we want the value in all the pages)
+    createCookie("carreras", numRaces, 200);
 
     let cart = document.getElementById("spanCart");
     //console.log(cart);
     cart.innerText = numRaces;
+
     cart.style.visibility = "visible";
     // window.location.replace("../shopping.html");
+
+
+
 }
 
 function createMap(i, start, end) {
@@ -149,18 +162,15 @@ function comprobarCookie() {
 
 }
 
-function carrerasCookie() {
-    getCookieValue("carreras");
-    createCookie("carreras", "111111", 50)
-        // console.log(document.cookie);
-}
+
 
 
 
 function init() {
 
-    /*  carrerasCookie(); */
+
     console.log("Inicio js Home");
+
     comprobarCookie();
 
 

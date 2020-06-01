@@ -3,7 +3,7 @@ import { getCookieValue } from "./exports.js";
 export { logOut };
 
 
-let totalRacesDone = 0;
+
 let usuario;
 let email;
 let edad;

@@ -54,3 +54,16 @@ a:link {
     display: block;
     outline: 0;
 }
+
+
+/*Cart Number of races*/
+
+#spanCart {
+    position: absolute;
+    visibility: hidden;
+    padding: 4px;
+    box-shadow: 0 0 7px #b53;
+    border-radius: 40%;
+    background: #f90;
+    font-size: 10px;
+}

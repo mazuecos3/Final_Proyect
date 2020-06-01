@@ -1,30 +1,31 @@
-import {logOut} from "./profile.js";
+import { logOut } from "./profile.js";
+import { getCookieValue } from "./exports.js";
 
 function paid() {
 
- //add function logout to the logout section
-  //console.log(document.getElementById("logOut"));
-  let btnLogOut = document.getElementById("logOut");
-  btnLogOut.addEventListener("click", logOut);
+    // add function logout to the logout section
+    // console.log(document.getElementById("logOut"));
+    let btnLogOut = document.getElementById("logOut");
+    btnLogOut.addEventListener("click", logOut);
 
-  let container = document.getElementById("product");
-  console.log(container);
+    let container = document.getElementById("product");
+    console.log(container);
 
- 
-  
-  let urlImage = "http://placehold.it/120x80";
-  let raceName = "10k Valencia 2020";
 
-  for (let i = 0; i < 4; i++) {
-      
-    let productContainer = document.createElement("div");
-    productContainer.innerHTML = `
+
+    let urlImage = "http://placehold.it/120x80";
+    let raceName = "10k Valencia 2020";
+
+    for (let i = 0; i < 4; i++) {
+
+        let productContainer = document.createElement("div");
+        productContainer.innerHTML = `
       <div class="row">
                           <div class="col-12 col-sm-12 col-md-2 text-center">
-                              <img class="img-responsive" src="`+ urlImage+`" alt="prewiew" width="120" height="80">
+                              <img class="img-responsive" src="` + urlImage + `" alt="prewiew" width="120" height="80">
                           </div>
                           <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                              <h4 class="product-name"><strong>`+ raceName +`</strong></h4>
+                              <h4 class="product-name"><strong>` + raceName + `</strong></h4>
                               <h4>
                                   <small>Product description</small>
                               </h4>
@@ -49,20 +50,37 @@ function paid() {
       
       `;
 
-      container.appendChild(productContainer);
-  }
-  
+        container.appendChild(productContainer);
+    }
+
+}
+
+// TODO EXPORT THIS FUNCTION TO ALL JS FILES
+function cookieRacesValues() {
+
+    // console.log(document.cookie);
+    console.log(getCookieValue("carreras"));
+
+    let valueRaces = getCookieValue("carreras");
+    let cart = document.getElementById("spanCart");
+    // console.log(cart);
+    cart.innerText = valueRaces;
+
+    cart.style.visibility = "visible";
+
 }
 
 function addEvents() {
-  let totalPrice = document.getElementById("price");
-  console.log(totalPrice.innerText);
+    let totalPrice = document.getElementById("price");
+    console.log(totalPrice.innerText);
 }
 
 function init() {
-  console.log("Script starts!!");
-  addEvents();
-  paid();
+
+    console.log("Script starts!!");
+    cookieRacesValues();
+    addEvents();
+    paid();
 }
 
 window.onload = init;

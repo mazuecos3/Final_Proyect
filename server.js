@@ -114,7 +114,7 @@ app.post("/verifyToken", (req, res) => {
 
 
     jstoken.verify(req.body.token, "desencrypt", (err, token) => {
-        console.log("perro :", req.body);
+        console.log("Petición", req.body);
 
         if (err) {
             res.send({ isValid: false });
