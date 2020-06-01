@@ -1,4 +1,5 @@
 export { createCookie };
+import { getCookieValue } from "./exports.js";
 
 
 
@@ -153,9 +154,10 @@ function addEnterListener() {
 //TODO!!!! CRATE THIS FUNCTION FOR ALL SCRIPTS IN ONLY 1 PLACE!!!
 function comprobarCookie() {
 
-    // SPLIT AND SUBSTRING TO TAKE ONLY THE TEXT THAT WE WANT BECAUSE ALL IS A STRING
-    let splitCookie = document.cookie.split(";")[0].indexOf("=");
-    let cookie = document.cookie.substring(splitCookie + 1, document.cookie.length);
+    let cookie;
+    cookie = getCookieValue("tokenUser");
+
+
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
     fetch("http://localhost:3000/verifyToken", {

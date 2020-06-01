@@ -73,6 +73,7 @@ function eventsReservar(i) {
     let buttonClicked = document.getElementById("button" + i);
     //console.log(buttonClicked);c
 
+
     //Add function when click in the button and enable 2 clases(animation and disable the button)
     buttonClicked.addEventListener("click", addCart);
     buttonClicked.addEventListener("click", function() {
@@ -85,7 +86,7 @@ function addCart() {
 
     //Num of races when u add 1 race to the cart 
 
-    console.log(document.cookie);
+    // console.log(document.cookie);
     numRaces++;
 
     //create a new cookie with the number of races added to the shoping cart (because we want the value in all the pages)
@@ -132,7 +133,7 @@ function createMap(i, start, end) {
 function comprobarCookie() {
     let cookie;
     cookie = getCookieValue("tokenUser");
-    console.log("PERRRRO", cookie);
+
 
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
@@ -152,7 +153,7 @@ function comprobarCookie() {
 
                 // window.location.replace("../main.html");
             } else {
-                console.log("replace");
+                //console.log("replace");
 
                 window.location.replace("../index.html");
             }
