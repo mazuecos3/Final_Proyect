@@ -162,7 +162,7 @@ body {
 }
 
 .current-events {
-    font-size: 18px;
+    font-size: 19px;
     position: relative;
     margin-left: 25px;
     bottom: 30px;
@@ -170,6 +170,7 @@ body {
 
 li {
     margin-top: 15px;
+    margin-right: 15px;
 }
 
 .posts {

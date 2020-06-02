@@ -21,11 +21,12 @@ function mainHome() {
     let main = document.getElementById("main");
     console.log(main);
     main.innerHTML = "";
-    for (let i = 16; i < 19; i++) {
+    for (let i = 19; i < 22; i++) {
 
         let container = document.createElement("div");
         container.classList.add("w3-row-padding");
-        container.id = i;
+        /*  container.id = i;
+         container.value = i; */
         container.innerHTML =
             `
           <div class="w3-container w3-white">     
@@ -36,7 +37,7 @@ function mainHome() {
             <p>Carrera de 10 kilometros maximo 200 participantes</p>
             <p>Ubicacion Prevista: Zona Alameda</p>
             <div id="map` + i + `" class="map"></div>
-            <button id="button` + i + `" class="w3-button w3-block w3-black w3-margin-bottom "></button>
+            <button id="button` + i + `" class="w3-button w3-block w3-black w3-margin-bottom buttonRaces"></button>
           </div>        
         `
             // console.log(container)
@@ -45,17 +46,17 @@ function mainHome() {
 
         // console.log(container.id);
         switch (container.id) {
-            case "16":
+            case "19":
                 start = 'Paiporta, Santa Ana';
                 end = 'Paiporta, Colombicultura';
                 break;
 
-            case "17":
+            case "20":
                 start = 'Paiporta, Jaume I';
                 end = 'Paiporta, Colombicultura';
                 break;
 
-            case "18":
+            case "21":
                 start = 'Paiporta, Maestre Palau';
                 end = 'Paiporta, Colombicultura';
                 break;
@@ -68,6 +69,7 @@ function mainHome() {
 
 
 function eventsReservar(i) {
+
 
     //Now we take the button pressed (with each id)
     let buttonClicked = document.getElementById("button" + i);
@@ -84,23 +86,31 @@ function eventsReservar(i) {
 
 function addCart() {
 
-    //Num of races when u add 1 race to the cart 
 
-    // console.log(document.cookie);
-    numRaces++;
+    // Take the id of the button (always is button + id of the race) so...
+    let buttonId = event.target.id;
+    // Here we take the last 2 characters because we know they are the id of the race, and it
+    // is that we want to put in the cookie
+    let idforCookie = buttonId.substring(buttonId.length - 2, buttonId.length);
+    console.log(idforCookie);
+    let finalIdForCookie;
 
+    // If the cookie is undefined or is empty, we create the cookie with the id (simple)
+    // else we have to add a ",".
+
+    if (getCookieValue("carreras") === undefined || getCookieValue('carreras').length === 0) {
+        finalIdForCookie = idforCookie;
+
+    } else {
+        // Now we take the value (the first time the value is empty the cookie and 
+        // add our id taked beofre with the race and also the ","
+        finalIdForCookie = getCookieValue("carreras") + "," + idforCookie;
+    }
     //create a new cookie with the number of races added to the shoping cart (because we want the value in all the pages)
-    createCookie("carreras", numRaces, 200);
 
-    let cart = document.getElementById("spanCart");
-    //console.log(cart);
-    cart.innerText = numRaces;
+    createCookie("carreras", finalIdForCookie, 200);
 
-    cart.style.visibility = "visible";
-    // window.location.replace("../shopping.html");
-
-
-
+    cookieRacesValues();
 }
 
 function createMap(i, start, end) {
@@ -159,23 +169,71 @@ function comprobarCookie() {
             }
 
         })
-        //When we check the cookie, can save the value for the cart shopping
-    cookieRacesValues();
+
+
 }
+// We get the cookie at the start of the aplication and check if the values of the cookie 
+//are pressed(buttons on home page), if is true, we have to disable the buttons or
+// the user can click to much times and we dont want this.
+function checkCookieRaces() {
+    let buttonsRaces = document.querySelectorAll(".buttonRaces");
+    console.log(buttonsRaces);
+    let idRacesArray = [];
+
+    // Array 
+    for (let i = 0; i < buttonsRaces.length; i++) {
+
+        // console.log(buttonsRaces[i].id);
+        let idButtonsRaces = buttonsRaces[i].id.substring(buttonsRaces[i].id.length - 2, buttonsRaces[i].id.length);
+        // console.log(idButtonsRaces);
+        idRacesArray.push(idButtonsRaces);
+    }
+    //console.log("ARRAY IDS", idRacesArray);
+
+    let allValuesCookie = getCookieValue('carreras');
+    console.log(allValuesCookie);
+    if (allValuesCookie !== undefined) {
+
+        allValuesCookie = allValuesCookie.split(',');
+        for (let i = 0; i < allValuesCookie.length; i++) {
 
 
+
+            for (let j = 0; j < idRacesArray.length; j++) {
+                // allValuesCookie[i].indexOf(idRacesArray);
+
+                console.log("i", allValuesCookie[i]);
+                console.log("j", idRacesArray[j]);
+                console.log(allValuesCookie.indexOf(idRacesArray[j]));
+
+                if (allValuesCookie.indexOf(idRacesArray[j]) !== -1) {
+                    buttonsRaces[allValuesCookie.indexOf(idRacesArray[j])].classList.add("disableButton", "buttonbck");
+                }
+
+
+            }
+
+        }
+
+    }
+
+
+}
 
 
 
 function init() {
 
-
     console.log("Inicio js Home");
 
     comprobarCookie();
 
+    cookieRacesValues();
 
     mainHome();
+
+    checkCookieRaces();
+
 
 
 }

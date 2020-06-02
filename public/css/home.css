@@ -88,6 +88,11 @@ button::after {
     background-color: #f90 !important;
 }
 
+.buttonbck {
+    background-color: #f90 !important;
+    opacity: 0.5;
+}
+
 .buttonAnimation:after {
     content: "Añadida al carrito";
 }

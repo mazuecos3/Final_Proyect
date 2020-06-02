@@ -71,34 +71,59 @@ function openDate(date, d) {
     d = (d - 1) % 7
         // array of races on this day
     let races = [
-        "Marxa conta l'Escleròsi Múltiple", "Carrera por la Esclerosis Múltiple",
-        "Carrera Solidaria Popular Cruz Roja", "Carrera Marta Fernández de Castro",
-        "Cursa Illa de El Palmar", "I Carrera por el día mundial del TDH",
-        " XLIV Volta a Peu als Barris", "VIII Can-rrera Bioparc Valencia"
+        "Carrera en Paiporta, (Click aquí para mas información)", "Carrera en Catarroja, (Click aquí para mas información)",
+        "Carrera en Massarrojos, (Click aquí para mas información)", "Carrera en Cheste, (Click aquí para mas información)",
+        "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)",
+        "VI Bioparc Valencia, (Click aquí para mas información)"
     ];
     let leftDiv = document.querySelector(".calendar-left");
     leftDiv.innerHTML = ``;
-
-
+    let finalRace;
+    // Asign for each ID-race, his name race
     if (event.target.classList == "active-day") {
 
         let idRaces = event.target.dataset.num;
 
+        switch (idRaces) {
+            case "19":
+                finalRace = races[0];
+                break;
+            case "20":
+                finalRace = races[1];
+                break;
+            case "21":
+                finalRace = races[2];
+                break;
+            case "22":
+                finalRace = races[3];
+                break;
+            case "23":
+                finalRace = races[4];
+                break;
+            case "24":
+                finalRace = races[5];
+                break;
+            case "25":
+                finalRace = races[6];
+                break;
+
+        }
+        // Inner all the dates in the current-events section
         leftDiv.innerHTML = `
  <div class="num-date">` + date + `</div>
  <div class="day">` + day[d] + `</div>
  <div class="current-events">Próximos Eventos :
    <ul>
-   <li> <a href="main.html#` + idRaces + `">` + races[Math.floor(Math.random() * 8)] + ` </a></li>
-   <li> <a href="main.html#` + idRaces + `">` + races[Math.floor(Math.random() * 8)] + ` </a></li>
-   <li> <a href="main.html#` + idRaces + `">` + races[Math.floor(Math.random() * 8)] + ` </a></li>
+   
+   <li> <a href="main.html#` + idRaces + `">` + finalRace + ` </a></li>
+ 
    </ul>
 </div>
 </div>
  `
     } else {
 
-        console.log(event.target.classList);
+        //console.log(event.target.classList);
         leftDiv.innerHTML = `
   <div class="num-date">` + date + `</div>
   <div class="day">` + day[d] + `</div>
@@ -113,7 +138,7 @@ function openDate(date, d) {
     }
 
 
-    console.log(leftDiv);
+    // console.log(leftDiv);
 }
 
 function init() {

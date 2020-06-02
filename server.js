@@ -35,9 +35,9 @@ app.post("/consulta", function(req, res) {
     //query to insert the dates in the bdd like ( username, password, email, edad )
     pool.query(
 
-        `INSERT INTO valenrunner (usuario, email, edad, password) VALUES ('${username}', '${email}', '${edad}', '${password}')`,
+        `INSERT INTO usuarios (usuario, email, edad, password) VALUES ('${username}', '${email}', '${edad}', '${password}')`,
 
-        /* "INSERT INTO `valenrunner` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
+        /* "INSERT INTO `usuarios` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
         function(err, result) {
 
 
@@ -54,7 +54,7 @@ app.post("/comprobar", function(req, res) {
 
     //query that check if the id_usuario is orrect with the password/username
     pool.query(
-        "SELECT id_usuario, usuario, email, edad FROM valenrunner WHERE usuario LIKE '" +
+        "SELECT id_usuario, usuario, email, edad FROM usuarios WHERE usuario LIKE '" +
         username +
         "' AND password LIKE '" +
         password +
@@ -119,7 +119,7 @@ app.post("/verifyToken", (req, res) => {
         if (err) {
             res.send({ isValid: false });
         } else {
-            pool.query("SELECT * FROM valenrunner WHERE id_usuario LIKE " + token.userid + ";", function(
+            pool.query("SELECT * FROM usuarios WHERE id_usuario LIKE " + token.userid + ";", function(
                 error,
                 results,
                 fields

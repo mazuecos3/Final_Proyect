@@ -18,31 +18,48 @@ function getCookieValue(cookieName) {
     //if doesn't exist ";" is because we only have the userToken cookie, so take all the lenght of the value, but 
     // if we have more than 1 cookie they are going to concatenate the strings separating by ";" so if we have more than 1 cookie
     // we are going to take the lenght until ";" not all the cookie lenght.
-    if (splitCookie.indexOf(';') !== -1) {
-        //  console.log("if");
-        cookie = splitCookie.substring(0, splitCookie.indexOf(';'));
-    } else {
-        // console.log("else");
-        cookie = splitCookie.substring(0, splitCookie.length);
+
+    if (splitCookie !== undefined) {
+
+
+        if (splitCookie.indexOf(';') !== -1) {
+            //  console.log("if");
+            cookie = splitCookie.substring(0, splitCookie.indexOf(';'));
+        } else {
+            // console.log("else");
+            cookie = splitCookie.substring(0, splitCookie.length);
+        }
+        //console.log("RETURN", cookie)
+        return cookie;
     }
-    console.log("RETURN", cookie)
-    return cookie;
 
 }
 
 // Function that gives the value of the cookie for the num of the all races when u add to the cart shopping 
 function cookieRacesValues() {
 
-    // console.log(document.cookie);
-    console.log(getCookieValue("carreras"));
 
-    let valueRaces = getCookieValue("carreras");
     let cart = document.getElementById("spanCart");
-    // console.log(cart);
-    cart.innerText = valueRaces;
 
-    cart.style.visibility = "visible";
+    let result = getCookieValue('carreras');
 
+    console.log("RESULTADO BRRRRRRRRRRRRIAN WEBON: ", result);
+
+
+    if (result !== undefined) {
+
+        if (result === "") {
+            cart.innerText = "0";
+        } else {
+
+            let split = result.split(",");
+            cart.innerText = split.length;
+
+        }
+
+
+        cart.style.visibility = "visible";
+    }
 }
 
 // Function that create the new cookie but with sesion expire = 0 , if you do that, 
@@ -50,5 +67,5 @@ function cookieRacesValues() {
 function logOut() {
 
     createCookie("tokenUser", "", 0);
-    createCookie("carreras", "", 0);
+    //createCookie("carreras", "", 0);
 }
