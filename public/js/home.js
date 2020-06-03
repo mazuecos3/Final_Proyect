@@ -15,27 +15,86 @@ function mainHome() {
     let btnLogOut = document.getElementById("logOut");
     btnLogOut.addEventListener("click", logOut);
 
+    //Lat and long (ubications)
     let start;
     let end;
 
     let main = document.getElementById("main");
-    console.log(main);
-    main.innerHTML = "";
-    for (let i = 19; i < 22; i++) {
+
+    let nameRace;
+    let totalKm;
+    let aproxTime;
+    let price;
+    for (let i = 19; i < 25; i++) {
 
         let container = document.createElement("div");
         container.classList.add("w3-row-padding");
-        /*  container.id = i;
-         container.value = i; */
+        container.id = i;
+
+        console.log(container.id);
+        switch (container.id) {
+            case "19":
+                start = 'Paiporta, Calle Picaña';
+                end = 'Paiporta, Calle Garbi';
+                nameRace = 'Carrera en Paiporta';
+                totalKm = '5 km';
+                aproxTime = '3h aprox';
+                price = "20€"
+                break;
+
+            case "20":
+                start = 'Catarroja, Calle Alacant';
+                end = 'Albal, Calle de Colón';
+                nameRace = 'Carrera en Catarroja';
+                totalKm = '5 km';
+                aproxTime = '3h aprox';
+                price = "25€"
+                break;
+
+            case "21":
+                start = 'Moncada, Calle Alfonso Roig ';
+                end = 'Moncada, Calle de les barreres';
+                nameRace = 'Carrera en Massarrojos';
+                totalKm = '5 km';
+                aproxTime = '3h aprox';
+                price = "30€"
+                break;
+            case "22":
+                start = 'Paiporta, Maestre Palau';
+                end = 'Paiporta, Colombicultura';
+                nameRace = 'Carrera en Cheste';
+                totalKm = '5 km';
+                aproxTime = '5h aprox';
+                price = "25€"
+                break;
+            case "23":
+                start = 'Paiporta, Maestre Palau';
+                end = 'Paiporta, Colombicultura';
+                nameRace = 'VIII Playa Pinedo';
+                totalKm = '10 km';
+                aproxTime = '5h aprox';
+                price = "35€"
+
+                break;
+            case "24":
+                start = 'Paiporta, Maestre Palau';
+                end = 'Paiporta, Colombicultura';
+                nameRace = 'VII Rio Turia';
+                totalKm = '10 km';
+                aproxTime = '6h aprox';
+                price = "35€"
+                break;
+
+        }
+        /* container.value = i; */
         container.innerHTML =
             `
-          <div class="w3-container w3-white">     
-          <p>` + container.id + `</p>
+          <div class="w3-container w3-white">             
           <!--<img src="./media/race1.jpg" alt="race1">-->
-            <h3>10k</h3>
-            <h6 class="w3-opacity"> 12€</h6>
-            <p>Carrera de 10 kilometros maximo 200 participantes</p>
-            <p>Ubicacion Prevista: Zona Alameda</p>
+            <h3>` + nameRace + `</h3>
+            <h6 class="w3-opacity"> ` + price + `</h6>
+            <p>Carrera de ` + totalKm + ` kilometros. </p>
+            <p>Tiempo esperado: ` + aproxTime + `.</p>
             <div id="map` + i + `" class="map"></div>
             <button id="button` + i + `" class="w3-button w3-block w3-black w3-margin-bottom buttonRaces"></button>
           </div>        
@@ -44,23 +103,7 @@ function mainHome() {
         main.appendChild(container);
         eventsReservar(i);
 
-        // console.log(container.id);
-        switch (container.id) {
-            case "19":
-                start = 'Paiporta, Santa Ana';
-                end = 'Paiporta, Colombicultura';
-                break;
 
-            case "20":
-                start = 'Paiporta, Jaume I';
-                end = 'Paiporta, Colombicultura';
-                break;
-
-            case "21":
-                start = 'Paiporta, Maestre Palau';
-                end = 'Paiporta, Colombicultura';
-                break;
-        }
         createMap(i, start, end);
     }
 
@@ -92,7 +135,7 @@ function addCart() {
     // Here we take the last 2 characters because we know they are the id of the race, and it
     // is that we want to put in the cookie
     let idforCookie = buttonId.substring(buttonId.length - 2, buttonId.length);
-    console.log(idforCookie);
+    //console.log(idforCookie);
     let finalIdForCookie;
 
     // If the cookie is undefined or is empty, we create the cookie with the id (simple)
@@ -192,19 +235,18 @@ function checkCookieRaces() {
 
     let allValuesCookie = getCookieValue('carreras');
     console.log(allValuesCookie);
+
     if (allValuesCookie !== undefined) {
 
         allValuesCookie = allValuesCookie.split(',');
         for (let i = 0; i < allValuesCookie.length; i++) {
 
-
-
             for (let j = 0; j < idRacesArray.length; j++) {
                 // allValuesCookie[i].indexOf(idRacesArray);
 
-                console.log("i", allValuesCookie[i]);
-                console.log("j", idRacesArray[j]);
-                console.log(allValuesCookie.indexOf(idRacesArray[j]));
+                //console.log("i", allValuesCookie[i]);
+                // console.log("j", idRacesArray[j]);
+                // console.log(allValuesCookie.indexOf(idRacesArray[j]));
 
                 if (allValuesCookie.indexOf(idRacesArray[j]) !== -1) {
                     buttonsRaces[allValuesCookie.indexOf(idRacesArray[j])].classList.add("disableButton", "buttonbck");

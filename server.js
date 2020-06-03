@@ -96,6 +96,55 @@ app.post("/comprobar", function(req, res) {
     );
 });
 
+
+
+// FUNCTION COMPROBAR CARRERAS EN LA BDD
+app.post("/comprobarCarreras", function(req, res) {
+
+    console.log(req.body.carreras);
+    let idCarrera = req.body.carreras;
+
+    //query that check if the id_usuario is orrect with the password/username
+    pool.query(
+        "SELECT * FROM carreras WHERE id_carrera IN (19,20,21,22,23,24) ;",
+        function(err, result) {
+            //console.log(result);
+            //If the result is in the bdd the result will be bigger than 0 
+            //so if the gresult is bigger than 0 we can create a token and do things
+            //else, show an alert that you have to register first;
+
+            if (result.length > 0) {
+                //console.log(result[0].usuario);
+                //console.log(result[0].password);
+                console.log(result.length);
+
+                let carreras = []
+                let carrera;
+                for (let i = 0; i < result.length; i++) {
+                    carrera = {
+                        id_carrera: result[i].id_carrera,
+                        nombre: result[i].nombre,
+                        tiempo: result[i].tiempo,
+                        distancia: result[i].distancia
+                    }
+
+                    carreras.push(carrera)
+                }
+
+                console.log(carreras);
+
+                res.send({ carreras: carreras });
+
+                //res.redirect('main.html');
+            } else {
+                console.log("Fallo consulta Carrera");
+                return 0;
+                //res.redirect('index.html');
+            }
+        }
+    );
+});
+
 // ENCRYPT TOKEN With the word "Desencrypt" you have to put the same word
 //when you will descencrypt it.
 function createToken(userId, usuario) {

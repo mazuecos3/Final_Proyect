@@ -43,9 +43,9 @@ function cookieRacesValues() {
 
     let result = getCookieValue('carreras');
 
-    console.log("RESULTADO BRRRRRRRRRRRRIAN WEBON: ", result);
+    //console.log("Result Cookie Carreras", result);
 
-
+    // If the result is not undefined we can work, else do nothing.
     if (result !== undefined) {
 
         if (result === "") {
@@ -67,5 +67,5 @@ function cookieRacesValues() {
 function logOut() {
 
     createCookie("tokenUser", "", 0);
-    //createCookie("carreras", "", 0);
+    createCookie("carreras", "", 0);
 }

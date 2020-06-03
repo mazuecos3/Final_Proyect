@@ -33,7 +33,7 @@ function dates() {
             num.addEventListener("click", () => openDate(event.target.innerText, event.target.dataset.num));
         } else {
 
-            if (contador <= 25 && contador > 18) {
+            if (contador <= 24 && contador > 18) {
                 num.classList.add("active-day");
             }
             // IF THEY ARE BIGGER THAN 30 WE HAVE TO START 01 , 02 , etc. And add classlist grey
@@ -73,8 +73,8 @@ function openDate(date, d) {
     let races = [
         "Carrera en Paiporta, (Click aquí para mas información)", "Carrera en Catarroja, (Click aquí para mas información)",
         "Carrera en Massarrojos, (Click aquí para mas información)", "Carrera en Cheste, (Click aquí para mas información)",
-        "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)",
-        "VI Bioparc Valencia, (Click aquí para mas información)"
+        "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)"
+
     ];
     let leftDiv = document.querySelector(".calendar-left");
     leftDiv.innerHTML = ``;
@@ -103,9 +103,7 @@ function openDate(date, d) {
             case "24":
                 finalRace = races[5];
                 break;
-            case "25":
-                finalRace = races[6];
-                break;
+
 
         }
         // Inner all the dates in the current-events section
