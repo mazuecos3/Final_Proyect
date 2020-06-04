@@ -101,22 +101,21 @@ app.post("/comprobar", function(req, res) {
 // FUNCTION COMPROBAR CARRERAS EN LA BDD
 app.post("/comprobarCarreras", function(req, res) {
 
-    console.log(req.body.carreras);
-    let idCarrera = req.body.carreras;
+    console.log(req.body.carreras.toString());
+    let idCarrera = req.body.carreras.toString();
 
-    //query that check if the id_usuario is orrect with the password/username
+    //query that check if the id_carrera is correct with the Bdd
     pool.query(
-        "SELECT * FROM carreras WHERE id_carrera IN (19,20,21,22,23,24) ;",
+        ` SELECT * FROM carreras WHERE id_carrera IN (${idCarrera});`,
         function(err, result) {
-            //console.log(result);
+            console.log(result);
             //If the result is in the bdd the result will be bigger than 0 
-            //so if the gresult is bigger than 0 we can create a token and do things
-            //else, show an alert that you have to register first;
+            //so if the gresult is bigger than 0 we can create the object/json carreras to send the values
+            //else, return 0 , if you didnt put this it probably explode;
 
             if (result.length > 0) {
-                //console.log(result[0].usuario);
-                //console.log(result[0].password);
-                console.log(result.length);
+
+                //console.log(result.length);
 
                 let carreras = []
                 let carrera;
@@ -125,7 +124,8 @@ app.post("/comprobarCarreras", function(req, res) {
                         id_carrera: result[i].id_carrera,
                         nombre: result[i].nombre,
                         tiempo: result[i].tiempo,
-                        distancia: result[i].distancia
+                        distancia: result[i].distancia,
+                        precio: result[i].precio
                     }
 
                     carreras.push(carrera)

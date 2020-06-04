@@ -34,8 +34,10 @@ function mainHome() {
         console.log(container.id);
         switch (container.id) {
             case "19":
+
                 start = 'Paiporta, Calle Picaña';
                 end = 'Paiporta, Calle Garbi';
+
                 nameRace = 'Carrera en Paiporta';
                 totalKm = '5 km';
                 aproxTime = '3h aprox';
@@ -60,8 +62,8 @@ function mainHome() {
                 price = "30€"
                 break;
             case "22":
-                start = 'Paiporta, Maestre Palau';
-                end = 'Paiporta, Colombicultura';
+                start = 'Cheste, Calle';
+                end = 'Cheste, Colombicultura';
                 nameRace = 'Carrera en Cheste';
                 totalKm = '5 km';
                 aproxTime = '5h aprox';
@@ -141,7 +143,7 @@ function addCart() {
     // If the cookie is undefined or is empty, we create the cookie with the id (simple)
     // else we have to add a ",".
 
-    if (getCookieValue("carreras") === undefined || getCookieValue('carreras').length === 0) {
+    if (getCookieValue("carreras") === undefined || getCookieValue("carreras").length === 0) {
         finalIdForCookie = idforCookie;
 
     } else {
@@ -190,7 +192,7 @@ function comprobarCookie() {
 
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://localhost:3000/verifyToken", {
+    fetch("http://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
