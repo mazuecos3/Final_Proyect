@@ -1,6 +1,7 @@
 import { logOut } from "./exports.js";
 import { cookieRacesValues } from "./exports.js";
 import { getCookieValue } from "./exports.js";
+import { createCookie } from "./login.js";
 
 function mainShopping() {
 
@@ -14,7 +15,7 @@ function mainShopping() {
         finalValuesCookie = allValuesCookie.split(",");
 
 
-        console.log(finalValuesCookie);
+        // console.log(finalValuesCookie);
 
         // add function logout to the logout section
         // console.log(document.getElementById("logOut"));
@@ -30,38 +31,42 @@ function mainShopping() {
         let aproxTime;
         let idCarrera;
         let price;
+        let totalPrice = 0;
 
         // Fetch to the server to take the values for our 
         //http://valenrunner.herokuapp.com/comprobarCarreras for heroku 
         //http://localhost:3000/comprobarCarreras for localhost
-        fetch("http://valenrunner.herokuapp.com/comprobarCarreras", {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    carreras: finalValuesCookie,
+        if (allValuesCookie !== undefined) {
 
 
-                }),
-            })
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response.carreras);
-                // For each response, we have all the values that we want , now only have to put the values in our div html
-                // with the variables asignations .
-                response.carreras.forEach(carrera => {
-                    console.log(carrera);
-                    idCarrera = carrera.id_carrera;
-                    raceName = carrera.nombre;
-                    distance = carrera.distancia;
-                    aproxTime = carrera.tiempo;
-                    price = carrera.precio;
+            fetch("http://valenrunner.herokuapp.com/comprobarCarreras", {
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    method: "POST",
+                    body: JSON.stringify({
+                        carreras: finalValuesCookie,
 
-                    let productContainer = document.createElement("div");
-                    productContainer.innerHTML = `
-              <div class="row">
+
+                    }),
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    //console.log(response.carreras);
+                    // For each response, we have all the values that we want , now only have to put the values in our div html
+                    // with the variables asignations .
+                    response.carreras.forEach(carrera => {
+                        //  console.log(carrera);
+                        idCarrera = carrera.id_carrera;
+                        raceName = carrera.nombre;
+                        distance = carrera.distancia;
+                        aproxTime = carrera.tiempo;
+                        price = carrera.precio;
+
+                        let productContainer = document.createElement("div");
+                        productContainer.innerHTML = `
+              <div id="row` + idCarrera + `" class="row">
                                   <div class="col-12 col-sm-12 col-md-2 text-center">
                                       <img class="img-responsive" src="` + urlImage + `" alt="prewiew" width="120" height="80">
                                   </div>
@@ -86,19 +91,24 @@ function mainShopping() {
                                           </button>
                                       </div>
                                   </div>
+                                  <hr>
                               </div>
-                              <hr>
-              
+                             
+                    
               `;
+                        totalPrice += price;
+                        // console.log(totalPrice);
+                        // function to put the total price to pay 
+                        setTotalPrice(totalPrice);
+                        container.appendChild(productContainer);
+                        // When the container is creatted, we can take the Id added before into the button 
+                        //for do  function remove race
+                        removeRace(idCarrera);
 
-                    container.appendChild(productContainer);
-                    // When the container is creatted, we can take the Id added before into the button 
-                    //for do  function remove race
-                    removeRace(idCarrera);
+                    });
 
-                });
-
-            })
+                })
+        }
     }
 }
 
@@ -108,37 +118,95 @@ function removeRace(id_carrera) {
     let buttonTrash = document.getElementById(buttonId);
 
     //console.log(buttonTrash);
-    buttonTrash.addEventListener("click", changueValueCookie);
-}
+    buttonTrash.addEventListener("click", function() {
+        let allValuesCookie = getCookieValue('carreras');
+        let insertCookie;
+        let idRow;
+        let row;
+        // cookie value separated without  ","
+        let finalValuesCookie;
+        if (allValuesCookie !== undefined) {
+            finalValuesCookie = allValuesCookie.split(",");
+            console.log(finalValuesCookie);
+
+            // If the value is only 1 in the races Cookie, we can delete the cookie 
+            // because is only 1 value and also we have to remove the row-container too.
+            if (finalValuesCookie.length <= 1) {
+                console.log("es menor");
 
 
-function changueValueCookie() {
+                insertCookie = "";
 
 
-    let allValuesCookie = getCookieValue('carreras');
-    // cookie value separated without  ","
-    let finalValuesCookie;
-    if (allValuesCookie !== undefined) {
-        finalValuesCookie = allValuesCookie.split(",");
-        console.log(finalValuesCookie);
 
-        if (finalValuesCookie.length <= 1) {
-            console.log("es menor");
+            } else {
+                console.log("es mayor");
+                console.log(finalValuesCookie.length);
+                //console.log(allValuesCookie[allValuesCookie.indexOf(id_carrera) - 1]);
+                console.log(id_carrera);
 
+                console.log(allValuesCookie.lastIndexOf(","));
+                console.log(allValuesCookie.indexOf(id_carrera));
+
+                if (allValuesCookie.lastIndexOf(",") < allValuesCookie.indexOf(id_carrera)) {
+                    insertCookie = allValuesCookie.substring(0, allValuesCookie.lastIndexOf(","));
+
+                    console.log("+++++++++++", insertCookie);
+
+                } else {
+
+                    if (allValuesCookie[allValuesCookie.indexOf(id_carrera) - 1] === ",") {
+
+                        let coma = allValuesCookie.substring(allValuesCookie.indexOf(id_carrera), allValuesCookie.length).indexOf(",") + allValuesCookie.indexOf(id_carrera);
+                        console.log("cOMA", coma);
+
+                        console.log("ASDASDASD ", allValuesCookie.indexOf(id_carrera) + coma);
+                        console.log("ENTRA");
+
+                        let start = allValuesCookie.substring(0, allValuesCookie.indexOf(id_carrera) - 1);
+                        let end = allValuesCookie.substring(coma, allValuesCookie.length);
+
+                        console.log(start + end);
+                        insertCookie = start + end;
+
+
+                    } else {
+                        insertCookie = allValuesCookie.substring(allValuesCookie.indexOf(",") + 1, allValuesCookie.length);
+
+                    }
+
+                }
+
+
+
+            }
         }
-    }
+
+        idRow = "row" + id_carrera;
+        row = document.getElementById(idRow);
+
+        // console.log(row);
+
+        row.style.display = "none";
+
+        createCookie("carreras", insertCookie, 200);
+    });
 }
 
-function addEvents() {
-    let totalPrice = document.getElementById("price");
-    //console.log(totalPrice.innerText);
+
+function setTotalPrice(totalPrice) {
+    let inputPrice = document.getElementById("price");
+
+    inputPrice.innerText = totalPrice + "€";
+    //console.log(totalPrice);
+
 }
 
 function init() {
 
     console.log("Script starts!!");
 
-    addEvents();
+
     mainShopping();
 
 }

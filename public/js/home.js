@@ -31,7 +31,7 @@ function mainHome() {
         container.classList.add("w3-row-padding");
         container.id = i;
 
-        console.log(container.id);
+        //console.log(container.id);
         switch (container.id) {
             case "19":
 
@@ -192,7 +192,7 @@ function comprobarCookie() {
 
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -203,7 +203,7 @@ function comprobarCookie() {
         .then((response) => response.json())
         .then((response) => {
             console.log(response.isValid)
-            console.log(response);
+                // console.log(response);
             if (response.isValid) {
 
                 // window.location.replace("../main.html");
@@ -236,26 +236,37 @@ function checkCookieRaces() {
     //console.log("ARRAY IDS", idRacesArray);
 
     let allValuesCookie = getCookieValue('carreras');
-    console.log(allValuesCookie);
+    //console.log(allValuesCookie);
 
     if (allValuesCookie !== undefined) {
 
         allValuesCookie = allValuesCookie.split(',');
+        allValuesCookie = allValuesCookie.sort();
+        console.log(allValuesCookie);
+
         for (let i = 0; i < allValuesCookie.length; i++) {
 
+
+            // allValuesCookie[i].indexOf(idRacesArray);
+
             for (let j = 0; j < idRacesArray.length; j++) {
-                // allValuesCookie[i].indexOf(idRacesArray);
 
-                //console.log("i", allValuesCookie[i]);
-                // console.log("j", idRacesArray[j]);
-                // console.log(allValuesCookie.indexOf(idRacesArray[j]));
+                /*   console.log("i", allValuesCookie[i]);
+                  console.log("j", idRacesArray[j]); */
 
-                if (allValuesCookie.indexOf(idRacesArray[j]) !== -1) {
-                    buttonsRaces[allValuesCookie.indexOf(idRacesArray[j])].classList.add("disableButton", "buttonbck");
+                if (allValuesCookie[i] === idRacesArray[j]) {
+                    buttonsRaces[j].classList.add("disableButton", "buttonbck");
+                    console.log(buttonsRaces[j]);
+
                 }
-
-
             }
+
+
+            /*    console.log(allValuesCookie.indexOf(idRacesArray[j]));
+
+               if (allValuesCookie.indexOf(idRacesArray[j]) !== -1) {
+                   buttonsRaces[allValuesCookie.indexOf(idRacesArray[j])].classList.add("disableButton", "buttonbck");
+               } */
 
         }
 
