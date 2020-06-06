@@ -39,7 +39,7 @@ function mainShopping() {
         if (allValuesCookie !== undefined) {
 
 
-            fetch("http://valenrunner.herokuapp.com/comprobarCarreras ", {
+            fetch("http://localhost:3000/comprobarCarreras", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
