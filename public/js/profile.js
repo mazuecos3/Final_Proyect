@@ -66,20 +66,17 @@ function headerInfo() {
     container.innerHTML =
         `
   <div class="profile-head">
-  <h5>
-    ` + usuario + ` / ` + userRol + ` 
-  </h5>
+  <h1>Perfil de Valenrunners </h1>
   <br>
-  <h6>Estado:</h6>
-  <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.. "</p>
-  <p class="proile-rating">Carreras Totales : <span>7</span></p>
+  
+  <p id="textUser"> ` + usuario + ` / ` + userRol + ` </p>
+  <p class="proile-rating">Carreras Totales : <span>0</span></p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
           <a class="nav-link active" id="home-tab"  href="#">Datos</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" id="profile-tab" href="#" >Historial</a>
+          <a class="nav-link" id="profile-tab" href="#" >Historial de Compra</a>
       </li> 
   </ul>
 </div>`
@@ -87,18 +84,16 @@ function headerInfo() {
 
 function leftInfo() {
     let container = document.getElementById("leftInfo");
+    let alertNoRaces = "Aún no has completado ninguna carrera.";
     //console.log(container);
     container.innerHTML = "";
 
     container.innerHTML =
         `
   <div class="profile-work">
-  <p> ` + userRol + `</p>
-  <a >` + races[Math.floor(Math.random() * 8)] + `</a><br />
-  <a >` + races[Math.floor(Math.random() * 8)] + `</a><br />
-  <a >` + races[Math.floor(Math.random() * 8)] + `</a><br />
-  <a >` + races[Math.floor(Math.random() * 8)] + `</a><br />
-  <a >` + races[Math.floor(Math.random() * 8)] + `</a><br />
+  <p> Historial de carreras: </p>
+  <a >` + alertNoRaces + `</a><br />
+ 
 </div>
   
   `;
@@ -181,33 +176,28 @@ function fillText() {
         container.innerHTML =
             `
   <div class="tab-content profile-tab" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">       
+  <div class="tab-pane fade show active" id="rightSection" role="tabpanel" aria-labelledby="home-tab">       
       <div class="row">
           <div class="col-md-6">
-              <label>I Carrera por el día mundial del TDH</label>
+              <p>Nombre carrera:</p>
             
           </div>
           <div class="col-md-6">
-              <p>16-06-2020</p>
+              <p>Fecha:</p>
             
           </div>
       </div>
       <div class="row">
           <div class="col-md-6">
-              <label>VIII Can-rrera Bioparc Valencia</label>
+              <label>Ninguna compra realizada.</label>
+            
           </div>
           <div class="col-md-6">
-              <p>17-06-2020</p>
+              <p>XX / XX / XXXX </p>
+            
           </div>
       </div>
-      <div class="row">
-          <div class="col-md-6">
-              <label>XLIV Volta a Peu als Barris</label>
-          </div>
-          <div class="col-md-6">
-              <p>18-06-2020</p>
-          </div>
-      </div>
+      
   </div>
 </div>
 

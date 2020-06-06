@@ -133,3 +133,14 @@ button::after {
     margin-bottom: 20px;
     text-align: center;
 }
+
+
+/*waterMark on map*/
+
+div[class="mq-logo-control leaflet-control"] img {
+    display: none;
+}
+
+div[class="mq-attribution-control leaflet-control"] {
+    display: none;
+}

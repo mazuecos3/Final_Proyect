@@ -67,3 +67,10 @@ a:link {
     background: #f90;
     font-size: 10px;
 }
+
+
+/*Each Row shopping*/
+
+.row {
+    margin-top: 15px;
+}

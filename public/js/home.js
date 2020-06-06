@@ -62,16 +62,16 @@ function mainHome() {
                 price = "30€"
                 break;
             case "22":
-                start = 'Cheste, Calle';
-                end = 'Cheste, Colombicultura';
+                start = 'Cheste, Calle Chiva';
+                end = 'Cheste, Proyecto';
                 nameRace = 'Carrera en Cheste';
                 totalKm = '5 km';
                 aproxTime = '5h aprox';
                 price = "25€"
                 break;
             case "23":
-                start = 'Paiporta, Maestre Palau';
-                end = 'Paiporta, Colombicultura';
+                start = 'Pinedo, Calle del Monsén Cuenca';
+                end = 'Saler, Avenida del Saler';
                 nameRace = 'VIII Playa Pinedo';
                 totalKm = '10 km';
                 aproxTime = '5h aprox';
@@ -79,8 +79,8 @@ function mainHome() {
 
                 break;
             case "24":
-                start = 'Paiporta, Maestre Palau';
-                end = 'Paiporta, Colombicultura';
+                start = 'Valencia, Avenida Jacinto Benavente';
+                end = 'Valencia,Calle de Mauro Guillén';
                 nameRace = 'VII Rio Turia';
                 totalKm = '10 km';
                 aproxTime = '6h aprox';
@@ -192,7 +192,7 @@ function comprobarCookie() {
 
     //http://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://valenrunner.herokuapp.com/verifyToken ", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

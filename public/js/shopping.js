@@ -39,7 +39,7 @@ function mainShopping() {
         if (allValuesCookie !== undefined) {
 
 
-            fetch("http://valenrunner.herokuapp.com/comprobarCarreras", {
+            fetch("http://valenrunner.herokuapp.com/comprobarCarreras ", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -90,14 +90,16 @@ function mainShopping() {
                                               <i class="fa fa-trash" aria-hidden="true"></i>
                                           </button>
                                       </div>
+                                    
                                   </div>
-                                  <hr>
+                               
                               </div>
+                          
                              
                     
               `;
                         totalPrice += price;
-                        // console.log(totalPrice);
+
                         // function to put the total price to pay 
                         setTotalPrice(totalPrice);
                         container.appendChild(productContainer);
@@ -106,10 +108,14 @@ function mainShopping() {
                         removeRace(idCarrera);
 
                     });
-
+                    console.log(totalPrice);
+                    paypalPay(totalPrice);
                 })
         }
+
     }
+
+
 }
 
 function removeRace(id_carrera) {
@@ -199,6 +205,49 @@ function setTotalPrice(totalPrice) {
 
     inputPrice.innerText = totalPrice + "€";
     //console.log(totalPrice);
+
+}
+
+function paypalPay(totalPrice) {
+
+
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'demo_sandbox_client_id',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: totalPrice,
+                        currency: 'EUR'
+                    }
+                }]
+            });
+        },
+        // Execute the payment
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Thank you for your purchase!');
+            });
+        }
+    }, '#paypal-button');
 
 }
 
