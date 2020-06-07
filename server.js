@@ -108,7 +108,7 @@ app.post("/comprobarCarreras", function(req, res) {
     pool.query(
         ` SELECT * FROM carreras WHERE id_carrera IN (${idCarrera});`,
         function(err, result) {
-            console.log(result);
+            console.log(result.length);
             //If the result is in the bdd the result will be bigger than 0 
             //so if the gresult is bigger than 0 we can create the object/json carreras to send the values
             //else, return 0 , if you didnt put this it probably explode;

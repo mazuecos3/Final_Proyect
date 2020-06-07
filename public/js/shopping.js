@@ -11,7 +11,8 @@ function mainShopping() {
     let allValuesCookie = getCookieValue('carreras');
     // cookie value separated without  ","
     let finalValuesCookie;
-    if (allValuesCookie !== undefined) {
+    console.log("AllValues Cookie 1" + allValuesCookie);
+    if (allValuesCookie !== undefined && allValuesCookie !== "") {
         finalValuesCookie = allValuesCookie.split(",");
 
 
@@ -25,7 +26,7 @@ function mainShopping() {
         let container = document.getElementById("product");
         //console.log(container);
 
-        let urlImage = "http://placehold.it/120x80";
+        let urlImage = "https://carreradeltaller.com/wp-content/uploads/2020/03/MartaJFunes_CarreradelTaller-0369-scaled.jpg";
         let raceName;
         let distance;
         let aproxTime;
@@ -36,10 +37,11 @@ function mainShopping() {
         // Fetch to the server to take the values for our 
         //http://valenrunner.herokuapp.com/comprobarCarreras for heroku 
         //http://localhost:3000/comprobarCarreras for localhost
-        if (allValuesCookie !== undefined) {
+        console.log("AllValues Cookie 2" + allValuesCookie);
 
+        if (allValuesCookie !== undefined && allValuesCookie !== "") {
 
-            fetch("https://valenrunner.herokuapp.com/comprobarCarreras", {
+            fetch("http://valenrunner.herokuapp.com/comprobarCarreras", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
@@ -82,7 +84,7 @@ function mainShopping() {
                                       </div>
                                       <div class="col-4 col-sm-4 col-md-4">
                                           <div class="quantity" style="padding-top: 5px">
-                                              <h6><strong> ` + price + `€</span></strong></h6>
+                                              <h6 id="price` + idCarrera + `"><strong> ` + price + `€</span></strong></h6>
                                           </div>
                                       </div>
                                       <div class="col-2 col-sm-2 col-md-2 text-right">
@@ -94,9 +96,6 @@ function mainShopping() {
                                   </div>
                                
                               </div>
-                          
-                             
-                    
               `;
                         totalPrice += price;
 
@@ -105,7 +104,7 @@ function mainShopping() {
                         container.appendChild(productContainer);
                         // When the container is creatted, we can take the Id added before into the button 
                         //for do  function remove race
-                        removeRace(idCarrera);
+                        removeRace(idCarrera, totalPrice);
 
                     });
                     console.log(totalPrice);
@@ -118,13 +117,35 @@ function mainShopping() {
 
 }
 
-function removeRace(id_carrera) {
+function removeRace(id_carrera, totalPrice) {
 
+
+    // each button id to add event to all of them
     let buttonId = "buttonTrash" + id_carrera;
     let buttonTrash = document.getElementById(buttonId);
 
-    //console.log(buttonTrash);
+    // add event click and the function
     buttonTrash.addEventListener("click", function() {
+
+        // First we have to changue ta value of the total price when we click on each trash button
+        // So we take the value of each and later we have to take off the price to the total price
+        let inputPrice = document.getElementById("price");
+        let totalPrice;
+        if (inputPrice.innerText.length <= 2) {
+            totalPrice = parseInt(inputPrice.innerText.substring(0, 2));
+        } else {
+            totalPrice = parseInt(inputPrice.innerText.substring(0, 3));
+        }
+        let priceInput = "price" + id_carrera;
+        let priceSection = document.getElementById(priceInput);
+        let price = parseInt(priceSection.innerText.substring(0, 2));
+
+
+        totalPrice = totalPrice - price;
+        paypalPay(totalPrice);
+        inputPrice.innerText = totalPrice + "€";
+
+        // Now we have to remove the value of the cookie too.
         let allValuesCookie = getCookieValue('carreras');
         let insertCookie;
         let idRow;
@@ -139,62 +160,41 @@ function removeRace(id_carrera) {
             // because is only 1 value and also we have to remove the row-container too.
             if (finalValuesCookie.length <= 1) {
                 console.log("es menor");
-
-
                 insertCookie = "";
 
-
-
             } else {
-                console.log("es mayor");
-                console.log(finalValuesCookie.length);
-                //console.log(allValuesCookie[allValuesCookie.indexOf(id_carrera) - 1]);
-                console.log(id_carrera);
-
-                console.log(allValuesCookie.lastIndexOf(","));
-                console.log(allValuesCookie.indexOf(id_carrera));
-
+                // Else if we have "," before the number we have to separate them with substring
                 if (allValuesCookie.lastIndexOf(",") < allValuesCookie.indexOf(id_carrera)) {
                     insertCookie = allValuesCookie.substring(0, allValuesCookie.lastIndexOf(","));
 
-                    console.log("+++++++++++", insertCookie);
-
                 } else {
-
+                    // Else if the value that we want, have one "," before we have to separate it and take only the value
+                    // removing the "," with substring
                     if (allValuesCookie[allValuesCookie.indexOf(id_carrera) - 1] === ",") {
 
-                        let coma = allValuesCookie.substring(allValuesCookie.indexOf(id_carrera), allValuesCookie.length).indexOf(",") + allValuesCookie.indexOf(id_carrera);
-                        console.log("cOMA", coma);
-
-                        console.log("ASDASDASD ", allValuesCookie.indexOf(id_carrera) + coma);
-                        console.log("ENTRA");
-
+                        let separation = allValuesCookie.substring(allValuesCookie.indexOf(id_carrera), allValuesCookie.length).indexOf(",") + allValuesCookie.indexOf(id_carrera);
                         let start = allValuesCookie.substring(0, allValuesCookie.indexOf(id_carrera) - 1);
-                        let end = allValuesCookie.substring(coma, allValuesCookie.length);
+                        let end = allValuesCookie.substring(separation, allValuesCookie.length);
 
                         console.log(start + end);
                         insertCookie = start + end;
 
-
+                        // Else to remove the last value of the cookie we do the substring of the penultimate value to the last value "length"    
                     } else {
                         insertCookie = allValuesCookie.substring(allValuesCookie.indexOf(",") + 1, allValuesCookie.length);
 
                     }
-
                 }
-
-
-
             }
         }
-
+        // Here we have to take each div ("row") in this case,
+        // to remove riw (display none) 
         idRow = "row" + id_carrera;
         row = document.getElementById(idRow);
 
         // console.log(row);
-
         row.style.display = "none";
-
+        // And finally we have to remove the cookie with the insert that we putted before.
         createCookie("carreras", insertCookie, 200);
     });
 }
@@ -202,13 +202,17 @@ function removeRace(id_carrera) {
 
 function setTotalPrice(totalPrice) {
     let inputPrice = document.getElementById("price");
-
     inputPrice.innerText = totalPrice + "€";
-    //console.log(totalPrice);
-
 }
 
+// Function that creates the Payment with paypal / credit or debit cards.
 function paypalPay(totalPrice) {
+
+    // first we take the element because we have to clean it first anyone call, 
+    // we are going to create the payment button the first time with all price value and
+    // when we remove each race because the value changue.
+    let buttonPaypal = document.getElementById("paypal-button");
+    buttonPaypal.innerHTML = "";
 
 
     paypal.Button.render({
