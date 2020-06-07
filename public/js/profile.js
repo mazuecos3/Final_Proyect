@@ -66,7 +66,7 @@ function headerInfo() {
     container.innerHTML =
         `
   <div class="profile-head">
-  <h1>Perfil de Valenrunners </h1>
+  <h1>Perfil de Valenrunner </h1>
   <br>
   
   <p id="textUser"> ` + usuario + ` / ` + userRol + ` </p>
