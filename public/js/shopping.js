@@ -35,13 +35,13 @@ function mainShopping() {
         let totalPrice = 0;
 
         // Fetch to the server to take the values for our 
-        //http://valenrunner.herokuapp.com/comprobarCarreras for heroku 
-        //http://localhost:3000/comprobarCarreras for localhost
+        //https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
+        //https://localhost:3000/comprobarCarreras for localhost
         console.log("AllValues Cookie 2" + allValuesCookie);
 
         if (allValuesCookie !== undefined && allValuesCookie !== "") {
 
-            fetch("http://valenrunner.herokuapp.com/comprobarCarreras", {
+            fetch("https://valenrunner.herokuapp.com/comprobarCarreras", {
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
