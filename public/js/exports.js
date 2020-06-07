@@ -67,5 +67,5 @@ function cookieRacesValues() {
 function logOut() {
 
     createCookie("tokenUser", "", 0);
-    //createCookie("carreras", "", 0);
+    createCookie("carreras", "", 0);
 }
