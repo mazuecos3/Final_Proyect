@@ -114,11 +114,11 @@ function fetchRegister() {
     // FETCH TO SEND ALL THE VALUES TO THE SERVER 
     // HEROKU LINK
     // https://valenrunner.herokuapp.com/consulta for heroku
-    // http://localhost:3000/comprobar for localhost
+    // http://localhost:3000/consulta for localhost
     if (errores === 0) {
         warning[0].style.visibility = "hidden";
         console.log("Bien");
-        fetch("https://valenrunner.herokuapp.com/consulta ", {
+        fetch("https://valenrunner.herokuapp.com/consulta", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -137,11 +137,13 @@ function fetchRegister() {
         .then((response) => response.json())
             .then((response) => {
                 console.log("Response: ", response.response)
-
+                    // If the response is true, replace the location to the index
                 if (response.response) {
-                    window.location.replace("index.html")
+                    window.location.replace("index.html");
+                    // else put other warning because the username is already in use 
                 } else {
-
+                    warning[0].innerHTML = `<strong>Error!</strong> El usuario ya está en uso, elija otro por favor.`
+                    warning[0].style.visibility = "visible";
                 }
             });
 
@@ -186,9 +188,6 @@ function IniciarLogin() {
     let username = document.getElementById("usuario").value;
     let password = document.getElementById("password").value;
 
-
-    console.log(document.getElementById("usuario").value);
-    console.log(document.getElementById("password").value);
     //FETCH to check if the response of the server, if is correct we create a cookie
     // with the tokenUser and the response signed by the token, also when all of this is
     //correct we can go inside the application.
@@ -196,7 +195,7 @@ function IniciarLogin() {
     // HEROKU LINK
     // http://valenrunner.herokuapp.com/comprobar for heroku
     // http://localhost:3000/comprobar for localhost
-    fetch("https://valenrunner.herokuapp.com/comprobar", {
+    fetch("http://valenrunner.herokuapp.com/comprobar", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -252,9 +251,9 @@ function comprobarCookie() {
     cookie = getCookieValue("tokenUser");
 
 
-    //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //http://localhost:3000/verifyToken for localhost
-    fetch("https://valenrunner.herokuapp.com/verifyToken ", {
+    // https://valenrunner.herokuapp.com/verifyToken for heroku 
+    // http://localhost:3000/verifyToken for localhost
+    fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",

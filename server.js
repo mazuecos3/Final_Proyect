@@ -213,7 +213,8 @@ app.post("/verifyToken", (req, res) => {
                     usuario: results[0].usuario,
                     email: results[0].email,
                     edad: results[0].edad,
-                    id_categoria: results[0].id_categoria
+                    id_categoria: results[0].id_categoria,
+                    genero: results[0].genero
                 };
                 console.log(userData);
 
