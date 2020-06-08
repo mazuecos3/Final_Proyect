@@ -29,6 +29,7 @@ app.post("/consulta", function(req, res) {
     let reqBody = req.body;
     console.log(reqBody);
 
+
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
