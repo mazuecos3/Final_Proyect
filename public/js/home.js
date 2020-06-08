@@ -194,7 +194,7 @@ function comprobarCookie() {
     //http://localhost:3000/verifyToken for localhost
     fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "POST",

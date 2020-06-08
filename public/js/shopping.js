@@ -46,7 +46,7 @@ function mainShopping() {
 
             fetch("https://valenrunner.herokuapp.com/comprobarCarreras", {
                     headers: {
-                        Accept: "application/json",
+                        "Accept": "application/json",
                         "Content-Type": "application/json",
                     },
                     method: "POST",

@@ -215,6 +215,7 @@ app.post("/verifyToken", (req, res) => {
                     edad: results[0].edad,
                     id_categoria: results[0].id_categoria
                 };
+                console.log(userData);
 
                 res.send(userData);
             });

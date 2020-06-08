@@ -120,7 +120,7 @@ function fetchRegister() {
         console.log("Bien");
         fetch("https://valenrunner.herokuapp.com/consulta ", {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "POST",
@@ -198,7 +198,7 @@ function IniciarLogin() {
     // http://localhost:3000/comprobar for localhost
     fetch("https://valenrunner.herokuapp.com/comprobar", {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "POST",
@@ -256,7 +256,7 @@ function comprobarCookie() {
     //http://localhost:3000/verifyToken for localhost
     fetch("https://valenrunner.herokuapp.com/verifyToken ", {
             headers: {
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Content-Type": "application/json",
             },
             method: "POST",
