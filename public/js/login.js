@@ -113,12 +113,12 @@ function fetchRegister() {
 
     // FETCH TO SEND ALL THE VALUES TO THE SERVER 
     // HEROKU LINK
-    // http://valenrunner.herokuapp.com/comprobar for heroku
+    // https://valenrunner.herokuapp.com/consulta for heroku
     // http://localhost:3000/comprobar for localhost
     if (errores === 0) {
         warning[0].style.visibility = "hidden";
         console.log("Bien");
-        fetch("http://localhost:3000/consulta ", {
+        fetch("https://valenrunner.herokuapp.com/consulta ", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
