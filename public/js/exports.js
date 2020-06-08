@@ -12,8 +12,6 @@ function getCookieValue(cookieName) {
     let splitCookie = document.cookie.split(cookieName + "=")[1];
     let cookie;
 
-    //console.log("SPLITTTTTT", splitCookie);
-
 
     //if doesn't exist ";" is because we only have the userToken cookie, so take all the lenght of the value, but 
     // if we have more than 1 cookie they are going to concatenate the strings separating by ";" so if we have more than 1 cookie
@@ -51,12 +49,9 @@ function cookieRacesValues() {
         if (result === "") {
             cart.innerText = "0";
         } else {
-
             let split = result.split(",");
             cart.innerText = split.length;
-
         }
-
 
         cart.style.visibility = "visible";
     }

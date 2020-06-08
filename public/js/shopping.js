@@ -32,12 +32,15 @@ function mainShopping() {
         let aproxTime;
         let idCarrera;
         let price;
+        let maxCorredores;
+        let dorsal;
+
         let totalPrice = 0;
 
         // Fetch to the server to take the values for our 
         //https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
-        //https://localhost:3000/comprobarCarreras for localhost
-        console.log("AllValues Cookie 2" + allValuesCookie);
+        //http://localhost:3000/comprobarCarreras for localhost
+
 
         if (allValuesCookie !== undefined && allValuesCookie !== "") {
 
@@ -55,16 +58,18 @@ function mainShopping() {
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    //console.log(response.carreras);
+                    console.log(response.carreras);
                     // For each response, we have all the values that we want , now only have to put the values in our div html
                     // with the variables asignations .
                     response.carreras.forEach(carrera => {
-                        //  console.log(carrera);
+                        console.log(carrera);
                         idCarrera = carrera.id_carrera;
                         raceName = carrera.nombre;
                         distance = carrera.distancia;
                         aproxTime = carrera.tiempo;
                         price = carrera.precio;
+                        maxCorredores = carrera.max_corredores;
+                        dorsal = carrera.current_dorsal;
 
                         let productContainer = document.createElement("div");
                         productContainer.innerHTML = `

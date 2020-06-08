@@ -26,24 +26,53 @@ app.use(
 
 app.post("/consulta", function(req, res) {
 
-    var username = req.body.usuario;
-    var password = req.body.password;
-    var email = req.body.email;
-    var edad = req.body.edad;
-    console.log(username, password, email, edad);
+    let reqBody = req.body;
+    console.log(reqBody);
 
-    //query to insert the dates in the bdd like ( username, password, email, edad )
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+    let edad = req.body.edad;
+    let id_categoria = req.body.categorias;
+    let genero = req.body.options;
+    console.log(username, password, email, edad, id_categoria, genero);
+
+    //query to check if the username already exists 
     pool.query(
 
-        `INSERT INTO usuarios (usuario, email, edad, password) VALUES ('${username}', '${email}', '${edad}', '${password}')`,
+        "SELECT usuario FROM usuarios WHERE usuario LIKE '" + username + "';",
 
-        /* "INSERT INTO `usuarios` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
+
         function(err, result) {
 
+            // IF THE USER THAT WE WANT TO INSERT IS ALLREADY CREATED, SHOW ALERT THAT THE USER IS CREATED AND REFRESH THE PAGE
+            if (result.length > 0) {
+                //res.send(result[0].usuario);
 
-            res.redirect("index.html")
+                console.log("El usuario ya esta creado");
+                // if is created send false
+                res.send({ response: false });
+
+            } else {
+                console.log(result);
+
+                pool.query(
+
+                    `INSERT INTO usuarios (usuario, email, edad, password, id_categoria, genero) VALUES ('${username}', '${email}', '${edad}', '${password}','${id_categoria}','${genero}')`,
+
+                    /* "INSERT INTO `usuarios` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
+                    function(err, result) {
+
+                        // if is not created send true
+                        res.send({ response: true });
+                    }
+                );
+            }
         }
     );
+
+    //query to insert the dates in the bdd like ( username, password, email, edad )
+
 });
 
 
@@ -54,7 +83,7 @@ app.post("/comprobar", function(req, res) {
 
     //query that check if the id_usuario is orrect with the password/username
     pool.query(
-        "SELECT id_usuario, usuario, email, edad FROM usuarios WHERE usuario LIKE '" +
+        "SELECT * FROM usuarios WHERE usuario LIKE '" +
         username +
         "' AND password LIKE '" +
         password +
@@ -73,11 +102,10 @@ app.post("/comprobar", function(req, res) {
                 let usuario = result[0].usuario;
                 let email = result[0].email;
                 let edad = result[0].edad;
+                let id_categoria = result[0].id_categoria;
+                let genero = result[0].genero;
 
-                console.log(id_usuario);
-                console.log(usuario);
-                console.log(email);
-                console.log(edad);
+                console.log(id_usuario, usuario, email, edad, id_categoria, genero);
 
                 let token = createToken(id_usuario, usuario);
 
@@ -108,7 +136,7 @@ app.post("/comprobarCarreras", function(req, res) {
     pool.query(
         ` SELECT * FROM carreras WHERE id_carrera IN (${idCarrera});`,
         function(err, result) {
-            console.log(result.length);
+            console.log(result);
             //If the result is in the bdd the result will be bigger than 0 
             //so if the gresult is bigger than 0 we can create the object/json carreras to send the values
             //else, return 0 , if you didnt put this it probably explode;
@@ -125,7 +153,9 @@ app.post("/comprobarCarreras", function(req, res) {
                         nombre: result[i].nombre,
                         tiempo: result[i].tiempo,
                         distancia: result[i].distancia,
-                        precio: result[i].precio
+                        precio: result[i].precio,
+                        max_corredores: result[i].max_corredores,
+                        current_dorsal: result[i].current_dorsal
                     }
 
                     carreras.push(carrera)
@@ -182,6 +212,7 @@ app.post("/verifyToken", (req, res) => {
                     usuario: results[0].usuario,
                     email: results[0].email,
                     edad: results[0].edad,
+                    id_categoria: results[0].id_categoria
                 };
 
                 res.send(userData);

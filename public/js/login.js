@@ -6,26 +6,41 @@ import { getCookieValue } from "./exports.js";
 // FUNCTION TO CREATEA REGISTER FORM
 function register() {
 
-
-
     let divEntero = document.getElementById("login");
-    let warning = document.getElementsByClassName("alert-danger");
+
     //console.log(divEntero);
     divEntero.innerHTML = "";
     divEntero.innerHTML = `
    
-    <form action="./consulta" method="POST">
+    <form id="formRegister">
     <h2>Registrarse</h2>
     <fieldset class="clearfix">
-        <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario" required></p>
-        <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com " required>  </p>
+        <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario"  required></p>
+        <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com "   required>  </p>
         <p><span class="fa fa-circle-o"></span><input id="edad" name="edad" type="number" Placeholder="Edad" min="12" max="99" maxlength="2" required>  </p>
+        <p><span class="fa fa-user"></span>
+            <select name="generos" id="options" >
+                <option value="" selected hidden >Sexo</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+            </select>
+        </p>
+        <p><span class="fa fa-user"></span>
+        <select name="id_categoria" id="categorias">
+        <option value="" selected hidden >Categorías</option>
+            <option value="1">Infantil</option>
+            <option value="2">Cadete</option>
+            <option value="3">Juvenil</option>
+            <option value="4">Junior</option>
+            <option value="5">Promesa</option>
+        </select>
+    </p>
         <p><span class="fa fa-lock"></span><input id="contraseña" name="password" type="password" Placeholder="Contraseña" required>  </p>
         <p><span class="fa fa-lock"></span><input id="RepeatContraseña" name="password_repeat" type="password" Placeholder="Repetir Contraseña" required></p>
     <div>
               
             <input id="volver" type="button" value="Volver"> 
-            <input id="registro" type="submit" value="Registrarse">       
+            <input id="registroRegister" type="button" value="Registrarse">       
         </div>
     </fieldset>
 </form>
@@ -34,40 +49,115 @@ function register() {
 <strong>Error!</strong> Las contraseñas no coinciden.
 </div>
 `;
-
-    /*Comprobación errores*/
-
-    document.getElementById("registro").addEventListener("click", function() {
-
-
-        /*   fetch("http://localhost:3000/consulta", {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                method: "POST",
-                // body: JSON.stringify({ username: username, password: password }),
-            })
-            .then((response) => console.log(response.statusText));
- */
-
-        /*If the password aren't the same show an alert*/
-        if (
-            document.getElementById("contraseña").value !=
-            document.getElementById("RepeatContraseña").value
-        ) {
-            console.log("las contraseñas no son iguales");
-
-            console.log(warning[0]);
-            warning[0].style.visibility = "visible";
-
-        }
-    });
-
     volver();
+
+    document.getElementById("registroRegister").addEventListener("click", fetchRegister);
+    document.getElementById("registroRegister").addEventListener("click", function(event) {
+        event.preventDefault()
+    });
 }
 
-function createWarning() {}
+
+function fetchRegister() {
+    // Values to send to the server 
+    let username = document.getElementById("usuario").value;
+    let password = document.getElementById("contraseña").value;
+    let RepeatContraseña = document.getElementById("RepeatContraseña").value;
+    let email = document.getElementById("email").value;
+    let edad = document.getElementById("edad").value;
+    let options = document.getElementById("options").value;
+    let categorias = document.getElementById("categorias").value;
+    // Get the errors because if some error is empty we have to stop send it to the server
+    let errores = 0;
+    /*Comprobación errores*/
+    let warning = document.getElementsByClassName("alert-danger");
+    let option;
+    console.log(username.length);
+
+    /* If the username is empty*/
+    warning[0].innerHTML = "";
+    if (username === '' || username.length > 15) {
+        warning[0].innerHTML = `<strong>Error!</strong> El usuario no puede estar vacío o contener más de 20 caracteres.`
+        errores++;
+    } else {
+        /* If the email is empty or the syntax is not good*/
+        if (email === '') {
+            warning[0].innerHTML = `<strong>Error!</strong> El e-mail no puede estar vacío.`
+            errores++;
+        } else if (!isEmail(email)) {
+            warning[0].innerHTML = `<strong>Error!</strong> El email no contiene @ o caracteres de e-mail..`
+        } else {
+            /* If the password aren't the same show an alert*/
+            if (password === '' || password.length > 20) {
+                // Put the warning with the text that we want
+                warning[0].innerHTML = `<strong>Error!</strong> La contraseña no puede estar vacía o contener más de 20 caracteres.`
+                errores++;
+            } else {
+                /* If the second password */
+                if (RepeatContraseña === '') {
+                    // Put the warning with the text that we want
+                    warning[0].innerHTML = `<strong>Error!</strong> La segunda contraseña no puede estar vacía.`
+
+                } else if (password !== RepeatContraseña) {
+                    // Put the warning with the text that we want
+                    warning[0].innerHTML = `<strong>Error!</strong>  Las contraseñas  no coinciden.`
+
+                }
+            }
+        }
+
+    }
+
+    warning[0].style.visibility = "visible";
+    console.log(errores);
+
+    // FETCH TO SEND ALL THE VALUES TO THE SERVER 
+    // HEROKU LINK
+    // http://valenrunner.herokuapp.com/comprobar for heroku
+    // http://localhost:3000/comprobar for localhost
+    if (errores === 0) {
+        warning[0].style.visibility = "hidden";
+        console.log("Bien");
+        fetch("http://localhost:3000/consulta ", {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email,
+                edad: edad,
+                options: options,
+                categorias: categorias
+            }),
+        })
+
+        .then((response) => response.json())
+            .then((response) => {
+                console.log("Response: ", response.response)
+
+                if (response.response) {
+                    window.location.replace("index.html")
+                } else {
+
+                }
+            });
+
+    }
+}
+
+
+
+// Check if the email syntax is correct
+function isEmail(email) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+
+
+
 
 // FUNCTION TO CREATE THE LOGIN
 function login() {
@@ -106,7 +196,7 @@ function IniciarLogin() {
     // HEROKU LINK
     // http://valenrunner.herokuapp.com/comprobar for heroku
     // http://localhost:3000/comprobar for localhost
-    fetch("https://valenrunner.herokuapp.com/comprobar", {
+    fetch("http://valenrunner.herokuapp.com/comprobar", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -149,7 +239,11 @@ function addEnterListener() {
             document.getElementById("acceder").click();
         }
     });
+
+
+
 }
+
 
 //TODO!!!! CRATE THIS FUNCTION FOR ALL SCRIPTS IN ONLY 1 PLACE!!!
 function comprobarCookie() {
@@ -159,8 +253,8 @@ function comprobarCookie() {
 
 
     //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //https://localhost:3000/verifyToken for localhost
-    fetch("https://valenrunner.herokuapp.com/verifyToken", {
+    //http://localhost:3000/verifyToken for localhost
+    fetch("https://valenrunner.herokuapp.com/verifyToken ", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -170,6 +264,8 @@ function comprobarCookie() {
         })
         .then((response) => response.json())
         .then((response) => {
+            console.log(response);
+
             console.log(response.isValid)
 
             if (response.isValid) {

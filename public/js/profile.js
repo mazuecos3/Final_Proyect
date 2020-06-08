@@ -21,8 +21,8 @@ function reviseCookie() {
     let cookie;
     cookie = getCookieValue("tokenUser");
     //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //https://localhost:3000/verifyToken for localhost
-    fetch("https://valenrunner.herokuapp.com/verifyToken", {
+    //http://localhost:3000/verifyToken for localhost
+    fetch("https://valenrunner.herokuapp.com/verifyToken ", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

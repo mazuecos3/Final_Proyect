@@ -1,7 +1,10 @@
 const mysql = require("mysql");
 
-// Con esto lo que hacemos es abrir y cerrar conexiones automaticamente
-// para que no explote, un maximo de 100 conexiones
+// With this we open and close the conections automatically
+// because if we dont don`t creathe the pool, maybe sometimes can close the conections
+// max 100 conections 
+
+
 
 const pool = mysql.createPool({
     connectionLimit: 100,

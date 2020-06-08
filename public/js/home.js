@@ -191,7 +191,7 @@ function comprobarCookie() {
 
 
     //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //https://localhost:3000/verifyToken for localhost
+    //http://localhost:3000/verifyToken for localhost
     fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
@@ -203,7 +203,7 @@ function comprobarCookie() {
         .then((response) => response.json())
         .then((response) => {
             console.log(response.isValid)
-                // console.log(response);
+            console.log(response);
             if (response.isValid) {
 
                 // window.location.replace("../main.html");
