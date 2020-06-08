@@ -196,7 +196,7 @@ function IniciarLogin() {
     // HEROKU LINK
     // http://valenrunner.herokuapp.com/comprobar for heroku
     // http://localhost:3000/comprobar for localhost
-    fetch("http://valenrunner.herokuapp.com/comprobar", {
+    fetch("https://valenrunner.herokuapp.com/comprobar", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
