@@ -11,7 +11,7 @@ function mainShopping() {
     let allValuesCookie = getCookieValue('carreras');
     // cookie value separated without  ","
     let finalValuesCookie;
-    console.log("AllValues Cookie 1" + allValuesCookie);
+    //console.log("AllValues Cookie 1" + allValuesCookie);
     if (allValuesCookie !== undefined && allValuesCookie !== "") {
         finalValuesCookie = allValuesCookie.split(",");
 
@@ -31,11 +31,12 @@ function mainShopping() {
         let distance;
         let aproxTime;
         let idCarrera;
-        let price;
+        let price = 0;
         let maxCorredores;
         let dorsal;
-
+        let cantidadTotal;
         let totalPrice = 0;
+        let inputPay;
 
         // Fetch to the server to take the values for our 
         //https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
@@ -44,7 +45,7 @@ function mainShopping() {
 
         if (allValuesCookie !== undefined && allValuesCookie !== "") {
 
-            fetch("https://valenrunner.herokuapp.com/comprobarCarreras", {
+            fetch("http://localhost:3000/comprobarCarreras", {
                     headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/json",
@@ -58,7 +59,7 @@ function mainShopping() {
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response.carreras);
+                    //console.log(response.carreras);
                     // For each response, we have all the values that we want , now only have to put the values in our div html
                     // with the variables asignations .
                     response.carreras.forEach(carrera => {
@@ -71,6 +72,7 @@ function mainShopping() {
                         maxCorredores = carrera.max_corredores;
                         dorsal = carrera.current_dorsal;
 
+
                         let productContainer = document.createElement("div");
                         productContainer.innerHTML = `
               <div id="row` + idCarrera + `" class="row">
@@ -80,7 +82,7 @@ function mainShopping() {
                                   <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
                                       <h4 class="product-name"><strong>` + raceName + `</strong></h4>
                                       <h4>
-                                          <small>Distancia ` + distance + `km - ` + aproxTime + `h aprox.</small>
+                                          <small>Distancia ` + distance + `km - ` + aproxTime + `h aprox - ` + maxCorredores + ` máximo número de participantes.</small>
                                       </h4>
                                   </div>
                                   <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
@@ -89,7 +91,8 @@ function mainShopping() {
                                       </div>
                                       <div class="col-4 col-sm-4 col-md-4">
                                           <div class="quantity" style="padding-top: 5px">
-                                              <h6 id="price` + idCarrera + `"><strong> ` + price + `€</span></strong></h6>
+                                              <h6 id="price` + idCarrera + `"><strong> ` + (price) + `€</span></strong><input id="morePay` + idCarrera + `" class="morePay" type="number"  min="1" max="5" value="1" onclick="setPrice(e)"> </input></h6>
+                                              <div id="result" onclick="setPrice()" ></div>  
                                           </div>
                                       </div>
                                       <div class="col-2 col-sm-2 col-md-2 text-right">
@@ -102,14 +105,27 @@ function mainShopping() {
                                
                               </div>
               `;
-                        totalPrice += price;
 
+                        container.appendChild(productContainer);
+
+                        // each input id to get the value of each of them
+                        inputPay = "morePay" + idCarrera;
+                        cantidadTotal = document.getElementById(inputPay).value;
+
+
+                        price = price * cantidadTotal;
+                        console.log("Priuce", price);
+
+                        totalPrice += price;
+                        console.log("TotalPrice", totalPrice);
+
+                        // cantidadTotal = document.getElementById(inputPay).addEventListener("change", setTotalPrice(totalPrice));
                         // function to put the total price to pay 
                         setTotalPrice(totalPrice);
-                        container.appendChild(productContainer);
+
                         // When the container is creatted, we can take the Id added before into the button 
                         //for do  function remove race
-                        removeRace(idCarrera, totalPrice);
+                        removeRace(idCarrera);
 
                     });
                     console.log(totalPrice);
@@ -122,7 +138,13 @@ function mainShopping() {
 
 }
 
-function removeRace(id_carrera, totalPrice) {
+function setPrice() {
+    console.log(e);
+
+
+}
+
+function removeRace(id_carrera) {
 
 
     // each button id to add event to all of them
@@ -208,6 +230,8 @@ function removeRace(id_carrera, totalPrice) {
 function setTotalPrice(totalPrice) {
     let inputPrice = document.getElementById("price");
     inputPrice.innerText = totalPrice + "€";
+    console.log(inputPrice.innerText);
+
 }
 
 // Function that creates the Payment with paypal / credit or debit cards.

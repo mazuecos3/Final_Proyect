@@ -8,6 +8,8 @@ import { logOut } from "./exports.js";
 let usuario;
 let email;
 let edad;
+let categoria;
+let genero;
 let userRol = "Runner";
 let races = [
     "Marxa conta l'Escleròsi Múltiple", "Carrera por la Esclerosis Múltiple",
@@ -22,7 +24,7 @@ function reviseCookie() {
     cookie = getCookieValue("tokenUser");
     //https://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("https://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -36,6 +38,8 @@ function reviseCookie() {
             usuario = response.usuario;
             email = response.email;
             edad = response.edad;
+            categoria = response.id_categoria;
+            genero = response.genero;
 
             // console.log(usuario,email,edad);
             //When we have the dates from the response like the username, email, years
@@ -121,20 +125,45 @@ function rightInfo() {
 
 }
 
-//Depends if you are in the dates/history section you are going to see
-//different info, with the dates that we recopile of the fetch request to the bdd
 
 function fillText() {
+
+
     console.log(usuario, email, edad);
 
+    // Depends if the category is 1 = Infantil, 2 - Cadete, etc...
+    switch (categoria) {
+        case 1:
+            categoria = "Infantil";
+            break;
+        case 2:
+            categoria = "Cadete";
+            break;
+        case 3:
+            categoria = "Juvenil";
+            break;
+        case 4:
+            categoria = "Junior";
+            break;
+        case 5:
+            categoria = "Promesa";
+            break;
+
+    }
+
     let container = document.getElementById("rightInfo");
+    //Depends if you are in the dates/history section you are going to see
+    //different info, with the dates that we recopile of the fetch request to the bdd
 
     let datesTab = document.getElementById("home-tab");
     let historyTab = document.getElementById("profile-tab");
 
+
     if (datesTab.classList.contains("active")) {
         console.log(datesTab);
         container.innerHTML = "";
+
+        // Put the values that we take of the bdd with the fetch to the server
         container.innerHTML =
             `
   <div class="tab-content profile-tab" id="myTabContent">
@@ -163,6 +192,24 @@ function fillText() {
               <p>` + edad + `</p>
           </div>
       </div>
+
+      <div class="row">
+      <div class="col-md-6">
+          <label>Categoría</label>
+      </div>
+      <div class="col-md-6">
+          <p>` + categoria + `</p>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-md-6">
+          <label>Género</label>
+      </div>
+      <div class="col-md-6">
+          <p>` + genero + `</p>
+      </div>
+      </div>
+ 
      
   </div>
  
@@ -179,12 +226,10 @@ function fillText() {
   <div class="tab-pane fade show active" id="rightSection" role="tabpanel" aria-labelledby="home-tab">       
       <div class="row">
           <div class="col-md-6">
-              <p>Nombre carrera:</p>
-            
+              <p>Nombre carrera:</p>   
           </div>
           <div class="col-md-6">
-              <p>Fecha:</p>
-            
+              <p>Fecha:</p>  
           </div>
       </div>
       <div class="row">
@@ -193,8 +238,7 @@ function fillText() {
             
           </div>
           <div class="col-md-6">
-              <p>XX / XX / XXXX </p>
-            
+              <p>XX / XX / XXXX </p>       
           </div>
       </div>
       

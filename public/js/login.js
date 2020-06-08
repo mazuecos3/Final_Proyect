@@ -118,7 +118,7 @@ function fetchRegister() {
     if (errores === 0) {
         warning[0].style.visibility = "hidden";
         console.log("Bien");
-        fetch("https://valenrunner.herokuapp.com/consulta", {
+        fetch("http://localhost:3000/consulta", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -195,7 +195,7 @@ function IniciarLogin() {
     // HEROKU LINK
     // https://valenrunner.herokuapp.com/comprobar for heroku
     // http://localhost:3000/comprobar for localhost
-    fetch("https://valenrunner.herokuapp.com/comprobar", {
+    fetch("http://localhost:3000/comprobar", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -253,7 +253,7 @@ function comprobarCookie() {
 
     // https://valenrunner.herokuapp.com/verifyToken for heroku 
     // http://localhost:3000/verifyToken for localhost
-    fetch("https://valenrunner.herokuapp.com/verifyToken", {
+    fetch("http://localhost:3000/verifyToken", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
