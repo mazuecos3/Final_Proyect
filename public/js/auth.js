@@ -14,6 +14,7 @@ const pool = mysql.createPool({
     database: "gupoecom_valenrunner",
     charset: "utf8mb4",
     debug: false,
+    multipleStatements: true,
 });
 
 pool.getConnection((err, connection) => {

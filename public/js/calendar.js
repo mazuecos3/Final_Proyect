@@ -17,7 +17,7 @@ function dates() {
     let date = document.createElement("div");
 
     date.classList.add("dates");
-    console.log(date);
+
     for (let i = 1; i <= 35; i++) {
         contador++;
 
@@ -65,7 +65,7 @@ function dates() {
 
 function openDate(date, d) {
 
-    console.log(d);
+
 
     // for take Monday, Tuesday... etc
     d = (d - 1) % 7

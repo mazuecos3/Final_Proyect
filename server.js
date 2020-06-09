@@ -42,28 +42,19 @@ app.post("/consulta", function(req, res) {
     pool.query(
 
         "SELECT usuario FROM usuarios WHERE usuario LIKE '" + username + "';",
-
-
         function(err, result) {
-
             // IF THE USER THAT WE WANT TO INSERT IS ALLREADY CREATED, SHOW ALERT THAT THE USER IS CREATED AND REFRESH THE PAGE
             if (result.length > 0) {
                 //res.send(result[0].usuario);
-
                 console.log("El usuario ya esta creado");
                 // if is created send false
                 res.send({ response: false });
-
             } else {
                 console.log(result);
-
                 pool.query(
-
                     `INSERT INTO usuarios (usuario, email, edad, password, id_categoria, genero) VALUES ('${username}', '${email}', '${edad}', '${password}','${id_categoria}','${genero}')`,
-
                     /* "INSERT INTO `usuarios` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
                     function(err, result) {
-
                         // if is not created send true
                         res.send({ response: true });
                     }
@@ -143,9 +134,7 @@ app.post("/comprobarCarreras", function(req, res) {
             //else, return 0 , if you didnt put this it probably explode;
 
             if (result.length > 0) {
-
                 //console.log(result.length);
-
                 let carreras = []
                 let carrera;
                 for (let i = 0; i < result.length; i++) {
@@ -158,14 +147,10 @@ app.post("/comprobarCarreras", function(req, res) {
                         max_corredores: result[i].max_corredores,
                         current_dorsal: result[i].current_dorsal
                     }
-
                     carreras.push(carrera)
                 }
-
                 console.log(carreras);
-
                 res.send({ carreras: carreras });
-
                 //res.redirect('main.html');
             } else {
                 console.log("Fallo consulta Carrera");
@@ -174,8 +159,80 @@ app.post("/comprobarCarreras", function(req, res) {
             }
         }
     );
+
+});
+// TO CHECK THE RACES RUNNED AND TAKE THE INFO
+app.post("/historialCarreras", function(req, res) {
+    console.log(req.body);
+
+    let idCarreraHistorial = req.body.idCarrera;
+    console.log(idCarreraHistorial);
+
+
+    pool.query(
+        "SELECT nombre FROM `carreras` WHERE id_carrera IN (" + idCarreraHistorial + ");SELECT * FROM `tiempos-carreras` WHERE id_carrera IN (" + idCarreraHistorial + ")",
+        function(err, result) {
+            console.log(result);
+            if (result.length > 0) {
+                res.send({
+                    result: result,
+                });
+            } else {
+
+                console.log("Fallo consulta Carrera");
+                return 0;
+            }
+        }
+    );
+    // Query to check the races already done
+    /*     pool.query(
+            "SELECT * FROM `tiempos-carreras` WHERE id_carrera IN (" + idCarreraHistorial + ");",
+            function(err, result) {
+                //console.log(result);
+                if (result.length > 0) {
+                    let carreras = []
+                    let carrera;
+                    for (let i = 0; i < result.length; i++) {
+                        carrera = {
+
+                            id_usuario: result[i].id_usuario,
+                            id_carrera: result[i].id_carrera,
+                            tiempo: result[i].tiempo,
+                            dorsal: result[i].dorsal,
+                        }
+                        carreras.push(carrera)
+                    }
+                    //console.log(carreras);
+                    res.send({ carreras: carreras });
+                } else {
+                    console.log("Fallo consulta Carrera");
+                    return 0;
+
+                }
+            }
+        ); */
 });
 
+// TO CHECK THE RACES BOUGHT AND TAKE THE INFO
+
+/* app.post("/historialCompras", function(req, res) {
+
+    let idCarreraHistorial = req.body.idCarrera;
+    // Query to check the races bought.
+    pool.query(
+        ` SELECT * FROM usuarios-carreras WHERE id_carrera IN (${idCarreraHistorial});`,
+        function(err, result) {
+            console.log(result);
+
+            if (result.length > 0) {
+
+            } else {
+                console.log("Fallo consulta Carrera");
+                return 0;
+            }
+        }
+    );
+}); */
 // ENCRYPT TOKEN With the word "Desencrypt" you have to put the same word
 //when you will descencrypt it.
 function createToken(userId, usuario) {

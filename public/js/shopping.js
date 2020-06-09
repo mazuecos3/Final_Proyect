@@ -34,7 +34,6 @@ function mainShopping() {
         let price = 0;
         let maxCorredores;
         let dorsal;
-        let cantidadTotal;
         let totalPrice = 0;
         let inputPay;
 
@@ -91,7 +90,7 @@ function mainShopping() {
                                       </div>
                                       <div class="col-4 col-sm-4 col-md-4">
                                           <div class="quantity" style="padding-top: 5px">
-                                              <h6 id="price` + idCarrera + `"><strong> ` + (price) + `€</span></strong><input id="morePay` + idCarrera + `" class="morePay" type="number"  min="1" max="5" value="1" onclick="setPrice(e)"> </input></h6>
+                                              <h6 id="price` + idCarrera + `"><strong> ` + price + `€</span></strong><input id="morePay` + idCarrera + `" class="morePay" type="number"  min="1" max="5" value="1" > </input></h6>
                                               <div id="result" onclick="setPrice()" ></div>  
                                           </div>
                                       </div>
@@ -110,36 +109,45 @@ function mainShopping() {
 
                         // each input id to get the value of each of them
                         inputPay = "morePay" + idCarrera;
-                        cantidadTotal = document.getElementById(inputPay).value;
 
-
-                        price = price * cantidadTotal;
-                        console.log("Priuce", price);
 
                         totalPrice += price;
-                        console.log("TotalPrice", totalPrice);
-
-                        // cantidadTotal = document.getElementById(inputPay).addEventListener("change", setTotalPrice(totalPrice));
                         // function to put the total price to pay 
                         setTotalPrice(totalPrice);
+
+                        document.getElementById(inputPay).addEventListener("click", payAll);
+
 
                         // When the container is creatted, we can take the Id added before into the button 
                         //for do  function remove race
                         removeRace(idCarrera);
 
                     });
-                    console.log(totalPrice);
-                    paypalPay(totalPrice);
+                    // console.log(totalPrice);
                 })
         }
 
     }
 
-
+    paypalPay();
 }
 
-function setPrice() {
-    console.log(e);
+function payAll() {
+
+
+    let allInputs = document.querySelectorAll(".morePay");
+
+    let money = 0;
+    allInputs.forEach(input => {
+
+
+        money += parseInt(input.value) * parseInt(input.parentNode.firstChild.innerText);
+
+
+
+    })
+
+    setTotalPrice(money);
 
 
 }
@@ -154,23 +162,12 @@ function removeRace(id_carrera) {
     // add event click and the function
     buttonTrash.addEventListener("click", function() {
 
-        // First we have to changue ta value of the total price when we click on each trash button
-        // So we take the value of each and later we have to take off the price to the total price
-        let inputPrice = document.getElementById("price");
-        let totalPrice;
-        if (inputPrice.innerText.length <= 2) {
-            totalPrice = parseInt(inputPrice.innerText.substring(0, 2));
-        } else {
-            totalPrice = parseInt(inputPrice.innerText.substring(0, 3));
-        }
-        let priceInput = "price" + id_carrera;
-        let priceSection = document.getElementById(priceInput);
-        let price = parseInt(priceSection.innerText.substring(0, 2));
+        // Get the input and remove the child of the parent in this case ("inputPrice").
+        let inputPrice = document.getElementById("morePay" + id_carrera);
+        inputPrice.parentNode.removeChild(inputPrice);
+        // And when is removed the value, we can take all prices of all sections to take the final price.
+        payAll();
 
-
-        totalPrice = totalPrice - price;
-        paypalPay(totalPrice);
-        inputPrice.innerText = totalPrice + "€";
 
         // Now we have to remove the value of the cookie too.
         let allValuesCookie = getCookieValue('carreras');
@@ -214,6 +211,7 @@ function removeRace(id_carrera) {
                 }
             }
         }
+
         // Here we have to take each div ("row") in this case,
         // to remove riw (display none) 
         idRow = "row" + id_carrera;
@@ -224,25 +222,28 @@ function removeRace(id_carrera) {
         // And finally we have to remove the cookie with the insert that we putted before.
         createCookie("carreras", insertCookie, 200);
     });
+
+
+
 }
 
 
 function setTotalPrice(totalPrice) {
+
     let inputPrice = document.getElementById("price");
-    inputPrice.innerText = totalPrice + "€";
-    console.log(inputPrice.innerText);
+    inputPrice.innerText = totalPrice;
+
 
 }
 
 // Function that creates the Payment with paypal / credit or debit cards.
-function paypalPay(totalPrice) {
+function paypalPay() {
 
     // first we take the element because we have to clean it first anyone call, 
     // we are going to create the payment button the first time with all price value and
     // when we remove each race because the value changue.
     let buttonPaypal = document.getElementById("paypal-button");
     buttonPaypal.innerHTML = "";
-
 
     paypal.Button.render({
         // Configure environment
@@ -264,10 +265,13 @@ function paypalPay(totalPrice) {
 
         // Set up a payment
         payment: function(data, actions) {
+
+            let allMoney = parseInt(document.getElementById("price").innerText);
+            console.log(allMoney);
             return actions.payment.create({
                 transactions: [{
                     amount: {
-                        total: totalPrice,
+                        total: allMoney,
                         currency: 'EUR'
                     }
                 }]

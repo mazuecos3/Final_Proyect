@@ -11,12 +11,18 @@ let edad;
 let categoria;
 let genero;
 let userRol = "Runner";
-let races = [
-    "Marxa conta l'Escleròsi Múltiple", "Carrera por la Esclerosis Múltiple",
-    "Carrera Solidaria Popular Cruz Roja", "Carrera Marta Fernández de Castro",
-    "Cursa Illa de El Palmar", "I Carrera por el día mundial del TDH",
-    " XLIV Volta a Peu als Barris", "VIII Can-rrera Bioparc Valencia"
-];
+
+/* --------------------- */
+let valuesLeft = [];
+let id_usuario;
+let nombreCarrera;
+let nombreCarrera1;
+let idCarreraGet;
+let idCarreraGet1
+let tiempo;
+let tiempo1;
+let dorsal;
+let dorsal1;
 
 function reviseCookie() {
 
@@ -47,12 +53,54 @@ function reviseCookie() {
         })
 
 }
+
+function historyInfo() {
+
+    let idCarrera = [14, 15];
+    fetch("http://localhost:3000/historialCarreras", {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                idCarrera: idCarrera
+
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            console.log(response.result);
+            console.log(response.result[0][0]);
+            console.log(response.result[1]);
+
+            nombreCarrera = response.result[0][0].nombre;
+            nombreCarrera1 = response.result[0][1].nombre;
+
+            idCarreraGet = response.result[1][0].id_carrera;
+            idCarreraGet1 = response.result[1][1].id_carrera;
+
+            tiempo = response.result[1][0].tiempo;
+            tiempo1 = response.result[1][1].tiempo;
+
+            dorsal = response.result[1][0].dorsal;
+            dorsal1 = response.result[1][1].dorsal;
+
+            console.log(tiempo, tiempo1, dorsal, dorsal1, idCarreraGet, idCarreraGet1);
+
+            leftInfo();
+        });
+
+}
+
+
 //call all functions
 function mainProfile() {
-
+    historyInfo();
     headerInfo();
-    leftInfo();
+
     rightInfo();
+
     //add function logout to the logout section
     //console.log(document.getElementById("logOut"));
     let btnLogOut = document.getElementById("logOut");
@@ -92,15 +140,25 @@ function leftInfo() {
     //console.log(container);
     container.innerHTML = "";
 
-    container.innerHTML =
-        `
-  <div class="profile-work">
-  <p> Historial de carreras: </p>
-  <a >` + alertNoRaces + `</a><br />
- 
+
+    if (idCarreraGet1 === 14 || idCarreraGet === 15) {
+        container.innerHTML =
+            `
+<div class="profile-work">
+<p> Historial de carreras: </p>
+<p>- ` + "Nombre: " + nombreCarrera + " / " + tiempo + "h  /  Dorsal Número: " + dorsal + `</p><br />
+<p>- ` + "Nombre: " + nombreCarrera1 + " / " + tiempo1 + "h  /  Dorsal Número: " + dorsal1 + `</p><br />
 </div>
-  
-  `;
+`;
+    } else {
+        container.innerHTML =
+            `
+<div class="profile-work">
+<p> Historial de carreras: </p>
+<a >` + alertNoRaces + `</a><br />
+</div>
+`;
+    }
 }
 
 function rightInfo() {
