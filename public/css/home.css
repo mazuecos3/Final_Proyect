@@ -144,3 +144,11 @@ div[class="mq-logo-control leaflet-control"] img {
 div[class="mq-attribution-control leaflet-control"] {
     display: none;
 }
+
+#h2Title {
+    font-size: 40px;
+}
+
+.pHome {
+    font-size: 17px;
+}

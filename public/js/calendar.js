@@ -76,7 +76,7 @@ function openDate(date, d) {
         "Carrera en Paiporta, (Click aquí para mas información)", "Carrera en Catarroja, (Click aquí para mas información)",
         "Carrera en Massarrojos, (Click aquí para mas información)", "Carrera en Cheste, (Click aquí para mas información)",
         "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)",
-        "Valencia Rio - Mestalla, (Ninguna información disponible)", "Avenida Joaquin - Puerto (Ninguna información disponible"
+        "Valencia Rio - Mestalla, (Ninguna información disponible)", "Avenida Joaquin - Puerto (Ninguna información disponible)"
 
     ];
     let leftDiv = document.querySelector(".calendar-left");
@@ -119,16 +119,32 @@ function openDate(date, d) {
         }
         // Inner all the dates in the current-events section
 
-        leftDiv.innerHTML = `
- <div class="num-date">` + date + `</div>
- <div class="day">` + day[d] + `</div>
- <div id="current-events" class="current-events">Próximos Eventos :
-   <ul>
-   <li> <a href="main.html#` + idRaces + `">` + finalRace + ` </a></li>
-   </ul>
-</div>
-</div>
- `
+        // If the races are dissableds add the name but without the link
+        if (finalRace === races[6] && finalRace === races[7]) {
+            leftDiv.innerHTML = `
+            <div class="num-date">` + date + `</div>
+            <div class="day">` + day[d] + `</div>
+            <div id="current-events" class="current-events">Próximos Eventos :
+              <ul>
+              <li> ` + finalRace + ` </a></li>
+              </ul>
+           </div>
+           </div>
+            `
+                // Else add the races with the name and link to this race in main.html
+        } else {
+            leftDiv.innerHTML = `
+            <div class="num-date">` + date + `</div>
+            <div class="day">` + day[d] + `</div>
+            <div id="current-events" class="current-events">Próximos Eventos :
+              <ul>
+              <li> <a href="main.html#` + idRaces + `">` + finalRace + ` </a></li>
+              </ul>
+           </div>
+           </div>
+            `
+        }
+        // Else add all the races "Nothing for this day"
     } else {
 
 

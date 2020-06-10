@@ -33,8 +33,8 @@ function reviseCookie() {
 
     let cookie;
     cookie = getCookieValue("tokenUser");
-    //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //http://localhost:3000/verifyToken for localhost
+    // https://valenrunner.herokuapp.com/verifyToken for heroku 
+    // http://localhost:3000/verifyToken for localhost
     fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
@@ -60,7 +60,7 @@ function reviseCookie() {
 }
 
 function historyInfo() {
-    // https://valenrunner.herokuapp.com/verifyToken
+    // https://valenrunner.herokuapp.com/historialCarreras
     // http://localhost:3000/historialCarreras
     let idCarrera = [14, 15];
     fetch("https://valenrunner.herokuapp.com/historialCarreras", {
@@ -98,7 +98,7 @@ function historyInfo() {
 function payMentInfo() {
 
     let idCarrera = [14, 15];
-    // https://valenrunner.herokuapp.com/historialCarreras
+    // https://valenrunner.herokuapp.com/historialCompras
     // http://localhost:3000/historialCompras
     fetch("https://valenrunner.herokuapp.com/historialCompras", {
             headers: {

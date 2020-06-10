@@ -13,7 +13,7 @@ function register() {
     divEntero.innerHTML = `
    
     <form id="formRegister">
-    <h2>Registrarse</h2>
+    <h2>Registro Valenrunner</h2>
     <fieldset class="clearfix">
         <p><span class="fa fa-user"></span><input id="usuario" name="usuario" type="text" Placeholder="Usuario"  required></p>
         <p><span class="fa fa-envelope"></span><input id="email" name="email" type="text" Placeholder="sample@gmail.com "   required>  </p>
@@ -46,7 +46,7 @@ function register() {
 </form>
 <br>
 <div class="alert alert-danger">
-<strong>Error!</strong> Las contraseñas no coinciden.
+
 </div>
 `;
     volver();
@@ -158,15 +158,13 @@ function isEmail(email) {
 }
 
 
-
-
-
 // FUNCTION TO CREATE THE LOGIN
 function login() {
     let divEntero = document.getElementById("login");
 
     //console.log(divEntero);
     divEntero.innerHTML = "";
+
     divEntero.innerHTML = `
     <form>
     <fieldset class="clearfix">

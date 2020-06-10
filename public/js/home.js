@@ -92,7 +92,7 @@ function mainHome() {
         container.innerHTML =
             `
           <div class="w3-container w3-white">             
-          <!--<img src="./media/race1.jpg" alt="race1">-->
+        
             <h3>` + nameRace + `</h3>
             <h6 class="w3-opacity"> ` + price + `</h6>
             <p>Carrera de ` + totalKm + ` kilometros. </p>
@@ -190,8 +190,8 @@ function comprobarCookie() {
     cookie = getCookieValue("tokenUser");
 
 
-    //https://valenrunner.herokuapp.com/verifyToken for heroku 
-    //http://localhost:3000/verifyToken for localhost
+    // https://valenrunner.herokuapp.com/verifyToken for heroku 
+    // http://localhost:3000/verifyToken for localhost
     fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 "Accept": "application/json",
