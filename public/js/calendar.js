@@ -116,6 +116,7 @@ function openDate(date, d) {
                 break;
 
 
+
         }
         // Inner all the dates in the current-events section
 
