@@ -35,7 +35,7 @@ function reviseCookie() {
     cookie = getCookieValue("tokenUser");
     //https://valenrunner.herokuapp.com/verifyToken for heroku 
     //http://localhost:3000/verifyToken for localhost
-    fetch("http://localhost:3000/verifyToken", {
+    fetch("https://valenrunner.herokuapp.com/verifyToken", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -60,9 +60,10 @@ function reviseCookie() {
 }
 
 function historyInfo() {
-
+    // https://valenrunner.herokuapp.com/verifyToken
+    // http://localhost:3000/historialCarreras
     let idCarrera = [14, 15];
-    fetch("http://localhost:3000/historialCarreras", {
+    fetch("https://valenrunner.herokuapp.com/historialCarreras", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
@@ -97,7 +98,9 @@ function historyInfo() {
 function payMentInfo() {
 
     let idCarrera = [14, 15];
-    fetch("http://localhost:3000/historialCompras", {
+    // https://valenrunner.herokuapp.com/historialCarreras
+    // http://localhost:3000/historialCompras
+    fetch("https://valenrunner.herokuapp.com/historialCompras", {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
