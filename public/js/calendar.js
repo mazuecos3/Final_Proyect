@@ -120,20 +120,9 @@ function openDate(date, d) {
         }
         // Inner all the dates in the current-events section
 
-        // If the races are dissableds add the name but without the link
-        if (finalRace === races[6] && finalRace === races[7]) {
-            leftDiv.innerHTML = `
-            <div class="num-date">` + date + `</div>
-            <div class="day">` + day[d] + `</div>
-            <div id="current-events" class="current-events">Próximos Eventos :
-              <ul>
-              <li> ` + finalRace + ` </a></li>
-              </ul>
-           </div>
-           </div>
-            `
-                // Else add the races with the name and link to this race in main.html
-        } else {
+        // Else add the races with the name and link to this race in main.html
+
+        if (finalRace !== races[6] && finalRace !== races[7]) {
             leftDiv.innerHTML = `
             <div class="num-date">` + date + `</div>
             <div class="day">` + day[d] + `</div>
@@ -144,6 +133,20 @@ function openDate(date, d) {
            </div>
            </div>
             `
+                // If the races are dissableds add the name but without the link
+        } else {
+
+            leftDiv.innerHTML = `
+            <div class="num-date">` + date + `</div>
+            <div class="day">` + day[d] + `</div>
+            <div id="current-events" class="current-events">Próximos Eventos :
+              <ul>
+              <li> ` + finalRace + ` </a></li>
+              </ul>
+           </div>
+           </div>
+            `
+
         }
         // Else add all the races "Nothing for this day"
     } else {

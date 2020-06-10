@@ -39,8 +39,8 @@ function mainShopping() {
         let inputPay;
 
         // Fetch to the server to take the values for our 
-        //https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
-        //http://localhost:3000/comprobarCarreras for localhost
+        // https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
+        // http://localhost:3000/comprobarCarreras for localhost
 
 
 
