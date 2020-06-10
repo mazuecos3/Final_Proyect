@@ -104,6 +104,15 @@ body {
     background-color: red;
 }
 
+.dissabledRaces {
+    background-color: grey;
+}
+
+.dissabledLink {
+    pointer-events: none;
+    cursor: default
+}
+
 .white {
     color: white;
 }

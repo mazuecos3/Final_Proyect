@@ -30,6 +30,8 @@ a.w3-bar-item.w3-button.w3-right.w3-mobile.fa {
     background-color: #2980B9!important;
 }
 
+.shoppingRaces {}
+
 .nav-background {
     color: #fff!important;
     background-color: #2980B9!important;
@@ -81,4 +83,6 @@ a:link {
 .morePay {
     width: 40px;
     margin-left: 10px;
+    font-size: 18px;
+    height: 30px;
 }

@@ -11,6 +11,7 @@ function mainShopping() {
     let allValuesCookie = getCookieValue('carreras');
     // cookie value separated without  ","
     let finalValuesCookie;
+    let rowsRaces;
     //console.log("AllValues Cookie 1" + allValuesCookie);
     if (allValuesCookie !== undefined && allValuesCookie !== "") {
         finalValuesCookie = allValuesCookie.split(",");
@@ -33,7 +34,7 @@ function mainShopping() {
         let idCarrera;
         let price = 0;
         let maxCorredores;
-        let dorsal;
+        let fecha;
         let totalPrice = 0;
         let inputPay;
 
@@ -58,7 +59,7 @@ function mainShopping() {
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    //console.log(response.carreras);
+                    console.log(response.carreras);
                     // For each response, we have all the values that we want , now only have to put the values in our div html
                     // with the variables asignations .
                     response.carreras.forEach(carrera => {
@@ -69,12 +70,13 @@ function mainShopping() {
                         aproxTime = carrera.tiempo;
                         price = carrera.precio;
                         maxCorredores = carrera.max_corredores;
-                        dorsal = carrera.current_dorsal;
+                        fecha = carrera.fecha;
+
 
 
                         let productContainer = document.createElement("div");
                         productContainer.innerHTML = `
-              <div id="row` + idCarrera + `" class="row">
+              <div id="row` + idCarrera + `" class="row shoppingRaces" >
                                   <div class="col-12 col-sm-12 col-md-2 text-center">
                                       <img class="img-responsive" src="` + urlImage + `" alt="prewiew" width="120" height="80">
                                   </div>
@@ -123,13 +125,45 @@ function mainShopping() {
                         removeRace(idCarrera);
 
                     });
-                    // console.log(totalPrice);
+
+
+
+                    rowsRaces = document.getElementsByClassName("shoppingRaces");
+                    console.log(rowsRaces.length);
+                    if (rowsRaces.length > 0) {
+                        sendDatesRace(raceName, fecha);
+                        paypalPay();
+                    } else {
+                        localStorage.clear();
+                    }
+
                 })
+
         }
 
     }
 
-    paypalPay();
+
+
+}
+
+// With this function we send the name of the race and the date, 
+//and now we have to call the localStorage in the profile js
+function sendDatesRace(nameRace, fecha) {
+
+    fecha = fecha.substring(0, 10);
+    console.log(nameRace, fecha);
+
+    var data = {
+
+        "name": nameRace,
+        "fecha": fecha,
+    }
+    localStorage.setItem("data", JSON.stringify(data));
+    // To remove the localstorageItem
+    //localStorage.removeItem('image');
+    //OR
+    //localStorage.clear(;
 }
 
 function payAll() {
@@ -244,7 +278,9 @@ function paypalPay() {
     // when we remove each race because the value changue.
     let buttonPaypal = document.getElementById("paypal-button");
     buttonPaypal.innerHTML = "";
+    // console.log(totalPrice);
 
+    //buttonPaypal.addEventListener("click", addRacePaid);
     paypal.Button.render({
         // Configure environment
         env: 'sandbox',

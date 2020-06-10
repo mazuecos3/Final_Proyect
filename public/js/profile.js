@@ -4,7 +4,7 @@ import { cookieRacesValues } from "./exports.js";
 import { logOut } from "./exports.js";
 
 
-
+/* Variables declaration */
 let usuario;
 let email;
 let edad;
@@ -13,16 +13,21 @@ let genero;
 let userRol = "Runner";
 
 /* --------------------- */
-let valuesLeft = [];
-let id_usuario;
+
 let nombreCarrera;
 let nombreCarrera1;
-let idCarreraGet;
-let idCarreraGet1
+
 let tiempo;
 let tiempo1;
 let dorsal;
 let dorsal1;
+/**/
+
+let nombrePayment;
+let nombrePayment1;
+
+let datePayment;
+let datePayment1;
 
 function reviseCookie() {
 
@@ -40,6 +45,7 @@ function reviseCookie() {
         })
         .then((response) => response.json())
         .then((response) => {
+            // Response if is Valid and all the values like user, email, age, etc
             console.log(response)
             usuario = response.usuario;
             email = response.email;
@@ -47,7 +53,6 @@ function reviseCookie() {
             categoria = response.id_categoria;
             genero = response.genero;
 
-            // console.log(usuario,email,edad);
             //When we have the dates from the response like the username, email, years
             mainProfile();
         })
@@ -70,25 +75,57 @@ function historyInfo() {
         })
         .then((response) => response.json())
         .then((response) => {
-            console.log(response.result);
-            console.log(response.result[0][0]);
-            console.log(response.result[1]);
 
+            // Name of the race with the time and numberParticipant(dorsal)
             nombreCarrera = response.result[0][0].nombre;
             nombreCarrera1 = response.result[0][1].nombre;
 
-            idCarreraGet = response.result[1][0].id_carrera;
-            idCarreraGet1 = response.result[1][1].id_carrera;
-
+            // Time of the race with the name and numberParticipant(dorsal)
             tiempo = response.result[1][0].tiempo;
             tiempo1 = response.result[1][1].tiempo;
 
+            // numberParticipant(dorsal) of the race with the name and time
             dorsal = response.result[1][0].dorsal;
             dorsal1 = response.result[1][1].dorsal;
 
-            console.log(tiempo, tiempo1, dorsal, dorsal1, idCarreraGet, idCarreraGet1);
 
             leftInfo();
+        });
+
+}
+
+function payMentInfo() {
+
+    let idCarrera = [14, 15];
+    fetch("http://localhost:3000/historialCompras", {
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                idCarrera: idCarrera
+
+            }),
+        })
+        .then((response) => response.json())
+        .then((response) => {
+
+            // Name of the race with the date
+            nombrePayment = response.result[0][0].nombre;
+            nombrePayment1 = response.result[0][1].nombre;
+
+            // una vez tenemos las fechas para quedarnos unicamente con el texto que nos interesa
+            // el siguiente formato XXXX/XX/XX hacemos un substring de el resultado desde 0 hasta 10.
+
+            datePayment = response.result[1][0].fecha_compra.substring(0, 10);
+            datePayment1 = response.result[1][1].fecha_compra.substring(0, 10);
+
+            console.log(nombrePayment, datePayment, nombrePayment1, datePayment1);
+
+
+
+            rightInfo();
         });
 
 }
@@ -97,9 +134,10 @@ function historyInfo() {
 //call all functions
 function mainProfile() {
     historyInfo();
+    payMentInfo();
     headerInfo();
 
-    rightInfo();
+
 
     //add function logout to the logout section
     //console.log(document.getElementById("logOut"));
@@ -137,17 +175,19 @@ function headerInfo() {
 function leftInfo() {
     let container = document.getElementById("leftInfo");
     let alertNoRaces = "Aún no has completado ninguna carrera.";
+
+
     //console.log(container);
     container.innerHTML = "";
 
-
-    if (idCarreraGet1 === 14 || idCarreraGet === 15) {
+    // Users to check if the fetch works and only take this values for history racers / shopping 
+    if (usuario === "runnerPrueba" || usuario === "runnerPrueba2") {
         container.innerHTML =
             `
 <div class="profile-work">
 <p> Historial de carreras: </p>
-<p>- ` + "Nombre: " + nombreCarrera + " / " + tiempo + "h  /  Dorsal Número: " + dorsal + `</p><br />
-<p>- ` + "Nombre: " + nombreCarrera1 + " / " + tiempo1 + "h  /  Dorsal Número: " + dorsal1 + `</p><br />
+<p>- ` + nombreCarrera + " / " + tiempo + "h  /  Dorsal Número: " + dorsal + `</p><br />
+<p>- ` + nombreCarrera1 + " / " + tiempo1 + "h  /  Dorsal Número: " + dorsal1 + `</p><br />
 </div>
 `;
     } else {
@@ -186,8 +226,11 @@ function rightInfo() {
 
 function fillText() {
 
-
     console.log(usuario, email, edad);
+    // Get  the localvalue of data because there we have the race putted in Shopping js.
+    var dataRecogida = JSON.parse(localStorage.getItem("data"));
+    //console.log(dataRecogida);
+
 
     // Depends if the category is 1 = Infantil, 2 - Cadete, etc...
     switch (categoria) {
@@ -206,27 +249,24 @@ function fillText() {
         case 5:
             categoria = "Promesa";
             break;
-
     }
 
     let container = document.getElementById("rightInfo");
     //Depends if you are in the dates/history section you are going to see
     //different info, with the dates that we recopile of the fetch request to the bdd
-
     let datesTab = document.getElementById("home-tab");
     let historyTab = document.getElementById("profile-tab");
-
 
     if (datesTab.classList.contains("active")) {
         console.log(datesTab);
         container.innerHTML = "";
 
-        // Put the values that we take of the bdd with the fetch to the server
+        // Put the values that we take of the bdd with the fetch to the server like username, email, etc...
         container.innerHTML =
             `
   <div class="tab-content profile-tab" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">       
-      <div class="row">
+      <div class="row" >
           <div class="col-md-6">
               <label>Usuario</label>
           </div>
@@ -268,16 +308,40 @@ function fillText() {
       </div>
       </div>
  
-     
   </div>
- 
 </div>
 
   `;
+        // Else if the history section is open put:
     } else {
         //console.log(container);
         console.log(historyTab);
         container.innerHTML = "";
+        let name;
+        let name1;
+        let date;
+        let date1;
+
+        // if the users bought some race put the values from bdd 
+        if (usuario === "runnerPrueba" || usuario === "runnerPrueba2") {
+            name = nombrePayment;
+            name1 = nombrePayment1
+            date = datePayment;
+            date1 = datePayment1;
+            // else put that you didnt buy nothing and a example of the format
+        } else if (dataRecogida !== null) {
+            name = dataRecogida.name;
+            date = dataRecogida.fecha;
+
+            name1 = "";
+            date1 = "";
+        } else {
+            name = "Ninguna compra realizada";
+            date = "XXXX / XX / XX";
+            name1 = "";
+            date1 = "";
+        }
+        // and finally put the values in the HTML
         container.innerHTML =
             `
   <div class="tab-content profile-tab" id="myTabContent">
@@ -292,13 +356,20 @@ function fillText() {
       </div>
       <div class="row">
           <div class="col-md-6">
-              <label>Ninguna compra realizada.</label>
-            
+              <label>` + name + `</label>
           </div>
           <div class="col-md-6">
-              <p>XX / XX / XXXX </p>       
+              <p>` + date + `</p>       
           </div>
       </div>
+      <div class="row">
+      <div class="col-md-6">
+          <label>` + name1 + `</label>
+      </div>
+      <div class="col-md-6">
+          <p>` + date1 + `</p>       
+      </div>
+  </div>
       
   </div>
 </div>
@@ -320,7 +391,6 @@ function loadFile(event) {
 }
 
 
-
 function init() {
 
     // First of all we call to revise the cookie function, inside of this 
@@ -328,6 +398,9 @@ function init() {
     // the reviseCookie like the first Call in this script
     reviseCookie();
     cookieRacesValues();
+
+
+
 
 }
 

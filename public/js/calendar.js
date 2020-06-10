@@ -32,7 +32,9 @@ function dates() {
             //FUNCTION WHEN U CLICK, CHANGUE ALL THE LEFT SECTION CALENDAR OF THIS DAY
             num.addEventListener("click", () => openDate(event.target.innerText, event.target.dataset.num));
         } else {
-
+            if (contador <= 15 && contador >= 14) {
+                num.classList.add("dissabledRaces");
+            }
             if (contador <= 24 && contador > 18) {
                 num.classList.add("active-day");
             }
@@ -73,18 +75,27 @@ function openDate(date, d) {
     let races = [
         "Carrera en Paiporta, (Click aquí para mas información)", "Carrera en Catarroja, (Click aquí para mas información)",
         "Carrera en Massarrojos, (Click aquí para mas información)", "Carrera en Cheste, (Click aquí para mas información)",
-        "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)"
+        "VIII Playa Pinedo, (Click aquí para mas información)", "VII Rio Turia, (Click aquí para mas información)",
+        "Valencia Rio - Mestalla, (Ninguna información disponible)", "Avenida Joaquin - Puerto (Ninguna información disponible"
 
     ];
     let leftDiv = document.querySelector(".calendar-left");
     leftDiv.innerHTML = ``;
     let finalRace;
     // Asign for each ID-race, his name race
-    if (event.target.classList == "active-day") {
+    if (event.target.classList == "active-day" || event.target.classList == "dissabledRaces") {
 
         let idRaces = event.target.dataset.num;
 
         switch (idRaces) {
+            case "14":
+                finalRace = races[6];
+
+                break;
+            case "15":
+                finalRace = races[7];
+
+                break;
             case "19":
                 finalRace = races[0];
                 break;
@@ -107,25 +118,24 @@ function openDate(date, d) {
 
         }
         // Inner all the dates in the current-events section
+
         leftDiv.innerHTML = `
  <div class="num-date">` + date + `</div>
  <div class="day">` + day[d] + `</div>
- <div class="current-events">Próximos Eventos :
+ <div id="current-events" class="current-events">Próximos Eventos :
    <ul>
-   
    <li> <a href="main.html#` + idRaces + `">` + finalRace + ` </a></li>
- 
    </ul>
 </div>
 </div>
  `
     } else {
 
-        //console.log(event.target.classList);
+
         leftDiv.innerHTML = `
   <div class="num-date">` + date + `</div>
   <div class="day">` + day[d] + `</div>
-  <div class="current-events">Próximos Eventos :
+  <div  class="current-events">Próximos Eventos :
     <ul>
   <li>  Ningún evento programado.</li>
     </ul>
@@ -134,6 +144,16 @@ function openDate(date, d) {
   `
 
     }
+    /* let allDissableRaces = document.querySelectorAll(".dissabledRaces").length;
+    console.log(document.querySelectorAll(".dissabledRaces").length);
+    for (let i = 0; i < allDissableRaces.length; i++) {
+        console.log(document.getElementById("current-events"));
+
+    } */
+
+
+
+
 
 
     // console.log(leftDiv);

@@ -205,3 +205,17 @@ h1 {
 #textUser {
     font-size: 20px;
 }
+
+.profile-work p:first-child {
+    font-size: 15px;
+    color: #0062cc;
+    font-weight: 600;
+    margin-top: 10%;
+}
+
+.profile-work p {
+    font-size: 15px;
+    color: black;
+    font-weight: 600;
+    margin-top: 0;
+}

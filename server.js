@@ -27,7 +27,7 @@ app.use(
 app.post("/consulta", function(req, res) {
 
     let reqBody = req.body;
-    console.log(reqBody);
+    //console.log(reqBody);
 
 
     let username = req.body.username;
@@ -36,7 +36,7 @@ app.post("/consulta", function(req, res) {
     let edad = req.body.edad;
     let id_categoria = req.body.categorias;
     let genero = req.body.options;
-    console.log(username, password, email, edad, id_categoria, genero);
+    //console.log(username, password, email, edad, id_categoria, genero);
 
     //query to check if the username already exists 
     pool.query(
@@ -46,11 +46,11 @@ app.post("/consulta", function(req, res) {
             // IF THE USER THAT WE WANT TO INSERT IS ALLREADY CREATED, SHOW ALERT THAT THE USER IS CREATED AND REFRESH THE PAGE
             if (result.length > 0) {
                 //res.send(result[0].usuario);
-                console.log("El usuario ya esta creado");
+                // console.log("El usuario ya esta creado");
                 // if is created send false
                 res.send({ response: false });
             } else {
-                console.log(result);
+                //console.log(result);
                 pool.query(
                     `INSERT INTO usuarios (usuario, email, edad, password, id_categoria, genero) VALUES ('${username}', '${email}', '${edad}', '${password}','${id_categoria}','${genero}')`,
                     /* "INSERT INTO `usuarios` ( `usuario`, `email`, `edad`, `password`) VALUES ('" + username + "', '" + password + "', '" + email + "', '" + edad + "')", */
@@ -97,7 +97,7 @@ app.post("/comprobar", function(req, res) {
                 let id_categoria = result[0].id_categoria;
                 let genero = result[0].genero;
 
-                console.log(id_usuario, usuario, email, edad, id_categoria, genero);
+                //console.log(id_usuario, usuario, email, edad, id_categoria, genero);
 
                 let token = createToken(id_usuario, usuario);
 
@@ -108,7 +108,7 @@ app.post("/comprobar", function(req, res) {
 
                 //res.redirect('main.html');
             } else {
-                console.log("Registrate Primero");
+                //console.log("Registrate Primero");
                 return 0;
                 //res.redirect('index.html');
             }
@@ -121,14 +121,14 @@ app.post("/comprobar", function(req, res) {
 // FUNCTION COMPROBAR CARRERAS EN LA BDD
 app.post("/comprobarCarreras", function(req, res) {
 
-    console.log(req.body.carreras.toString());
+    //console.log(req.body.carreras.toString());
     let idCarrera = req.body.carreras.toString();
 
     //query that check if the id_carrera is correct with the Bdd
     pool.query(
         ` SELECT * FROM carreras WHERE id_carrera IN (${idCarrera});`,
         function(err, result) {
-            console.log(result);
+            // console.log(result);
             //If the result is in the bdd the result will be bigger than 0 
             //so if the gresult is bigger than 0 we can create the object/json carreras to send the values
             //else, return 0 , if you didnt put this it probably explode;
@@ -145,15 +145,15 @@ app.post("/comprobarCarreras", function(req, res) {
                         distancia: result[i].distancia,
                         precio: result[i].precio,
                         max_corredores: result[i].max_corredores,
-                        current_dorsal: result[i].current_dorsal
+                        fecha: result[i].fecha
                     }
                     carreras.push(carrera)
                 }
-                console.log(carreras);
+                //console.log(carreras);
                 res.send({ carreras: carreras });
                 //res.redirect('main.html');
             } else {
-                console.log("Fallo consulta Carrera");
+                // console.log("Fallo consulta Carrera");
                 return 0;
                 //res.redirect('index.html');
             }
@@ -163,76 +163,55 @@ app.post("/comprobarCarreras", function(req, res) {
 });
 // TO CHECK THE RACES RUNNED AND TAKE THE INFO
 app.post("/historialCarreras", function(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
 
     let idCarreraHistorial = req.body.idCarrera;
-    console.log(idCarreraHistorial);
-
+    // console.log(idCarreraHistorial);
 
     pool.query(
         "SELECT nombre FROM `carreras` WHERE id_carrera IN (" + idCarreraHistorial + ");SELECT * FROM `tiempos-carreras` WHERE id_carrera IN (" + idCarreraHistorial + ")",
         function(err, result) {
-            console.log(result);
+            //console.log(result);
             if (result.length > 0) {
                 res.send({
                     result: result,
                 });
             } else {
 
-                console.log("Fallo consulta Carrera");
+                //console.log("Fallo consulta Carrera");
                 return 0;
             }
         }
     );
-    // Query to check the races already done
-    /*     pool.query(
-            "SELECT * FROM `tiempos-carreras` WHERE id_carrera IN (" + idCarreraHistorial + ");",
-            function(err, result) {
-                //console.log(result);
-                if (result.length > 0) {
-                    let carreras = []
-                    let carrera;
-                    for (let i = 0; i < result.length; i++) {
-                        carrera = {
 
-                            id_usuario: result[i].id_usuario,
-                            id_carrera: result[i].id_carrera,
-                            tiempo: result[i].tiempo,
-                            dorsal: result[i].dorsal,
-                        }
-                        carreras.push(carrera)
-                    }
-                    //console.log(carreras);
-                    res.send({ carreras: carreras });
-                } else {
-                    console.log("Fallo consulta Carrera");
-                    return 0;
-
-                }
-            }
-        ); */
 });
 
 // TO CHECK THE RACES BOUGHT AND TAKE THE INFO
 
-/* app.post("/historialCompras", function(req, res) {
+app.post("/historialCompras", function(req, res) {
 
-    let idCarreraHistorial = req.body.idCarrera;
-    // Query to check the races bought.
+    //console.log(req.body);
+
+    let idCarreraCompra = req.body.idCarrera;
+    //console.log(idCarreraCompra);
+
     pool.query(
-        ` SELECT * FROM usuarios-carreras WHERE id_carrera IN (${idCarreraHistorial});`,
+        "SELECT nombre FROM `carreras` WHERE id_carrera IN (" + idCarreraCompra + ");SELECT * FROM `usuarios-carreras` WHERE id_carrera IN (" + idCarreraCompra + ")",
         function(err, result) {
-            console.log(result);
-
+            // console.log(result);
             if (result.length > 0) {
-
+                res.send({
+                    result: result,
+                });
             } else {
-                console.log("Fallo consulta Carrera");
+
+                // console.log("Fallo consulta Carrera");
                 return 0;
             }
         }
     );
-}); */
+
+});
 // ENCRYPT TOKEN With the word "Desencrypt" you have to put the same word
 //when you will descencrypt it.
 function createToken(userId, usuario) {
@@ -251,7 +230,7 @@ app.post("/verifyToken", (req, res) => {
 
 
     jstoken.verify(req.body.token, "desencrypt", (err, token) => {
-        console.log("Petición", req.body);
+        // console.log("Petición", req.body);
 
         if (err) {
             res.send({ isValid: false });
@@ -273,7 +252,7 @@ app.post("/verifyToken", (req, res) => {
                     id_categoria: results[0].id_categoria,
                     genero: results[0].genero
                 };
-                console.log(userData);
+                // console.log(userData);
 
                 res.send(userData);
             });
