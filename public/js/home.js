@@ -206,6 +206,7 @@ function comprobarCookie() {
             console.log(response);
             if (response.isValid) {
 
+
                 // window.location.replace("../main.html");
             } else {
                 //console.log("replace");
