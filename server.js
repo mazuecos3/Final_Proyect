@@ -2,8 +2,8 @@ const jstoken = require("jsonwebtoken");
 const express = require("express");
 const path = require("path");
 const app = express();
-//tener el e
-const consultas = require("./public/js/consultas.js");
+
+
 const pool = require("./public/js/auth");
 
 //para que heroku elija el puerto que tenga libre
