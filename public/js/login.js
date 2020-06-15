@@ -8,7 +8,7 @@ function register() {
 
     let divEntero = document.getElementById("login");
 
-    ////console.lo(divEntero);
+    //console.log(divEntero);
     divEntero.innerHTML = "";
     divEntero.innerHTML = `
    
@@ -72,7 +72,7 @@ function fetchRegister() {
     /*Comprobación errores*/
     let warning = document.getElementsByClassName("alert-danger");
     let option;
-    //console.lo(username.length);
+    console.log(username.length);
 
     /* If the username is empty*/
     warning[0].innerHTML = "";
@@ -109,7 +109,7 @@ function fetchRegister() {
     }
 
     warning[0].style.visibility = "visible";
-    //console.lo(errores);
+    console.log(errores);
 
     // FETCH TO SEND ALL THE VALUES TO THE SERVER 
     // HEROKU LINK
@@ -117,7 +117,7 @@ function fetchRegister() {
     // http://localhost:3000/consulta for localhost
     if (errores === 0) {
         warning[0].style.visibility = "hidden";
-        //console.lo("Bien");
+        console.log("Bien");
         fetch("https://valenrunner.herokuapp.com/consulta", {
             headers: {
                 "Accept": "application/json",
@@ -136,8 +136,8 @@ function fetchRegister() {
 
         .then((response) => response.json())
             .then((response) => {
-                //console.lo("Response: ", response.response)
-                // If the response is true, replace the location to the index
+                console.log("Response: ", response.response)
+                    // If the response is true, replace the location to the index
                 if (response.response) {
                     window.location.replace("index.html");
                     // else put other warning because the username is already in use 
@@ -263,9 +263,9 @@ function comprobarCookie() {
         })
         .then((response) => response.json())
         .then((response) => {
-            //console.log(response);
+            console.log(response);
 
-            ////console.lo(response.isValid)
+            console.log(response.isValid)
 
             if (response.isValid) {
                 window.location.replace("../main.html");
@@ -283,7 +283,7 @@ function comprobarCookie() {
 // FIRST FUNCTION & ADDVEVENTS
 function init() {
     comprobarCookie();
-    console.lo("Iniciando...");
+    console.log("Iniciando...");
     login();
     addEvents();
     addEnterListener();

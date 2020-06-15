@@ -204,7 +204,7 @@ function comprobarCookie() {
         .then((response) => response.json())
         .then((response) => {
             //console.log(response.isValid)
-            // console.log(response);
+            //console.log(response);
             if (response.isValid) {
 
 
@@ -244,7 +244,7 @@ function checkCookieRaces() {
 
         allValuesCookie = allValuesCookie.split(',');
         allValuesCookie = allValuesCookie.sort();
-        //console.log(allValuesCookie);
+        console.log(allValuesCookie);
 
         for (let i = 0; i < allValuesCookie.length; i++) {
 
@@ -258,7 +258,7 @@ function checkCookieRaces() {
 
                 if (allValuesCookie[i] === idRacesArray[j]) {
                     buttonsRaces[j].classList.add("disableButton", "buttonbck");
-                    //console.log(buttonsRaces[j]);
+                    console.log(buttonsRaces[j]);
 
                 }
             }

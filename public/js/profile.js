@@ -46,7 +46,7 @@ function reviseCookie() {
         .then((response) => response.json())
         .then((response) => {
             // Response if is Valid and all the values like user, email, age, etc
-            //console.log(response)
+            console.log(response)
             usuario = response.usuario;
             email = response.email;
             edad = response.edad;
@@ -143,7 +143,7 @@ function mainProfile() {
 
 
     //add function logout to the logout section
-    ////console.log(document.getElementById("logOut"));
+    //console.log(document.getElementById("logOut"));
     let btnLogOut = document.getElementById("logOut");
     btnLogOut.addEventListener("click", logOut);
 
@@ -154,7 +154,7 @@ function mainProfile() {
 function headerInfo() {
 
     let container = document.getElementById("headerInfo");
-    // //console.log(container);
+    // console.log(container);
     container.innerHTML = "";
     container.innerHTML =
         `
@@ -261,7 +261,7 @@ function fillText() {
     let historyTab = document.getElementById("profile-tab");
 
     if (datesTab.classList.contains("active")) {
-        console.log(datesTab);
+        //console.log(datesTab);
         container.innerHTML = "";
 
         // Put the values that we take of the bdd with the fetch to the server like username, email, etc...
@@ -317,7 +317,7 @@ function fillText() {
   `;
         // Else if the history section is open put:
     } else {
-        ////console.log(container);
+        //console.log(container);
         //console.log(historyTab);
         container.innerHTML = "";
         let name;
@@ -384,7 +384,7 @@ function fillText() {
 
 //Set the cookie with value "empty" and expires with 0 ( is the same as sesion)
 //add function logout to the logout section
-////console.log(document.getElementById("logOut"));
+//console.log(document.getElementById("logOut"));
 let btnLogOut = document.getElementById("logOut");
 btnLogOut.addEventListener("click", logOut);
 
