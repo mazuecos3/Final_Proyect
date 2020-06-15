@@ -42,8 +42,6 @@ function mainShopping() {
         // https://valenrunner.herokuapp.com/comprobarCarreras for heroku 
         // http://localhost:3000/comprobarCarreras for localhost
 
-
-
         if (allValuesCookie !== undefined && allValuesCookie !== "") {
 
             fetch("https://valenrunner.herokuapp.com/comprobarCarreras", {
