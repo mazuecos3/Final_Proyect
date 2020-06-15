@@ -169,7 +169,7 @@ function headerInfo() {
   <br>
   
   <p id="textUser"> ` + usuario + ` / ` + userRol + ` </p>
-  <p class="proile-rating">Carreras Totales : <span>"`+totalR+`"</span></p>
+  <p class="proile-rating">Carreras Totales : <span>`+totalR+`</span></p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
           <a class="nav-link active" id="home-tab"  href="#">Datos</a>
