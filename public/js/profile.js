@@ -26,7 +26,7 @@ let dorsal1;
 let nombrePayment;
 let nombrePayment1;
 
-let datePayment;
+let  datePayment;
 let datePayment1;
 
 function reviseCookie() {
@@ -152,10 +152,16 @@ function mainProfile() {
 }
 
 function headerInfo() {
-
+    let totalR;
     let container = document.getElementById("headerInfo");
     // console.log(container);
     container.innerHTML = "";
+
+    if (usuario === "runnerPrueba2") {
+        totalR = "2";
+    } else{
+        totalR = "0";
+    }
     container.innerHTML =
         `
   <div class="profile-head">
@@ -163,7 +169,7 @@ function headerInfo() {
   <br>
   
   <p id="textUser"> ` + usuario + ` / ` + userRol + ` </p>
-  <p class="proile-rating">Carreras Totales : <span>0</span></p>
+  <p class="proile-rating">Carreras Totales : <span>"`+totalR+`"</span></p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
           <a class="nav-link active" id="home-tab"  href="#">Datos</a>
@@ -326,7 +332,7 @@ function fillText() {
         let date1;
 
         // if the users bought some race put the values from bdd 
-        if (usuario === "runnerPrueba" || usuario === "runnerPrueba2") {
+        if (usuario === "runnerPrueba1" || usuario === "runnerPrueba2") {
             name = nombrePayment;
             name1 = nombrePayment1
             date = datePayment;
