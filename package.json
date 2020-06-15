@@ -21,6 +21,6 @@
         "leaflet-routing-machine": "^3.2.12",
         "mysql": "^2.18.1",
         "node-sass": "^4.13.1",
-        "sass": "^1.23.7"
+
     }
 }

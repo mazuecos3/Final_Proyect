@@ -46,7 +46,7 @@ function reviseCookie() {
         .then((response) => response.json())
         .then((response) => {
             // Response if is Valid and all the values like user, email, age, etc
-            console.log(response)
+            //console.log(response)
             usuario = response.usuario;
             email = response.email;
             edad = response.edad;
@@ -124,7 +124,7 @@ function payMentInfo() {
             datePayment = response.result[1][0].fecha_compra.substring(0, 10);
             datePayment1 = response.result[1][1].fecha_compra.substring(0, 10);
 
-            console.log(nombrePayment, datePayment, nombrePayment1, datePayment1);
+            //console.log(nombrePayment, datePayment, nombrePayment1, datePayment1);
 
 
 
@@ -143,7 +143,7 @@ function mainProfile() {
 
 
     //add function logout to the logout section
-    //console.log(document.getElementById("logOut"));
+    ////console.log(document.getElementById("logOut"));
     let btnLogOut = document.getElementById("logOut");
     btnLogOut.addEventListener("click", logOut);
 
@@ -154,7 +154,7 @@ function mainProfile() {
 function headerInfo() {
 
     let container = document.getElementById("headerInfo");
-    // console.log(container);
+    // //console.log(container);
     container.innerHTML = "";
     container.innerHTML =
         `
@@ -229,7 +229,7 @@ function rightInfo() {
 
 function fillText() {
 
-    console.log(usuario, email, edad);
+    //console.log(usuario, email, edad);
     // Get  the localvalue of data because there we have the race putted in Shopping js.
     var dataRecogida = JSON.parse(localStorage.getItem("data"));
     //console.log(dataRecogida);
@@ -317,8 +317,8 @@ function fillText() {
   `;
         // Else if the history section is open put:
     } else {
-        //console.log(container);
-        console.log(historyTab);
+        ////console.log(container);
+        //console.log(historyTab);
         container.innerHTML = "";
         let name;
         let name1;
@@ -384,7 +384,7 @@ function fillText() {
 
 //Set the cookie with value "empty" and expires with 0 ( is the same as sesion)
 //add function logout to the logout section
-//console.log(document.getElementById("logOut"));
+////console.log(document.getElementById("logOut"));
 let btnLogOut = document.getElementById("logOut");
 btnLogOut.addEventListener("click", logOut);
 

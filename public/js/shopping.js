@@ -60,11 +60,11 @@ function mainShopping() {
                 })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(response.carreras);
+                    // console.log(response.carreras);
                     // For each response, we have all the values that we want , now only have to put the values in our div html
                     // with the variables asignations .
                     response.carreras.forEach(carrera => {
-                        console.log(carrera);
+                        //console.log(carrera);
                         idCarrera = carrera.id_carrera;
                         raceName = carrera.nombre;
                         distance = carrera.distancia;
@@ -153,7 +153,7 @@ function mainShopping() {
 function sendDatesRace(nameRace, fecha) {
 
     fecha = fecha.substring(0, 10);
-    console.log(nameRace, fecha);
+    //console.log(nameRace, fecha);
 
     var data = {
 
@@ -213,12 +213,12 @@ function removeRace(id_carrera) {
         let finalValuesCookie;
         if (allValuesCookie !== undefined) {
             finalValuesCookie = allValuesCookie.split(",");
-            console.log(finalValuesCookie);
+            //console.log(finalValuesCookie);
 
             // If the value is only 1 in the races Cookie, we can delete the cookie 
             // because is only 1 value and also we have to remove the row-container too.
             if (finalValuesCookie.length <= 1) {
-                console.log("es menor");
+                //console.log("es menor");
                 insertCookie = "";
 
             } else {
@@ -304,7 +304,7 @@ function paypalPay() {
         payment: function(data, actions) {
 
             let allMoney = parseInt(document.getElementById("price").innerText);
-            console.log(allMoney);
+            //console.log(allMoney);
             return actions.payment.create({
                 transactions: [{
                     amount: {
